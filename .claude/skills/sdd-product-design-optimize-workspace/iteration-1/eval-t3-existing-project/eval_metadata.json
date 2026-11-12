@@ -1,0 +1,22 @@
+{
+  "eval_id": 3,
+  "eval_name": "t3-existing-project",
+  "prompt": "我之前已经用你们的流程做了一个售楼管理系统，项目还在 Projects_Repo 里，现在想在这个老项目上加一个预约看房的功能，我要新建项目吗？",
+  "assertions": [
+    {
+      "name": "routes-to-maintenance",
+      "description": "判断走已有项目修整分支（sdd-project-maintenance），不是新建产品设计",
+      "type": "branch_selection"
+    },
+    {
+      "name": "no-new-artifacts",
+      "description": "不创建任何新产物文件（不写 PRD.md / prototypes/ 等）",
+      "type": "negative_check"
+    },
+    {
+      "name": "tells-user-not-new-project",
+      "description": "明确告知用户不该新建项目，而应走已有项目修改",
+      "type": "user_communication"
+    }
+  ]
+}

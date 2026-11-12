@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "产物路径均在 active_project_path 下（docs/ 或 .sdd/），未出现 Harness 根目录下的 docs/ 或 .sdd/",
+      "passed": true,
+      "evidence": "产物清单均位于 P 盘 projects 下的 project-ops-desk 目录"
+    },
+    {
+      "text": "完成时四件套齐全：docs/PRD.md + docs/api-contracts.md + docs/Plan.md + docs/prototypes/",
+      "passed": true,
+      "evidence": "判定完成行明确四件套齐全并含临时产物已清理"
+    },
+    {
+      "text": "ui-design-spec.md（.sdd/tmp/）在 B2 原型完成后删除",
+      "passed": true,
+      "evidence": "B2 收尾明确立即删除 .sdd/tmp/ui-design-spec.md（原型完成后随即清理）"
+    },
+    {
+      "text": "visual-research.md（.sdd/tmp/）保留到阶段 C 完成后删除",
+      "passed": true,
+      "evidence": "收尾保留 visual-research 供 C 参考，并明确保留到阶段 C 完成后删除"
+    },
+    {
+      "text": "输出未强制创建 data-system.json",
+      "passed": false,
+      "evidence": "创建了 docs/data-system.json（因含统计仪表盘判为报表类项目），偏离映射表不列入的本意"
+    },
+    {
+      "text": "阶段判断依据产物存在性（无 PRD 到 R，有 spec 到 B2 等）",
+      "passed": true,
+      "evidence": "阶段判定链全程基于产物存在性，支持断点恢复"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1,
+    "total": 6,
+    "pass_rate": 0.8333333333333334
+  }
+}

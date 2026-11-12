@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.xxyopen.novel.dao.mapper.BookChapterMapper">
+
+    <select id="countChaptersByBookIds" resultType="io.github.xxyopen.novel.dto.resp.BookChapterCountDto">
+        select book_id as bookId, count(*) as chapterCount
+        from book_chapter
+        where book_id in
+        <foreach collection="bookIds" item="bookId" open="(" separator="," close=")">
+            #{bookId}
+        </foreach>
+        group by book_id
+    </select>
+
+</mapper>

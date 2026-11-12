@@ -1,0 +1,421 @@
+@charset "utf-8";
+
+/*
+ * 全局主题变量表（T-008 主题基础设施，全站唯一来源）
+ *
+ * 使用约定：
+ * 1. 所有语义变量统一 `--nv-` 前缀，同一语义只允许存在一个变量。
+ * 2. 浅色取值 = 改造前的硬编码现状，仅做抽取，不改变观感。
+ * 3. 深色取值只写在本文件 `html.dark` 段，色阶与 Element Plus 官方
+ *    `theme-chalk/dark/css-vars.css` 对齐，避免自定义区域与 el-* 组件
+ *    出现「两套深色」拼接感。
+ * 4. 页面/组件只消费 `var(--nv-*)`；禁止在各自文件里另造颜色常量，
+ *    也禁止用 `html.dark .xxx { ... }` 逐条覆写（el-* 已由官方深色变量覆盖）。
+ * 5. 新增变量必须在 `:root` 与 `html.dark` **两段同时定义、名字严格一致**，
+ *    并登记到下方「变量登记」表；只加一段会导致深色下取不到值而回退继承。
+ *
+ * 变量登记（按任务批次追加，共 134 个）：
+ * - T-008  基础 25 个：--nv-bg-page / -bg-container / -bg-overlay / -bg-subtle；
+ *   --nv-text-primary / -regular / -secondary / -weak / -inverse；
+ *   --nv-border / -border-light / -border-lighter / -divider；
+ *   --nv-brand / -brand-hover / -brand-active / -link；
+ *   --nv-danger / -success；--nv-input-bg / -input-placeholder；
+ *   --nv-mask / -shadow / -shadow-strong / -image-placeholder
+ * - T-009  扩展色板 68 个（背景 / 文字 / 边框 / 中性填充 / 状态强调 /
+ *   排行榜名次与等级徽标 / 阴影遮罩各自成组，见下方分段注释）
+ * - T-010  阅读页 17 个：--nv-reader-panel-bg、-toolbar-bg、-toolbar-shadow、
+ *   -line、-text、-title、-meta、-btn-shadow、-active、-on-brand、
+ *   -order-border、-order-border-hover、-order-bg、-order-bg-hover、
+ *   -chip-bg、-chip-bg-hover、-chip-active-bg；
+ *   阅读色卡 6 个：--nv-reader-theme-white / -green / -pink / -yellow / -gray / -night；
+ *   按钮微调 2 个：--nv-btn-hover-text / --nv-btn-brand-tint
+ * - T-011  账号中心与内容管理 9 个：--nv-text-label、--nv-text-time、--nv-text-icon、
+ *   --nv-btn-idle-bg、--nv-border-panel、--nv-border-dotted、
+ *   --nv-social-weibo、--nv-social-qq、--nv-social-wechat
+ * - T-012  作者后台 7 个：--nv-text-field、--nv-border-field、--nv-btn-gray-bg、
+ *   --nv-btn-danger-bg、--nv-bg-note、--nv-accent-tab、--nv-nav-back-hover
+ * - T-013  本次未新增变量（只做全站走查与残余硬编码收口）
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- 背景 ---- */
+  --nv-bg-page: #f5f5f5; /* 页面底色（现状 body #f5f5f5） */
+  --nv-bg-container: #ffffff; /* 容器 / 卡片底色 */
+  --nv-bg-overlay: #ffffff; /* 悬浮层底色：弹窗 / 下拉 / 消息 */
+  --nv-bg-subtle: #fafafa; /* 次级底色：表头、悬浮行、分区底 */
+
+  /* ---- 文字 ---- */
+  --nv-text-primary: #333333; /* 标题 / 主文字 */
+  --nv-text-regular: #404040; /* 正文文字 */
+  --nv-text-secondary: #666666; /* 次要文字 */
+  --nv-text-weak: #999999; /* 弱文字 / 辅助信息 */
+  --nv-text-inverse: #ffffff; /* 反色文字：品牌色或深色底上的文字 */
+
+  /* ---- 边框与分隔线（3 个层级） ---- */
+  --nv-border: #e0e0e0; /* 强边框：表格、外框 */
+  --nv-border-light: #eaeaea; /* 常规边框 */
+  --nv-border-lighter: #eeeeee; /* 弱边框 */
+  --nv-divider: #eeeeee; /* 分隔线（虚线 / 点线） */
+
+  /* ---- 品牌色 ---- */
+  --nv-brand: #ff8800; /* 主色（#f80） */
+  --nv-brand-hover: #ff7700; /* 主色 hover（#f70） */
+  --nv-brand-active: #ff7800; /* 主色强调（#ff7800） */
+  --nv-link: #ff7700; /* 链接色 */
+
+  /* ---- 状态色 ---- */
+  --nv-danger: #ed4259; /* 危险 / 错误（归并 #ff4040 / #ed4259 / #f65167） */
+  --nv-success: #66d65e; /* 成功 */
+
+  /* ---- 表单 ---- */
+  --nv-input-bg: #ffffff; /* 输入框底色 */
+  --nv-input-placeholder: #999999; /* 占位符文字 */
+
+  /* ---- 效果 ---- */
+  --nv-mask: rgba(0, 0, 0, 0.3); /* 遮罩 */
+  --nv-shadow: rgba(0, 0, 0, 0.05); /* 轻阴影 */
+  --nv-shadow-strong: rgba(0, 0, 0, 0.3); /* 重阴影 */
+  --nv-image-placeholder: #f6f6f6; /* 图片占位灰（归并 #f6f6f6 / #ececec） */
+
+  /*
+   * ---- 扩展色板（T-009） ----
+   * 6 个全局 CSS 里存在大量历史上各自取值的近似色，浅色必须 1:1 保留（PRD 7.5），
+   * 因此无法合并，只能每个原始色值对应一个变量。注释里的十六进制即原始取值。
+   * 新代码请优先使用上方语义变量；本段只服务全局骨架样式。
+   */
+
+  /* ---- 背景（扩展） ---- */
+  --nv-bg-warm: #fbfaf8; /* .topBar 顶栏 */
+  --nv-bg-muted: #f6f6f6; /* 中性填充：hover 行 / 区块底 */
+  --nv-bg-muted-1: #f7f7f7; /* .rightList .more / .book_intro */
+  --nv-bg-muted-2: #f8f8f8; /* 用户中心菜单选中底 */
+  --nv-bg-muted-3: #f9f9f9; /* 表头 / 目录分组头 */
+  --nv-bg-hover: #f0f0f0; /* 灰按钮 hover */
+  --nv-bg-raised: #e6e6e6; /* 弹窗目录分组头 */
+  --nv-brand-tint: #fefaf6; /* 品牌色描边按钮 hover 底 */
+  --nv-bg-nav-strong: #3e3d43; /* 作者站深色导航条 */
+  --nv-bg-nav-strong-hover: #313035;
+
+  /* ---- 主导航条（浅色 = 品牌色；深色 = 深底，满足深色态导航为深色系） ---- */
+  --nv-nav-bg: #ff8800; /* #f80 */
+  --nv-nav-link-line: #ff8800; /* 导航未选中项的 2px 下划线（与导航底色同值 → 不可见） */
+  --nv-nav-line: rgba(255, 255, 255, 0.8); /* 导航 hover 下划线 */
+
+  /* ---- 文字（扩展） ---- */
+  --nv-text-strong: #000000;
+  --nv-text-body: #444444;
+  --nv-text-dim: #555555;
+  --nv-text-quiet: #777777;
+  --nv-text-note: #808080;
+  --nv-text-muted: #888888;
+  --nv-text-tertiary: #8c8c8c;
+  --nv-text-faint: #a6a6a6;
+  --nv-text-disabled: #cccccc; /* #ccc */
+  --nv-text-ghost: #d2d2d2;
+  --nv-text-separator: #e5d9da; /* 顶栏 / 版权栏竖线字符 */
+
+  /* ---- 边框与分隔线（扩展） ---- */
+  --nv-border-muted: #cccccc; /* #ccc */
+  --nv-border-strong: #d9d9d9;
+  --nv-border-subtle: #dddddd; /* #ddd */
+  --nv-border-medium: #dedede;
+  --nv-border-soft: #e6e6e6;
+  --nv-border-shade: #e9e9e9;
+  --nv-border-faint: #ebebeb;
+  --nv-border-hair: #ededed;
+  --nv-border-hairline: #f5f5f5; /* 极淡列表分隔线 */
+  --nv-border-warm: #eae6e2; /* 顶栏底边 / 右栏点线 */
+  --nv-border-inverse: #ffffff; /* 白底上的"隐形"边框，深色下取容器底 */
+  --nv-border-gray: #878689; /* 作者站搜索框 */
+  --nv-border-arrow: #7f7f7f; /* 下拉小三角 */
+
+  /* ---- 中性填充块 ---- */
+  --nv-fill-muted: #999999; /* 榜单序号底 / 新闻小圆点 */
+
+  /* ---- 状态色与强调色（扩展） ---- */
+  --nv-danger-strong: #ff4040;
+  --nv-danger-hover: #fc2525;
+  --nv-danger-soft: #f65167;
+  --nv-danger-pure: #ff0000; /* #f00 */
+  --nv-orange: #ff6600; /* #f60 */
+  --nv-vip: #fe8034;
+  --nv-accent-pink: #ff758f;
+  --nv-accent-blue: #2972cc;
+  --nv-accent-blue-alt: #4a90e2;
+  --nv-accent-cyan: #5fc3f3; /* .blue */
+  --nv-accent-green: #336600; /* #360 .green */
+
+  /* ---- 排行榜名次 / 用户等级徽标（装饰色） ---- */
+  --nv-rank-1: #fc7403;
+  --nv-rank-2: #f79415;
+  --nv-rank-3: #ffa95e;
+  --nv-level-1: #d0d0d0;
+  --nv-level-2: #c0c0c0;
+  --nv-level-3: #b4b3b3;
+  --nv-level-4: #a0dfe6;
+  --nv-level-5: #77d2db;
+  --nv-level-6: #b4d894;
+  --nv-level-7: #94c766;
+  --nv-level-8: #ffc24c;
+  --nv-level-9: #ffa800;
+  --nv-level-10: #ff6e26;
+  --nv-level-11: #ff0000;
+
+  /* ---- 阴影 / 遮罩（扩展） ---- */
+  --nv-shadow-medium: rgba(0, 0, 0, 0.25);
+  --nv-shadow-grey: #999999; /* 弹窗灰色投影（非 rgba） */
+  --nv-shadow-inset: hsla(0, 0%, 92%, 0.35); /* 评论框内发光 */
+  --nv-shadow-warm: #f9f2e9; /* 封面内发光 */
+  --nv-scrim: #000000; /* 浮层遮罩底（配合 opacity） */
+
+  /*
+   * ---- 正文阅读页（T-010） ----
+   * 阅读页自成一套「半透明纸面」观感，浅色必须 1:1 保留现状；
+   * 深色取 el-bg-color-overlay(#1d1e1f) 系半透明叠层，保证深底浅字。
+   */
+  --nv-reader-panel-bg: rgba(255, 255, 255, 0.45); /* 正文面板 / 左右工具列 */
+  --nv-reader-toolbar-bg: rgba(255, 255, 255, 0.4); /* 阅读页顶栏 */
+  --nv-reader-toolbar-shadow: rgba(0, 0, 0, 0.1); /* 顶栏投影 */
+  --nv-reader-line: rgba(0, 0, 0, 0.1); /* 面板 / 翻页按钮描边 */
+  --nv-reader-text: #111111; /* 正文文字 */
+  --nv-reader-title: #000000; /* 章节标题 */
+  --nv-reader-meta: rgba(0, 0, 0, 0.5); /* 章节元信息 / 工具列图标文字 */
+  --nv-reader-btn-shadow: #ececec; /* 设置项按钮投影 */
+  --nv-reader-active: #cc2931; /* 设置项选中文字 */
+  --nv-reader-on-brand: #fefefe; /* 品牌色圆钮上的文字 */
+  --nv-reader-order-border: #d8d8d8;
+  --nv-reader-order-border-hover: #d1d1d1;
+  --nv-reader-order-bg: rgba(255, 255, 255, 0.7);
+  --nv-reader-order-bg-hover: rgba(255, 255, 255, 0.2);
+  --nv-reader-chip-bg: rgba(0, 0, 0, 0.07); /* 阅读页浮动小标签底 */
+  --nv-reader-chip-bg-hover: rgba(0, 0, 0, 0.1);
+  --nv-reader-chip-active-bg: rgba(255, 136, 0, 0.05); /* 品牌色小标签激活底 */
+
+  /* ---- 阅读主题色卡（纯样本色，深色下保持原色才有辨识度） ---- */
+  --nv-reader-theme-white: #faf6ed;
+  --nv-reader-theme-green: #e2efe2;
+  --nv-reader-theme-pink: #fdd9d9;
+  --nv-reader-theme-yellow: #f1debd;
+  --nv-reader-theme-gray: #eeeeee;
+  --nv-reader-theme-night: #666666;
+
+  /* ---- 按钮微调色（Book.vue 的 el-button 覆写） ---- */
+  --nv-btn-hover-text: #fafafa;
+  --nv-btn-brand-tint: #ff880061;
+  /*
+   * ---- 账号中心 / 内容管理（T-011） ----
+   * 登录、注册、用户设置、我的评论、阅读历史、上传图书、我的上传、书籍管理
+   * 共用这一组；深色段必须同名同数。
+   */
+  --nv-text-label: #aaaaaa; /* 用户资料字段标签（.mytab_list .tit） */
+  --nv-text-time: #bbbbbb; /* 阅读历史的时间列（.update_time） */
+  --nv-text-icon: #8c939d; /* 头像上传占位图标 */
+  --nv-btn-idle-bg: #dfdfdf; /* 未启用的灰按钮底（.btn_phone） */
+  --nv-border-panel: #efefef; /* 用户中心右栏左分隔线（.my_r） */
+  --nv-border-dotted: #e3e3e3; /* 登录/注册右侧点线（.user_r） */
+  --nv-social-weibo: #f55c5b; /* 第三方登录品牌色：微博 */
+  --nv-social-qq: #51b7ff; /* 第三方登录品牌色：QQ */
+  --nv-social-wechat: #66d65e; /* 第三方登录品牌色：微信 */
+
+  /*
+   * ---- 作者后台（T-012） ----
+   * 作者站五页 + 作者注册页 + author/Header 专用；深色段必须同名同数。
+   * 均为现有色板里没有 1:1 对应、且语义独立的历史取值，硬并入相近变量
+   * 会改变浅色观感（PRD 7.5 不允许），故单列。
+   */
+  --nv-text-field: #727272; /* 作者注册页表单文字（.inpMain/.textArea/select） */
+  --nv-border-field: #dbdbdb; /* 作者注册页表单描边（#DBDBDB） */
+  --nv-btn-gray-bg: #eeeeee; /* .btnGray 未启用灰按钮底（#EEE） */
+  --nv-btn-danger-bg: #ff4246; /* .btnPayment 支付按钮底 */
+  --nv-bg-note: #fffae2; /* .showNote 提示条浅黄底 */
+  --nv-accent-tab: #60bbff; /* 作者注册页 Tab 选中蓝（描边 + 底） */
+  --nv-nav-back-hover: #ffe8d1; /* author/Header 返回链接 hover 文字 */
+}
+
+html.dark {
+  color-scheme: dark;
+
+  /* ---- 背景（Element Plus 深色色阶） ---- */
+  --nv-bg-page: #141414; /* el-bg-color */
+  --nv-bg-container: #1d1e1f; /* el-bg-color-overlay */
+  --nv-bg-overlay: #1d1e1f; /* el-bg-color-overlay */
+  --nv-bg-subtle: #262727; /* el-fill-color-light */
+
+  /* ---- 文字 ---- */
+  --nv-text-primary: #e5eaf3; /* el-text-color-primary */
+  --nv-text-regular: #cfd3dc; /* el-text-color-regular */
+  --nv-text-secondary: #a3a6ad; /* el-text-color-secondary */
+  --nv-text-weak: #8d9095; /* el-text-color-placeholder */
+  --nv-text-inverse: #ffffff; /* 品牌色 / 深色底上的文字保持反白 */
+
+  /* ---- 边框与分隔线 ---- */
+  --nv-border: #4c4d4f; /* el-border-color */
+  --nv-border-light: #414243; /* el-border-color-light */
+  --nv-border-lighter: #363637; /* el-border-color-lighter */
+  --nv-divider: #363637;
+
+  /* ---- 品牌色 ---- */
+  --nv-brand: #ff8800;
+  --nv-brand-hover: #ff7800;
+  --nv-brand-active: #ff7800;
+  --nv-link: #ff7800;
+
+  /* ---- 状态色 ---- */
+  --nv-danger: #f78989; /* el-color-danger-dark-2 */
+  --nv-success: #85ce61; /* el-color-success-dark-2 */
+
+  /* ---- 表单 ---- */
+  --nv-input-bg: #1d1e1f;
+  --nv-input-placeholder: #8d9095;
+
+  /* ---- 效果 ---- */
+  --nv-mask: rgba(0, 0, 0, 0.7);
+  --nv-shadow: rgba(0, 0, 0, 0.5);
+  --nv-shadow-strong: rgba(0, 0, 0, 0.8);
+  --nv-image-placeholder: #262727;
+
+  /*
+   * ---- 扩展色板（T-009）深色取值 ----
+   * 与 `:root` 段严格同名同数；色阶取自 Element Plus 深色 css-vars，
+   * 纯装饰性色块（名次 / 等级徽标）保持浅色值以保证白字可读。
+   */
+
+  /* ---- 背景（扩展） ---- */
+  --nv-bg-warm: #1d1e1f;
+  --nv-bg-muted: #262727;
+  --nv-bg-muted-1: #262727;
+  --nv-bg-muted-2: #262727;
+  --nv-bg-muted-3: #232324;
+  --nv-bg-hover: #2b2c2d;
+  --nv-bg-raised: #303132;
+  --nv-brand-tint: #2a2118;
+  --nv-bg-nav-strong: #141414;
+  --nv-bg-nav-strong-hover: #262727;
+
+  --nv-nav-bg: #1d1e1f;
+  --nv-nav-link-line: #1d1e1f;
+  --nv-nav-line: rgba(255, 255, 255, 0.8);
+
+  /* ---- 文字（扩展） ---- */
+  --nv-text-strong: #ffffff;
+  --nv-text-body: #cfd3dc;
+  --nv-text-dim: #b9bcc2;
+  --nv-text-quiet: #a3a6ad;
+  --nv-text-note: #a3a6ad;
+  --nv-text-muted: #9a9da3;
+  --nv-text-tertiary: #9a9da3;
+  --nv-text-faint: #8d9095;
+  --nv-text-disabled: #6c6e72;
+  --nv-text-ghost: #5c5e62;
+  --nv-text-separator: #4c4d4f;
+
+  /* ---- 边框与分隔线（扩展） ---- */
+  --nv-border-muted: #4c4d4f;
+  --nv-border-strong: #4c4d4f;
+  --nv-border-subtle: #414243;
+  --nv-border-medium: #414243;
+  --nv-border-soft: #363637;
+  --nv-border-shade: #363637;
+  --nv-border-faint: #363637;
+  --nv-border-hair: #363637;
+  --nv-border-hairline: #2b2c2d;
+  --nv-border-warm: #363637;
+  --nv-border-inverse: #1d1e1f;
+  --nv-border-gray: #4c4d4f;
+  --nv-border-arrow: #8d9095;
+
+  /* ---- 中性填充块 ---- */
+  --nv-fill-muted: #4c4d4f;
+
+  /* ---- 状态色与强调色（扩展） ---- */
+  --nv-danger-strong: #f78989;
+  --nv-danger-hover: #f56c6c;
+  --nv-danger-soft: #f78989;
+  --nv-danger-pure: #f78989;
+  --nv-orange: #ff8f3d;
+  --nv-vip: #fe8034;
+  --nv-accent-pink: #ff758f;
+  --nv-accent-blue: #5ca0f2;
+  --nv-accent-blue-alt: #4a90e2;
+  --nv-accent-cyan: #5fc3f3;
+  --nv-accent-green: #6fbf3f;
+
+  /* ---- 排行榜名次 / 用户等级徽标（装饰色，保持白字可读） ---- */
+  --nv-rank-1: #fc7403;
+  --nv-rank-2: #f79415;
+  --nv-rank-3: #ffa95e;
+  --nv-level-1: #d0d0d0;
+  --nv-level-2: #c0c0c0;
+  --nv-level-3: #b4b3b3;
+  --nv-level-4: #a0dfe6;
+  --nv-level-5: #77d2db;
+  --nv-level-6: #b4d894;
+  --nv-level-7: #94c766;
+  --nv-level-8: #ffc24c;
+  --nv-level-9: #ffa800;
+  --nv-level-10: #ff6e26;
+  --nv-level-11: #ff0000;
+
+  /* ---- 阴影 / 遮罩（扩展） ---- */
+  --nv-shadow-medium: rgba(0, 0, 0, 0.5);
+  --nv-shadow-grey: #000000;
+  --nv-shadow-inset: hsla(0, 0%, 0%, 0.35);
+  --nv-shadow-warm: #2a2724;
+  --nv-scrim: #000000;
+
+  /*
+   * ---- 正文阅读页（T-010）深色 ----
+   * 浅色是「白 45% 蒙层 + 深字」，深色改为「#1d1e1f 系蒙层 + 浅字」；
+   * 各层不透明度沿用浅色数值，只换基色，保持层次关系不变。
+   */
+  --nv-reader-panel-bg: rgba(29, 30, 31, 0.9);
+  --nv-reader-toolbar-bg: rgba(29, 30, 31, 0.85);
+  --nv-reader-toolbar-shadow: rgba(0, 0, 0, 0.5);
+  --nv-reader-line: rgba(255, 255, 255, 0.12);
+  --nv-reader-text: #cfd3dc;
+  --nv-reader-title: #e5eaf3;
+  --nv-reader-meta: #a3a6ad;
+  --nv-reader-btn-shadow: #363637;
+  --nv-reader-active: #f78989;
+  --nv-reader-on-brand: #ffffff;
+  --nv-reader-order-border: #414243;
+  --nv-reader-order-border-hover: #4c4d4f;
+  --nv-reader-order-bg: rgba(29, 30, 31, 0.7);
+  --nv-reader-order-bg-hover: rgba(29, 30, 31, 0.4);
+  --nv-reader-chip-bg: rgba(255, 255, 255, 0.07);
+  --nv-reader-chip-bg-hover: rgba(255, 255, 255, 0.1);
+  --nv-reader-chip-active-bg: rgba(255, 136, 0, 0.12);
+
+  /* 阅读主题色卡为样本色，深色下保持原色 */
+  --nv-reader-theme-white: #faf6ed;
+  --nv-reader-theme-green: #e2efe2;
+  --nv-reader-theme-pink: #fdd9d9;
+  --nv-reader-theme-yellow: #f1debd;
+  --nv-reader-theme-gray: #eeeeee;
+  --nv-reader-theme-night: #666666;
+
+  --nv-btn-hover-text: #fafafa;
+  --nv-btn-brand-tint: #ff880061;
+
+  /* ---- 账号中心 / 内容管理（T-011）深色 ---- */
+  --nv-text-label: #8d9095; /* el-text-color-placeholder */
+  --nv-text-time: #8d9095;
+  --nv-text-icon: #8d9095;
+  --nv-btn-idle-bg: #303132; /* el-fill-color-dark 系 */
+  --nv-border-panel: #363637; /* el-border-color-lighter */
+  --nv-border-dotted: #414243; /* el-border-color-light */
+  --nv-social-weibo: #f56c6c; /* 深底上略提亮，保持可辨识 */
+  --nv-social-qq: #5ca0f2;
+  --nv-social-wechat: #85ce61;
+
+  /* ---- 作者后台（T-012）深色 ---- */
+  --nv-text-field: #cfd3dc; /* el-text-color-regular */
+  --nv-border-field: #414243; /* el-border-color-light */
+  --nv-btn-gray-bg: #303132; /* 与 --nv-btn-idle-bg 深色同值 */
+  --nv-btn-danger-bg: #f56c6c; /* el-color-danger */
+  --nv-bg-note: #2b2a24; /* 深色下保留暖黄倾向的提示底 */
+  --nv-accent-tab: #5ca0f2; /* 与 --nv-accent-blue 深色同值 */
+  --nv-nav-back-hover: #ffd9b3; /* 深色导航条上的返回链接 hover 文字 */
+}

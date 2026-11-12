@@ -1,0 +1,807 @@
+{
+  "project": "novel（小说精品屋）- 上传图书功能",
+  "project_type": "web",
+  "created": "2026-09-04",
+  "source_files": {
+    "prd": "docs/PRD.md",
+    "plan": "docs/Plan.md",
+    "api_contracts": "docs/api-contracts.md"
+  },
+  "external_services": [
+    {
+      "name": "MySQL 8",
+      "required": true,
+      "config_keys": [
+        "spring.datasource.url",
+        "spring.datasource.username",
+        "spring.datasource.password"
+      ],
+      "tester_access_required": "本机 localhost:3306 访问权限（已运行）",
+      "fallback_allowed": false,
+      "status": "confirmed"
+    },
+    {
+      "name": "Redis 5",
+      "required": true,
+      "config_keys": [
+        "spring.data.redis.host",
+        "spring.data.redis.port",
+        "spring.data.redis.password"
+      ],
+      "tester_access_required": "本机 127.0.0.1:6379 访问权限（已运行）",
+      "fallback_allowed": false,
+      "status": "confirmed"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "上传配置与接口骨架",
+      "type": "backend",
+      "description": "调整 application.yml 配置（max-file-size/max-request-size→100MB，file.upload.path→Windows 路径）；新增 BookUploadReqDto/BookUploadRespDto；新增 BookUploadController 占位接口 POST /api/front/resource/book/upload；新增 ErrorCodeEnum A0702~A0706。本任务完成接口可调用但返回「功能开发中」占位响应。",
+      "source_feature": "T-后端-001",
+      "acceptanceCriteria": [
+        "application.yml 中 spring.servlet.multipart.max-file-size 和 max-request-size 已设置为 100MB",
+        "application.yml 中 novel.file.upload.path 已改为 Windows 可用路径（如 D:/novel-upload）",
+        "后端启动后，POST /api/front/resource/book/upload 接口可访问（返回占位响应或参数校验错误，不报 404）"
+      ],
+      "technicalChecks": [
+        "mvnw.cmd compile 编译通过",
+        "后端启动无报错，确认 8888 端口监听进程对应本次构建",
+        "curl -X POST http://127.0.0.1:8888/api/front/resource/book/upload 返回 RestResp 格式响应（非 404）"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [],
+      "priority": 1,
+      "rules_files": [
+        "dev-standards/backend-dev.md",
+        "dev-standards/backend-layers.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": false
+    },
+    {
+      "id": "T-002",
+      "title": "txt 解析与章节入库（含前端联调）",
+      "type": "backend",
+      "description": "实现 txt 文件解析（编码识别 UTF-8/GBK/UTF-8 BOM + 正则切章）；实现单事务入库（建 book_info + 逐章 book_chapter/book_content + 更新 book_info 最新章节/字数）；复用现有 MP BaseMapper 与缓存清理。前端上传页面将 Mock 替换为真实 API，完成真实联调。",
+      "source_feature": "T-后端-002 + T-前端-001（txt 部分）",
+      "acceptanceCriteria": [
+        "用户在「上传图书」页面选择一本 .txt 文件，填写书名、作者名、分类、方向、简介后点击上传，页面显示上传成功，并展示解析出的章节数量和总字数",
+        "上传成功后，该书出现在前台首页推荐列表或搜索结果中",
+        "点击该书可正常分章阅读，章节内容与上传的 txt 文件内容一致",
+        "上传一个超过 100MB 的文件，页面显示「文件大小超过限制」错误提示",
+        "上传一个非 txt/epub 格式的文件（如 .pdf），页面显示「不支持的文件格式」错误提示",
+        "上传一个不含有效章节的空文件，页面显示「图书文件解析失败」错误提示，不产生脏数据"
+      ],
+      "technicalChecks": [
+        "mvnw.cmd compile 编译通过",
+        "mvnw.cmd test 单元测试通过（如有）",
+        "确认 8888 端口监听进程对应本次构建，必要时重启",
+        "前端上传页面已将 Mock 接口替换为真实 API，请求命中 http://127.0.0.1:8888/api/front/resource/book/upload",
+        "数据库 book_info/book_chapter/book_content 表真实写入数据，且 book_info.wordCount 和 lastChapter* 字段已更新",
+        "上传事务完整性：任一步失败全部回滚，不产生半本书"
+      ],
+      "frontendIntegration": {
+        "required": true,
+        "pages": [
+          "frontend/src/views/BookUpload.vue"
+        ],
+        "services": [
+          "frontend/src/api/book.js 或类似 service 文件"
+        ],
+        "realApiEndpoints": [
+          "POST /api/front/resource/book/upload"
+        ],
+        "mockExitCriteria": [
+          "前端页面不再展示 [Mock] 数据或 Mock 提示",
+          "浏览器网络面板显示请求命中真实后端 8888 端口",
+          "上传成功后页面可跳转到图书详情页或阅读页"
+        ]
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-001"
+      ],
+      "priority": 2,
+      "rules_files": [
+        "dev-standards/backend-dev.md",
+        "dev-standards/backend-layers.md",
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": true
+    },
+    {
+      "id": "T-003",
+      "title": "epub 解析与章节入库（含前端联调）",
+      "type": "backend",
+      "description": "在 pom.xml 新增 jsoup 依赖；实现 epub 解析与章节入库，复用 T-002 已落地的「单事务入库 + NOT NULL 兜底」，避免 B0001 复发。\n\n1. 解析链路（EpubBookParser）：\n   - epub 本质是 zip，用 JDK 内置 ZipFile/ZipInputStream 读取，无需第三方解压库\n   - 按 EPUB 规范定位章节：META-INF/container.xml → 读取 rootfile（OPF 路径）→ 解析 OPF 的 manifest 与 spine（spine idref 顺序即阅读顺序）→ 按 spine 顺序逐个读取 xhtml 章节文件\n   - 每个 xhtml 用 jsoup（Jsoup.parse）提取正文：去除 script/style 与布局标签，清洗为纯文本（去 HTML 标签/样式/多余空行）；epub 一章一文件天然分章，章节标题取文件内首个标题标签（h1/h2/title）或文件名，可复用 TxtBookParser 的章节切分/命名逻辑兜底\n   - 解析失败（zip 损坏 / 缺 container.xml / OPF 结构不完整 / 无有效章节）统一映射 A0704「图书文件解析失败」，不写入任何记录\n\n2. 入库链路（与 T-002 完全同一套单事务逻辑）：\n   - 复用 BookUploadServiceImpl 已有的「建 book_info + 逐章 book_chapter/book_content + 更新 book_info wordCount/lastChapter*」单事务流程，author_id=0\n   - ⚠️ 关键：强制复用 T-002 已修的 NOT NULL 兜底，epub 分支同样完整赋值 pic_url/book_name/author_id/author_name/book_desc（picUrl=/img/default-cover.gif 随 jar 打包），insert 前对照 novel_struc.sql DDL 穷尽覆盖所有 NOT NULL 无默认值列，避免复发 B0001\n   - 缓存清理保持在事务方法内（evictBookInfoCache 等）\n\n3. 前端联调：\n   - 上传页面文件选择器 accept 含 .epub；格式校验/100MB 限制复用 T-002 已打通分支\n   - 继续遵守上传 multipart 的 Content-Type: undefined 修复约定\n\n4. 完成后维护 .sdd/experience.md，沉淀 epub 解析避坑。",
+      "source_feature": "T-后端-003 + T-前端-001（epub 部分）",
+      "acceptanceCriteria": [
+        "用户在「上传图书」页面选择一本 .epub 文件，填写书名、作者名、分类、方向、简介后点击上传，页面显示上传成功，并展示解析出的章节数量和总字数",
+        "上传成功后，该书出现在前台首页推荐列表或搜索结果中",
+        "点击该书可正常分章阅读，章节顺序与 epub 原书 spine 顺序一致，正文为纯文本（无 HTML 标签或样式残留）",
+        "上传一个损坏的 epub 文件（zip 结构损坏或缺少 container.xml），页面显示「图书文件解析失败」错误提示，不产生脏数据"
+      ],
+      "technicalChecks": [
+        "pom.xml 已新增 jsoup 依赖，且 mvnw.cmd compile 编译通过",
+        "mvnw.cmd test 单元测试通过（如有）",
+        "验证前先确认 8888 端口监听进程对应当前构建：netstat -ano 查 PID，必要时 taskkill 后干净重启再 curl（系统级经验：陈旧进程会返回旧占位响应，误导排错）",
+        "前端上传页面 accept 属性包含 .epub，文件选择器可选择 epub 文件",
+        "真实上传 epub：curl -F file=@<样例.epub> -F bookName=... -F authorName=... -F workDirection=0 -F categoryId=... http://127.0.0.1:8888/api/front/resource/book/upload 返回 code 00000",
+        "数据库 book_info/book_chapter/book_content 表真实写入 epub 解析数据，且 book_info.wordCount 与 lastChapter* 字段已更新",
+        "book_info INSERT 覆盖全部 NOT NULL 无默认值列（对照 novel_struc.sql DDL 核对 pic_url/book_name/author_id/author_name/book_desc），不报 B0001",
+        "epub 正文为纯文本：抽查 book_content.content，无 <p>/<div>/style/class 等 HTML 标签残留",
+        "章节顺序与 spine 一致：book_chapter.chapter_num 递增顺序对应 OPF spine 的 idref 顺序",
+        "上传事务完整性：任一步失败全部回滚，不产生半本书；损坏 epub 返回 A0704 且无脏数据"
+      ],
+      "frontendIntegration": {
+        "required": true,
+        "pages": [
+          "frontend/src/views/BookUpload.vue"
+        ],
+        "services": [
+          "frontend/src/api/book.js 或类似 service 文件"
+        ],
+        "realApiEndpoints": [
+          "POST /api/front/resource/book/upload"
+        ],
+        "mockExitCriteria": [
+          "前端页面不再展示 [Mock] 数据或 Mock 提示",
+          "浏览器网络面板显示 epub 上传请求命中真实后端 8888 端口",
+          "上传 epub 成功后页面可跳转到图书详情页或阅读页"
+        ]
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-002"
+      ],
+      "priority": 3,
+      "rules_files": [
+        "dev-standards/backend-dev.md",
+        "dev-standards/backend-layers.md",
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": true
+    },
+    {
+      "id": "T-004",
+      "title": "端到端回归验证",
+      "type": "integration",
+      "description": "真实启动后端（8888）+ 前端（1024），上传样例 txt 和 epub 文件，验证完整链路：上传→入库→首页/搜索展示→分章阅读。回归验证现有功能（首页/搜索/阅读）未被破坏。",
+      "source_feature": "T-集成-001",
+      "acceptanceCriteria": [
+        "用户上传一本 txt 文件后，该书在首页推荐列表或搜索结果中可见，且可完整阅读",
+        "用户上传一本 epub 文件后，该书在首页推荐列表或搜索结果中可见，且可完整阅读",
+        "上传的图书在前台搜索框中输入书名关键词可被搜索到",
+        "现有图书的首页推荐、搜索、阅读功能正常（回归验证）",
+        "上传过程中页面显示加载状态，上传完成或失败后状态正确恢复"
+      ],
+      "technicalChecks": [
+        "确认 8888 端口监听进程对应本次后端构建，必要时重启",
+        "确认 1024 端口监听进程对应本次前端构建，必要时重启",
+        "前端请求代理配置正确（VUE_APP_BASE_API_URL 指向 http://127.0.0.1:8888/api）",
+        "数据库 book_info/book_chapter/book_content 表数据完整",
+        "回归测试：现有图书的首页 API /api/front/home/books 返回正常",
+        "回归测试：现有图书的搜索 API /api/front/search/books 返回正常",
+        "回归测试：现有图书的阅读 API /api/front/book/{id} 和 /api/front/book/content/{chapterId} 返回正常"
+      ],
+      "frontendIntegration": {
+        "required": true,
+        "pages": [
+          "frontend/src/views/BookUpload.vue",
+          "frontend/src/views/Home.vue",
+          "frontend/src/views/Search.vue",
+          "frontend/src/views/BookChapter.vue"
+        ],
+        "services": [],
+        "realApiEndpoints": [
+          "POST /api/front/resource/book/upload",
+          "GET /api/front/home/books",
+          "GET /api/front/search/books",
+          "GET /api/front/book/{id}",
+          "GET /api/front/book/content/{chapterId}"
+        ],
+        "mockExitCriteria": [
+          "所有页面不再展示 Mock 数据",
+          "上传→入库→展示→阅读完整链路真实可用"
+        ]
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-003"
+      ],
+      "priority": 4,
+      "rules_files": [
+        "dev-standards/frontend.md",
+        "dev-standards/backend-dev.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": true
+    },
+    {
+      "id": "T-005",
+      "title": "上传归属字段与管理员账号基础设施（uploader_id + admin 初始化 + 上传链路取登录态）",
+      "type": "backend",
+      "description": "本任务只做「我的上传」的基础设施，不实现管理接口与管理页（T-006），也不做历史数据回填（T-007）。\n\n1. 数据库结构\n   - 用 Python/pymysql 或 mysql 客户端对本地 novel 库执行：ALTER TABLE book_info ADD COLUMN uploader_id bigint unsigned NOT NULL DEFAULT 0 COMMENT '上传者用户ID;0-匿名'，ADD KEY idx_uploader_id (uploader_id)。\n   - 新增迁移脚本 doc/sql/uploader_id_2026-10-20.sql，脚本需可重复执行（先查 information_schema.COLUMNS 判断列/索引是否已存在）。\n   - BookInfo 实体新增 uploaderId（Long），沿用现有手写 getter/setter 风格；DatabaseConsts.BookTable 新增 COLUMN_UPLOADER_ID = \"uploader_id\"。\n\n2. 管理员账号初始化（幂等）\n   - application.yml 增加 novel.admin.username / novel.admin.password（默认 admin / admin），代码禁止硬编码密码。\n   - 启动时（独立 Component + CommandLineRunner，或复用 NovelApplication 现有 CommandLineRunner 风格）查询 user_info.username，不存在则插入：password=DigestUtils.md5DigestAsHex(password.getBytes(UTF_8))（与 UserServiceImpl.login 同口径）、salt='0'、nick_name=管理员账号名、status=0、account_balance=0、create_time/update_time=now。\n   - user_info 有唯一键 uk_username，需捕获 DuplicateKeyException 视为已存在；重复启动不得重复插入。\n\n3. 登录响应增加管理员标识（供前端导航显隐，向后兼容增列）\n   - UserLoginRespDto 新增 Boolean admin；UserServiceImpl.login 按 username 是否等于配置的管理员账号名赋值。\n   - 为什么不用管理接口的 A0301 判断显隐：frontend/src/utils/request.js 的全局拦截器对任意非 00000 都会 ElMessage.error，普通用户每次进页面都会被弹「访问未授权」。\n\n4. 上传链路取登录态\n   - WebConfig 给 /api/front/resource/book/upload 单独挂 TokenParseInterceptor（只解析不拦截，保持 order 3），匿名上传必须继续可用。\n   - BookUploadServiceImpl.doUploadBook 建 BookInfo 时 setUploaderId(UserHolder.getUserId() == null ? 0L : UserHolder.getUserId())。\n   - 注意：前端 axios 未登录时也可能带上 Authorization 头（值为 null/字符串 \"null\"），TokenParseInterceptor 解析失败返回 null，必须落 0 而不是抛异常。\n   - 沿用项目经验：NOT NULL 无默认值列（pic_url/book_name/author_id/author_name/book_desc）必须全部赋值；写库字段按 novel_struc.sql 列长截断；不得回退 T-003/Bugfix 已修的兜底。\n   - 同名校验仍按 author_id=0 查重，不因 uploader_id 改变口径。\n\n5. 完成后把新踩的坑追加到 .sdd/experience.md。",
+      "source_feature": "3A-归属字段 + 3A-管理员账号",
+      "acceptanceCriteria": [
+        "book_info 表已新增 uploader_id 列（bigint unsigned NOT NULL DEFAULT 0）并建立 idx_uploader_id 索引，后端启动不因实体新增字段报错",
+        "后端启动后 user_info 中始终存在且仅存在一条 username='admin' 的记录；重复启动不会多插入",
+        "用 admin / admin 调用现有前台登录接口可登录成功，登录响应带管理员标识 admin=true；普通账号登录返回 admin=false",
+        "在「上传图书」页面以管理员登录态真实上传一本书，该书 book_info.uploader_id 记录为 admin 的用户 id；退出登录后匿名上传一本书，uploader_id 记录为 0",
+        "上传接口保持免登录可用：不带 token 的匿名上传仍然成功，txt/epub 上传、100MB 限制与既有错误码行为无回归",
+        "管理员账号与密码来自配置项 novel.admin.*，代码与脚本中未新增任何明文生产密钥"
+      ],
+      "technicalChecks": [
+        "mvnw.cmd compile 编译通过（用 mvnw.cmd 而非 mvnw；JAVA_HOME 指向 JDK21 安装目录，本地仓库通过 MAVEN_OPTS 传递，不要用 -Dmaven.repo.local 直接拼命令）",
+        "迁移脚本 doc/sql/uploader_id_2026-10-20.sql 已在本地 MySQL novel 库真实执行：SHOW COLUMNS FROM book_info LIKE 'uploader_id' 有结果，SHOW INDEX FROM book_info 含 idx_uploader_id",
+        "重启后端并确认 8888 端口的监听 PID 属于本次构建（系统级经验：陈旧进程会返回旧行为，先 netstat -ano 定位 PID）",
+        "curl -X POST http://127.0.0.1:8888/api/front/user/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"admin\"}' 返回 code 00000、data.admin=true、data.token 非空",
+        "连续启动后端两次，SELECT COUNT(*) FROM user_info WHERE username='admin' 恒为 1",
+        "前端真实联调（不得只用 curl 判定）：浏览器打开 1024，用 admin 登录后在「上传图书」页面真实上传一本 txt，SELECT id,uploader_id FROM book_info ORDER BY create_time DESC LIMIT 1 的 uploader_id 等于 admin 用户 id",
+        "匿名回归：清除 localStorage 的 Authorization 后再次从上传页面上传，新行 uploader_id = 0，且 pic_url/book_name/author_id/author_name/book_desc 全部有值，无 B0001",
+        "匿名上传回归：更新后的 book_info.word_count 与 book_chapter 行数正常，前台可正常打开该书",
+        "代码中未硬编码管理员密码，novel.admin.password 只从 application.yml 读取"
+      ],
+      "frontendIntegration": {
+        "required": true,
+        "pages": [
+          "frontend/src/views/BookUpload.vue",
+          "frontend/src/views/Login.vue"
+        ],
+        "services": [
+          "frontend/src/api/book.js",
+          "frontend/src/api/user.js"
+        ],
+        "realApiEndpoints": [
+          "POST /api/front/user/login",
+          "POST /api/front/resource/book/upload"
+        ],
+        "mockExitCriteria": [
+          "管理员登录态下，上传请求携带真实 Authorization 头并命中 http://127.0.0.1:8888/api/front/resource/book/upload",
+          "匿名（无 token）上传请求同样命中真实接口并成功，uploader_id 落 0",
+          "上传页面无 Mock 数据或占位文案"
+        ]
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-004"
+      ],
+      "priority": 5,
+      "rules_files": [
+        "dev-standards/backend-dev.md",
+        "dev-standards/backend-layers.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": false
+    },
+    {
+      "id": "T-006",
+      "title": "「我的上传」管理接口 + 前台入口与管理页（含真实联调）",
+      "type": "integration",
+      "description": "一个完整闭环：后端管理接口 + 管理员权限校验 + 前端导航入口/路由/管理页 + 真实接口联调。\n\n1. 后端接口（严格按 docs/api-contracts.md 第 1A 节）\n   - ApiRouterConsts 新增 UPLOAD_URL_PREFIX=\"/upload\" 与 API_FRONT_UPLOAD_URL_PREFIX=API_FRONT_URL_PREFIX+UPLOAD_URL_PREFIX；WebConfig 把 API_FRONT_UPLOAD_URL_PREFIX + \"/**\" 加入 AuthInterceptor 拦截前缀（AuthInterceptor 按 URI 第一段推导 frontAuthStrategy，/api/front/upload/** 天然落到前台登录校验）。\n   - DTO：UploadBookReqDto extends PageReqDto（增加可选 Integer bookStatus）；UploadBookRespDto（id/bookName/authorName/categoryName/picUrl/wordCount/chapterCount/bookStatus/createTime，createTime 用 @JsonFormat(pattern=\"yyyy-MM-dd HH:mm:ss\")）；UploadBookStatusReqDto（@NotNull @Min(0) @Max(1) Integer bookStatus）。\n   - UploadController（@RequestMapping(ApiRouterConsts.API_FRONT_UPLOAD_URL_PREFIX)）：GET books、PUT book/{bookId}/status。\n   - Service 管理员判定：当前 UserHolder.getUserId() 对应用户的 username 等于配置的 novel.admin.username，否则抛 BusinessException(ErrorCodeEnum.USER_UN_AUTH) → A0301；未登录由 AuthInterceptor 返回 A0230。不新增角色表。\n   - 列表：uploader_id = 当前用户 id，create_time 倒序；chapterCount 用一次 GROUP BY book_chapter 批量统计（禁止每行 selectCount 的 N+1）；bookStatus 传 0/1 时过滤，不传查全部；分页用 MyBatis-Plus Page。\n   - 切换状态：bookId 不存在或不属于当前用户 → A2002；只更新 book_status 与 update_time；事务提交后调用 BookInfoCacheManager.evictBookInfoCache(bookId)，保证前台详情页即时生效；目标状态与当前相同时按成功幂等返回。\n\n2. 前端（Vue 3 + Vue CLI + Element Plus，沿用现有代码风格，不套用 dev-standards/frontend.md 的 React 规范）\n   - src/api/upload.js：listMyUploadBooks(params)、updateBookStatus(bookId, bookStatus)。\n   - src/views/MyUpload.vue：沿用 box_center/main 布局 + Header/Footer；展示书名、作者、分类、字数、章节数、上传时间、状态标签；分页每页 10 条；状态筛选 全部/连载中/已完结；每本一个「设为已完结 / 设为连载中」按钮，请求中禁用防重复点击；有加载态、空态、失败提示。\n   - src/router/index.js 增加顶层路由 /my_upload（参照 /book_upload）。\n   - src/components/common/Navbar.vue：仅在已登录且 localStorage 管理员标记为真时渲染「我的上传」。\n   - src/utils/auth.js 增加 isAdmin 的存取/清除；Login.vue 登录成功后保存 data.admin；Top.vue 退出时清除该标记，避免换账号后残留。\n   - Login.vue 放开手机号格式校验：当前 if (!/^1[3-9][0-9]{9}/.test(username)) 只弹错不 return，但会干扰 admin 登录；改为仅校验非空，输入框 placeholder 改为「用户名 / 手机号」。\n   - 注意 Jackson 开启 write-numbers-as-strings：id/bookStatus/wordCount/chapterCount 会序列化为字符串，前端比较与传参请用 Number() 转换，不要用 === 与数字比较。\n\n3. 完成后把新踩的坑追加到 .sdd/experience.md。",
+      "source_feature": "3A-管理接口 + 3A-前端入口 + 3A-管理页",
+      "acceptanceCriteria": [
+        "未登录访客和普通用户登录后，顶部导航栏都看不到「我的上传」入口",
+        "用 admin / admin 登录后，顶部导航出现「我的上传」，点击进入 /my_upload 页面并展示 admin 名下的上传书目",
+        "列表按上传时间倒序排列，每页 10 条，翻页可用；每行能看到书名、作者、分类、字数、章节数、上传时间与状态",
+        "状态筛选选择「已完结」只显示已完结的书，选择「连载中」只显示连载中的书，切回「全部」恢复完整列表",
+        "对一本连载中的书点击「设为已完结」，列表状态立即变为已完结；刷新页面后仍为已完结，且前台该书详情页显示为已完结",
+        "对已完结的书点击「设为连载中」可切回连载中，前台详情页同步显示为连载中",
+        "普通用户或未登录用户手动访问 /my_upload 地址时看不到任何上传书、也不能修改状态（提示无权限或跳转登录）",
+        "列表加载时显示加载状态，无数据时显示空列表提示，请求失败时有明确错误提示且页面不白屏",
+        "登录页输入 admin 登录不再弹出「手机号格式不正确」，普通手机号账号登录不受影响"
+      ],
+      "technicalChecks": [
+        "mvnw.cmd compile 编译通过；如新增/调整单元测试，mvnw.cmd test 通过",
+        "前端 npm run lint 与 npm run build 通过（Vue CLI 工程，无 type-check 脚本，不要虚构 npm run type-check）",
+        "重启后端与前端，确认 8888 与 1024 端口监听 PID 均属于本次构建（系统级经验：陈旧进程会误导排错）",
+        "GET http://127.0.0.1:8888/api/front/upload/books（带 admin token）返回 code 00000，data 含 pageNum/pageSize/total/pages/list，字段与 api-contracts 1A.1 一致（id 为字符串、createTime 为 yyyy-MM-dd HH:mm:ss、pageSize 默认 10、create_time 倒序）",
+        "bookStatus=1 与 bookStatus=0 分别只返回对应状态；不传 bookStatus 返回全部；pageNum=2 返回第二页且与 total 匹配",
+        "PUT /api/front/upload/book/{bookId}/status body {\"bookStatus\":1} 返回 00000；DB 中 book_info.book_status 已变更，且随后 GET /api/front/book/{bookId} 返回 bookStatus=1（证明 Caffeine 缓存已清理）",
+        "权限与错误码：不带 token → A0230；普通用户 token → A0301；不存在或非本人 bookId → A2002；bookStatus=2 或非 0/1 → A0400（若 MethodArgumentNotValidException 未被全局 handler 映射为 A0400，需在 CommonExceptionHandler 补齐）",
+        "浏览器真实操作（1024）：admin 登录 → 导航出现入口 → 筛选 → 切换状态，Network 面板请求命中真实 8888 接口，无 Mock 数据",
+        "chapterCount 统计未产生 N+1：分页 10 条时列表查询 SQL 条数为常数级（可用 MyBatis 日志确认）",
+        "前端无控制台报错；普通用户登录后访问 /my_upload 不出现白屏或未捕获异常"
+      ],
+      "frontendIntegration": {
+        "required": true,
+        "pages": [
+          "frontend/src/views/MyUpload.vue",
+          "frontend/src/components/common/Navbar.vue",
+          "frontend/src/views/Login.vue",
+          "frontend/src/components/common/Top.vue",
+          "frontend/src/router/index.js"
+        ],
+        "services": [
+          "frontend/src/api/upload.js",
+          "frontend/src/utils/auth.js"
+        ],
+        "realApiEndpoints": [
+          "POST /api/front/user/login",
+          "GET /api/front/upload/books",
+          "PUT /api/front/upload/book/{bookId}/status",
+          "GET /api/front/book/{bookId}"
+        ],
+        "mockExitCriteria": [
+          "「我的上传」页面数据全部来自真实后端，无 [Mock] 数据或占位文案",
+          "浏览器 Network 面板显示 /front/upload/books 与 /front/upload/book/*/status 命中 8888 端口真实接口",
+          "刷新页面后列表状态与数据库一致，不依赖前端本地缓存"
+        ]
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-005"
+      ],
+      "priority": 6,
+      "rules_files": [
+        "dev-standards/backend-dev.md",
+        "dev-standards/backend-layers.md",
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": "codex/tester",
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "独立验收 PASS：后端 compile 通过；前端 build 通过；全仓 lint 复现 116 个历史错误且本次新增/改动文件 ESLint delta=0；重启后 8888=PID9944、1024=PID7796 均属本次构建；列表/筛选/分页/类型/倒序/权限错误码/幂等/DB 与缓存同步均通过；Chrome 真实操作命中 8888 无 Mock、pageerror 为空；chapterCount 为单次 GROUP BY 无 N+1。观察项：既有静态图片 404、全仓 lint 历史错误、MySQL ai_ci 大小写不敏感。测试数据已按 book_content→book_chapter→book_info 单事务清理并回到基线。",
+      "user_gate": true
+    },
+    {
+      "id": "T-007",
+      "title": "历史书「仙逆」回填 + 全链路 E2E 回归",
+      "type": "integration",
+      "description": "1. 历史数据回填\n   - 新增 doc/sql/uploader_id_backfill_2026-10-20.sql，内容为：UPDATE book_info b JOIN user_info u ON u.username = '<配置的管理员账号名>' SET b.uploader_id = u.id, b.update_time = NOW() WHERE b.book_name = '仙逆' AND b.author_id = 0 AND b.uploader_id = 0;\n   - 脚本必须幂等：重复执行影响行数为 0，且不得改动其他书的 uploader_id。\n   - 在本地 novel 库真实执行并记录执行前后的 SELECT id, book_name, author_id, uploader_id FROM book_info WHERE book_name='仙逆'。\n   - 若库中符合条件的历史上传书不止「仙逆」一本，先向 Orchestrator 报告，不要擅自扩大回填范围。\n\n2. 全链路 E2E 回归（真实启动后端 8888 + 前端 1024）\n   - 管理员链路：admin 登录 → 导航「我的上传」→ 列表含「仙逆」→ 去上传页上传一本新 txt → 返回列表新书排第一 → 切换为已完结 → 前台详情页显示已完结 → 刷新/重新登录后仍为已完结。\n   - 匿名链路：清 token 上传一本书 → 不出现在「我的上传」→ 前台首页/搜索可查到并可分章阅读。\n   - 权限链路：未登录与普通用户调用管理接口分别返回 A0230 / A0301，且不能修改任何书状态。\n   - 现有功能回归：首页推荐、分类/搜索、分章阅读、txt/epub 上传、超长章节名截断均正常。\n   - 测试数据清理：单事务内按 book_content → book_chapter → book_info 顺序删除本次新增测试数据，清理后回到测试前基线（先记录基线数量的 SQL 快照）。\n\n3. 完成后把回填与 E2E 避坑追加到 .sdd/experience.md。",
+      "source_feature": "3A-历史数据回填 + 集成回归",
+      "acceptanceCriteria": [
+        "用 admin 登录进入「我的上传」，列表中能看到历史上传书「仙逆」，作者显示为匿名用户，状态与库中一致",
+        "「仙逆」只归属 admin：刷新页面、退出重新登录后仍能在「我的上传」看到它",
+        "管理员从「我的上传」页去上传一本新书后返回，新书出现在列表第一条（按上传时间倒序）",
+        "把新上传的书设为已完结后，前台该书详情页显示已完结，刷新页面或重新登录仍保持已完结",
+        "未登录状态下上传的书不会出现在「我的上传」列表，但能在首页/搜索中被找到并正常阅读",
+        "现有功能回归正常：首页推荐、分类与搜索、分章阅读、txt 与 epub 上传均可正常使用",
+        "重复执行回填脚本不会改动其他书，也不会把别的匿名上传书误归到 admin 名下"
+      ],
+      "technicalChecks": [
+        "回填脚本 doc/sql/uploader_id_backfill_2026-10-20.sql 已落盘并在本地 MySQL 真实执行；SELECT id,book_name,author_id,uploader_id FROM book_info WHERE book_name='仙逆' 的 uploader_id 等于 admin 的 user_info.id",
+        "幂等验证：重复执行回填脚本影响行数为 0；执行前后 SELECT COUNT(*) FROM book_info WHERE uploader_id <> 0 的差值仅为「仙逆」这一行",
+        "重启后端与前端，确认 8888 与 1024 端口监听 PID 均属于本次构建（系统级经验 2026-09-01）",
+        "E2E 管理员链路（真实浏览器 1024）：admin 登录 → /my_upload 含「仙逆」→ 上传 txt → GET /api/front/upload/books total 增加 1 且首条为该书 → PUT 状态为 1 → GET /api/front/book/{id} 返回 bookStatus=1",
+        "E2E 匿名链路：无 token 上传后新行 uploader_id=0，GET /api/front/upload/books total 不变；GET /api/front/search/books?keyword=<书名> 能查到该书",
+        "权限复测：GET /api/front/upload/books 无 token → A0230，普通用户 token → A0301，PUT 状态同样被拒",
+        "回归：GET /api/front/home/books、/api/front/search/books、/api/front/book/{id}、/api/front/book/content/{chapterId} 返回正常；txt 与 epub 上传均成功",
+        "数据清理：测试前记录 (book_info, book_chapter, book_content) 基线数量，测试后单事务按 book_content → book_chapter → book_info 顺序删除新增数据并恢复到基线",
+        "前端无 Mock 数据残留，Network 面板所有相关请求命中真实 8888 接口"
+      ],
+      "frontendIntegration": {
+        "required": true,
+        "pages": [
+          "frontend/src/views/MyUpload.vue",
+          "frontend/src/views/BookUpload.vue",
+          "frontend/src/views/Home.vue",
+          "frontend/src/views/BookClass.vue",
+          "frontend/src/views/Book.vue",
+          "frontend/src/views/BookContent.vue"
+        ],
+        "services": [
+          "frontend/src/api/upload.js",
+          "frontend/src/api/book.js"
+        ],
+        "realApiEndpoints": [
+          "POST /api/front/user/login",
+          "POST /api/front/resource/book/upload",
+          "GET /api/front/upload/books",
+          "PUT /api/front/upload/book/{bookId}/status",
+          "GET /api/front/home/books",
+          "GET /api/front/search/books",
+          "GET /api/front/book/{bookId}",
+          "GET /api/front/book/content/{chapterId}"
+        ],
+        "mockExitCriteria": [
+          "所有页面均无 Mock 数据或占位文案",
+          "上传 → 归属 → 我的上传列表 → 状态切换 → 前台详情同步的完整链路真实可用",
+          "回归路径（首页/搜索/阅读）全部命中真实后端"
+        ]
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-006"
+      ],
+      "priority": 7,
+      "rules_files": [
+        "dev-standards/frontend.md",
+        "dev-standards/backend-dev.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "[PASS] [T-007] 独立验收通过：仙逆回填归属与幂等正确，重启后端/前端后真实浏览器完成管理员上传/列表/状态切换/详情同步与匿名上传/搜索/阅读链路，权限与既有接口回归通过。数据已按 book_content→book_chapter→book_info 单事务清理并回到基线，三表恢复 109/19716/19716，测试关键词搜索 total=0。观察项：后端 CORS 只允许 localhost:1024，127.0.0.1:1024 会被拒绝，用户访问需使用 localhost；报告详见 .sdd/test-reports/test-T-007.md。\n补充（2026-10-21）：用户反馈「丹道宗师」也是历史上传书，已补回填 uploader_id 0→1；修正后 admin 列表 total=2（仙逆+丹道宗师）。",
+      "user_gate": true
+    },
+    {
+      "id": "T-008",
+      "title": "主题基础设施与切换机制（theme.css 变量表 + useTheme + Element Plus 深色引入 + 导航栏切换图标）",
+      "type": "frontend",
+      "description": "本任务是全站主题能力的唯一基础设施，后续页面变量化任务只消费这里的变量与 API，不得各自再造一套主题机制。\n\n1. 新建 `frontend/src/assets/styles/theme.css`\n- `:root` 定义浅色取值，`html.dark` 定义深色取值；变量统一 `--nv-` 前缀，禁止同一语义出现两套命名。\n- 必须覆盖的语义（浅色取值一律取自改造前的硬编码现状，不得顺手改观感）：\n  页面底色（现状 body #f5f5f5）、容器/卡片底色（#fff）、悬浮层底色（弹窗/下拉/消息）、\n  主文字（#333）、正文文字、次要文字（#666）、弱文字（#999）、反色文字（#fff）、\n  边框（#eaeaea/#eee/#e0e0e0 等归并为 2~3 个层级）、分隔线、\n  品牌主色与 hover（现有 #f80 / #f70 / #ff7800 体系）、链接色、\n  危险/错误色（#ff4040 / #ed4259 / #f65167 归并）、成功色、\n  输入框底色与占位符文字色（现状 #999）、遮罩 rgba、阴影 rgba、图片占位灰（#f6f6f6/#ececec）。\n- 深色取值使用 Element Plus 深色体系同一色阶（如页面 #141414 / 悬浮 #1d1e1f / 主文字 #E5EAF3 / 边框 #4C4D4F），\n  保证自定义区域与 `el-*` 组件不出现「两套深色」拼接感。\n\n2. 新建主题逻辑 `frontend/src/utils/theme.js`（可与既有 `utils/auth.js` 并列；若选 `src/composables/useTheme.js` 亦可，二选一并在 notes 写明）\n- 存储键固定（建议 `novel-theme`），值为 `light` / `dark`；无值或非法值一律按 `light`。\n- 导出 `getStoredTheme()` / `setTheme(theme)` / `toggleTheme()` / `isDark()` / `initTheme()`。\n- 切换时在 `document.documentElement` 上增删 `dark` class（Element Plus 深色 css-vars 的选择器是 `html.dark`），并同步 `color-scheme`。\n- localStorage 读写必须 try/catch 容错（隐私模式/禁用存储时不得抛错阻断渲染）。\n\n3. `frontend/src/main.js` 接入\n- 在 `element-plus/dist/index.css` 之后引入 `element-plus/theme-chalk/dark/css-vars.css`，再引入 `@/assets/styles/theme.css`，保持既有 base.css / main.css 引入顺序不变。\n- `initTheme()` 必须在 `app.mount('#app')` 之前同步执行，避免首帧浅色闪烁（深色偏好用户刷新时不能先白一下）。\n\n4. `frontend/src/components/common/Top.vue` 切换入口\n- 位置：`.bookShelf` 区域内、`.user_link` 之前；未登录 / 已登录 / 管理员三种状态下都渲染。\n- 交互：点击调用 `toggleTheme()`；深色态显示太阳类图标，浅色态显示月亮类图标；带中文 `title` 与 `aria-label`（如「切换为深色主题」/「切换为浅色主题」）。\n- 图标来源：复用 `main.js` 已在使用的 `@element-plus/icons-vue`（随 element-plus 2.2.0 安装，Moon / Sunny 均已存在）；若该包在构建中不可用，改用内联 SVG。**不得**修改 package.json。\n- 入口样式只用色彩与内联尺寸（图标 20px 左右），不得改变 `.topMain`（现状 height 92px）/ `.bookShelf` 的高度与浮动布局，登录/注册/退出文字位置不得移动。\n\n5. 本任务只做机制与入口：`views/**` 与 6 个全局 CSS 仍保留硬编码颜色，深色下页面外观不完整属预期，不要为了让图标好看去顺手改页面颜色。",
+      "source_feature": "PRD 7.2（双主题/切换入口/持久化/Element Plus 适配）+ Plan 5（主题基础设施 / 切换入口）",
+      "acceptanceCriteria": [
+        "`frontend/src/assets/styles/theme.css` 同时存在 `:root` 与 `html.dark` 两套取值，变量统一 `--nv-` 前缀，同名语义只有一个变量",
+        "清空浏览器存储后首次打开站点，`<html>` 上没有 `dark` class，页面外观与改造前一致（默认浅色，不跟随操作系统设置）",
+        "任意页面点击导航栏右上角的主题图标后，`<html>` 立即增加 `dark` class，图标同步换成反向图标；再次点击移除该 class 并换回原图标",
+        "主题选择会写入浏览器本地存储；刷新页面后图标与 `<html>` class 与刷新前一致，且刷新过程中不会先显示浅色再跳成深色",
+        "主题图标在未登录、普通用户登录、管理员登录三种状态下都出现在导航栏右上角，且不挤压原有的「登录 / 注册 / 退出 / 昵称」文字，顶栏高度不变",
+        "深色态下 Element Plus 组件示例（任选页面触发一个 `el-dialog` 或 `el-message`）底色随之为深色系，证明官方深色变量已生效"
+      ],
+      "technicalChecks": [
+        "`cd frontend && npm run lint` 执行通过口径为「本次新增/修改文件 ESLint 错误数 = 0」；给出对本次文件单独跑 lint 的 delta 证据（全仓 116 个历史错误不计入本次阻塞，但不得以历史错误为由跳过）",
+        "`cd frontend && npm run build` 通过（允许既有 chunk 体积告警）",
+        "`npm run serve` 后 `http://localhost:1024` 可访问（不使用 127.0.0.1，后端 CORS 仅放行 localhost）",
+        "真实浏览器验证：清空 localStorage → 加载首页 → `document.documentElement.className` 不含 dark → 点击切换图标 → 含 dark → 刷新 → 仍含 dark 且 localStorage 键值为 dark → 再点击 → 恢复 light",
+        "首帧无闪烁：在 localStorage 预置 dark 后重新加载页面，`domcontentloaded` 时刻 `document.documentElement` 已带 dark class",
+        "构建产物校验：`dist` 内 CSS 含 `html.dark` 深色变量规则（grep 证据），证明 `theme-chalk/dark/css-vars.css` 已进入产物",
+        "`frontend/package.json` 的 dependencies 与 devDependencies 未新增任何条目（与改造前逐字一致）",
+        "改动文件清单仅包含 theme.css（新增）、theme.js 或 useTheme.js（新增）、main.js、Top.vue；`views/**`、`api/**`、`router/**`、`utils/auth.js` 均未被修改"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [
+          "frontend/src/assets/styles/theme.css",
+          "frontend/src/utils/theme.js",
+          "frontend/src/main.js",
+          "frontend/src/components/common/Top.vue"
+        ],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-007"
+      ],
+      "priority": 8,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "[PASS] [T-008] 独立验收通过：theme.css 25 个 --nv-* 在 :root/html.dark 严格同名同数、浅色值取自改造前硬编码；theme.js 五 API + try/catch + 非法值按 light；main.js require(dark/css-vars.css) + initTheme 早于 mount；Top.vue 三态入口、Moon/Sunny、中文 title/aria。独立复验：dev 25/25、prod(dist 静态服务)10/10、容错+布局 9/9 全通过；首帧 dark(dev 182.6ms/prod 97.4ms) 早于 first-paint(208/128ms)；prod dist 中 EP 独有深色值 --el-color-primary-light-7=#213d5b、--el-bg-color=#141414 实测生效，el-message/el-input/el-dialog 真实变深；npm run build 通过且产物与 Developer 的 dist 逐字节一致；package.json SHA256 与改造前一致，changed files 仅 2 新 2 改，views/api/router/auth.js/easyui.css/layer.css 零改动；本次 3 文件 ESLint delta=0。已推翻 Developer 的一个说法：其脚本仅断言 html.dark 存在不足以区分 theme.css 与 EP 覆盖，我用 EP 独有变量值补验。既有缺陷（非本次）：utils/auth.js 无 try/catch，全存储禁用时 Top.vue setup 抛 SecurityError（不在允许改动范围）。详见 .sdd/test-reports/test-T-008.md",
+      "user_gate": false
+    },
+    {
+      "id": "T-009",
+      "title": "全局 CSS 变量化（base.css / main.css / book.css / about.css / user.css / read.css）",
+      "type": "frontend",
+      "description": "把 6 个全局 CSS 中的色彩类硬编码替换为 T-008 的 `--nv-*` 变量，浅色取值保持不变（PRD 7.5 视觉基线），深色自动由 `html.dark` 生效。\n\n1. 改造范围与实测体量\n- `base.css`（235 行，约 109 处色值）：body 底色/文字、a 链接与 hover、语义色类（.red/.black3/.black6/.black9/.ccc/.orange 等）、占位符、表格与 input 边框、`.topMain`（height 92px、background #fff）、`.bookShelf .user_link`、`.bookShelf .line`、分页与按钮。\n- `main.css`（247 行，约 92 处）：`.scSmallImg li` 白边与 #FF7800 选中边、`.hot_articles` 分隔线、`.rightBox .title` 边框、`.rightList` 文本色、页脚、列表 hover。\n- `book.css`（153 行，约 58 处）：书籍详情/目录/列表卡片底色与文字、评分、章节目录表格线。\n- `about.css`（27 行，约 13 处）：`.userBox` #fff 底与 #eaeaea 边、`.my_l li .on`（#f80 左边线 + #f8f8f8 底）、`.my_r` 边框与 #fff 底、新闻列表分隔线。\n- `user.css`（5 行，约 2 处）：`.my_l li a` 的 #666 与 #fff 左边线。\n- `read.css`（1 行，0 处色值）：只含背景图，无需改动（说明即可）。\n\n2. 替换规则\n- 只替换 color / background(-color) / border(-*-color) / box-shadow / outline-color / 占位符色。保留结构、尺寸、字体、定位、选择器与层叠顺序。\n- `url(../images/*.png)` 背景图、`transparent`、`none` 保留原样。\n- 若某语义在 theme.css 缺失，先在 theme.css 补变量（浅色值=原值，深色值取 EP 深色同色阶），不得在该 CSS 内写死深色值。\n- 不得新增 `html.dark .selector { ... }` 局部覆写块；主题只通过变量切换。\n- 不得改动 `easyui.css`（3243 行，第三方遗留）与 `layer.css`（未被引入）。\n\n3. 产出证据\n- 开工前先记录 6 个文件的色值出现次数（`grep -oE '#[0-9a-fA-F]{3,8}|rgba?\\([^)]*\\)' | wc -l`），改造后同命令结果应为 0（白名单仅为 transparent 等非色彩值）。\n- 用浅色截图对比证明视觉基线未变。",
+      "source_feature": "PRD 7.2（整站配色切换）+ Plan 5（全局 CSS 变量化）",
+      "acceptanceCriteria": [
+        "浅色主题下首页、全部作品、排行榜、书籍详情、正文阅读、登录、注册、用户中心、上传图书、我的上传、书籍管理的观感与改造前一致：底色、文字色、边框、表头、按钮颜色均无可感知变化",
+        "6 个全局样式文件中不再出现十六进制或 rgba 色彩值，色彩声明全部引用 `--nv-*` 变量（`transparent` 与背景图除外）",
+        "深色态下，纯由全局样式驱动的区域（顶部搜索栏与顶栏底色、主导航条、页脚版权栏、页面外层底色、书籍卡片边框与文字）变为深色系且文字可读",
+        "两种主题下所有页面的元素位置、间距、字号、滚动行为均未改变（只变颜色，不变布局）",
+        "`easyui.css` 与 `layer.css` 的内容未被改动"
+      ],
+      "technicalChecks": [
+        "`cd frontend && npm run lint`：本次修改文件 ESLint delta = 0（附核查证据）",
+        "`cd frontend && npm run build` 通过（允许既有体积告警），构建产物 CSS 中 `--nv-` 变量定义与引用均存在",
+        "色值清零证据：对 base/main/book/about/user/read 六个文件执行色值 grep，结果从开工前的实测计数（109/92/58/13/2/0）降为 0",
+        "`easyui.css`、`layer.css` 的校验和（sha256）与改造前一致，证明未修改",
+        "浅色视觉基线：改造前后对同一路由同一视口（1440x900）截图对比，允许的差异仅为抗锯齿级误差；截图路径附在报告中",
+        "深色实测（localhost:1024）：点击切换图标后读取 `.topMain`、`.mainNav`、`.footer`、`body` 的 computed backgroundColor，均为深色系（相对亮度 < 0.3），且文字色相对亮度差足够可读",
+        "`npm run serve` 与浏览器实测均在 `http://localhost:1024` 进行，不使用 127.0.0.1"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [
+          "frontend/src/assets/styles/base.css",
+          "frontend/src/assets/styles/main.css",
+          "frontend/src/assets/styles/book.css",
+          "frontend/src/assets/styles/about.css",
+          "frontend/src/assets/styles/user.css",
+          "frontend/src/assets/styles/read.css"
+        ],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-008"
+      ],
+      "priority": 9,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": false
+    },
+    {
+      "id": "T-010",
+      "title": "前台浏览与阅读页变量化（首页 / 全部作品 / 排行榜 / 书籍详情 / 正文阅读 / 目录 / 新闻 / 反馈）",
+      "type": "frontend",
+      "description": "把前台浏览与阅读链路的页面级硬编码颜色替换为 `--nv-*` 变量，重点是正文阅读页 `BookContent.vue`（实测 106 处，全站最多）。\n\n1. 范围与实测体量\n- `views/BookContent.vue` 106 处（重点）：正文底色与正文文字、`.textbox`、`#readcontent`、`readBox`、顶部工具栏 `.read_menu / .menu_left / .menu_right`、`.haveRead`、`.nextPageBox`、上下章按钮、章节标题与元信息 `.textinfo`、评分与推荐位。\n- `views/Book.vue` 5 处、`views/BookClass.vue` 2 处、`views/BookRank.vue` 2 处、`views/ChapterList.vue` 0 处、`views/News.vue` 0 处、`views/Home.vue` 0 处、`views/FeadBack.vue` 0 处（这些页面主要靠全局 CSS，按实际残留逐条处理，0 处的不要硬造改动）。\n- `components/home/*`（BookNewestRank / BookUpdateRank / BookVisitRank / LatestNews / FriendLink）当前无内联色值，若改色需求已由全局 CSS 满足则不改。\n\n2. 模板内联颜色（必须处理）\n- `BookContent.vue` 模板中有 6 处 `style=\"background-color: rgba(255, 255, 255, 0.45)\"`（`.menu_left` 与 `.textbox` 等），深色下会形成白色半透明蒙层。\n- 处理方式：抽成语义 class 或改为 `:style` 绑定变量（如 `var(--nv-reader-bg)`），不得保留固定白色 rgba。\n\n3. 正文阅读页专项要求（PRD 7.2 第 6 条）\n- 深色下正文底色为深色、正文文字为浅色，顶部工具栏、左侧目录/设置入口、底部上下章按钮同为深色系，不得出现「深底深字」。\n- 阅读页已有 `read_style_1..6` 遗留多配色类（浅黄白/护眼绿/粉色/浅黄/浅灰/夜间黑）：本次**不扩展**为新的配色方案模式，也不新增「阅读主题」切换逻辑（PRD 7.6 非目标）；只需保证这些遗留类在未启用状态下不影响默认深色可读性，不得删除它们（可能被遗留脚本引用），但也不得让它们与新变量冲突。\n- 正文区域行距、字号、行宽、内边距保持不变，只改颜色。\n\n4. 不改动任何尺寸、布局、路由、接口与业务逻辑。",
+      "source_feature": "PRD 7.2 第 6 条 + PRD 7.3/7.4（正文阅读为重点适配）+ Plan 5（页面组件变量化-前台）",
+      "acceptanceCriteria": [
+        "点击导航栏主题图标切到深色后，首页（推荐位、三档排行榜区块、最新新闻、友情链接）底色、文字、卡片边框均为深色系，无「深底深字」或「浅底浅字」",
+        "深色下全部作品页与排行榜页的列表区、筛选条、分页区域文字可读，当前选中项的高亮仍然清晰可辨",
+        "深色下书籍详情页的封面占位、简介区、章节目录入口、评分与评论入口文字可读，封面与文字不粘连",
+        "深色下正文阅读页的正文区域底色为深色、正文文字为浅色，顶部工具栏、目录/设置入口、底部上一章/下一章按钮同为深色系且可读，页面上没有白色或半透明白色蒙层残留",
+        "深色下章节目录页与新闻详情页的标题、正文、时间等文字均可读",
+        "切回浅色后，以上页面与改造前的浅色外观一致（颜色、边框、阴影无可感知差异）",
+        "两种主题下以上页面均无元素被遮挡、错位或宽度变化（只变颜色，不变布局）"
+      ],
+      "technicalChecks": [
+        "`cd frontend && npm run lint`：本次修改文件 ESLint delta = 0（附核查证据）",
+        "`cd frontend && npm run build` 通过（允许既有体积告警）",
+        "色值清零证据：对本次涉及的 .vue 文件执行色值 grep（排除 theme.css/全局 CSS），`color|background|border` 声明中的十六进制与 rgba 降为 0；白名单（若有）逐条在报告列明理由",
+        "内联样式证据：`grep -n 'background-color: rgba(255' frontend/src/views/BookContent.vue` 无结果",
+        "浅色视觉基线：改造前后对 `/home`、`/bookclass`、`/book_rank`、`/book/{id}`、`/book/{id}/{chapterId}` 五个路由同视口（1440x900）截图对比，差异仅抗锯齿级；截图路径附报告",
+        "深色可读性量化：浏览器脚本读取正文容器、工具栏、列表卡片的 computed color 与 backgroundColor，计算相对亮度差，正文区亮度差 ≥ 4.5（WCAG AA 普通文本），并在报告中给出数值",
+        "深色实测在 `http://localhost:1024` 进行（不使用 127.0.0.1）",
+        "未修改 `read_style_*` 相关的 CSS 规则集合（可用 diff 证明该段未被删除或改写），未新增阅读主题切换逻辑",
+        "未改动 `router/index.js`、`api/**`、`utils/**` 及任何业务判断逻辑"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [
+          "frontend/src/views/Home.vue",
+          "frontend/src/components/home/BookNewestRank.vue",
+          "frontend/src/components/home/BookUpdateRank.vue",
+          "frontend/src/components/home/BookVisitRank.vue",
+          "frontend/src/components/home/LatestNews.vue",
+          "frontend/src/components/home/FriendLink.vue",
+          "frontend/src/views/BookClass.vue",
+          "frontend/src/views/BookRank.vue",
+          "frontend/src/views/Book.vue",
+          "frontend/src/views/BookContent.vue",
+          "frontend/src/views/ChapterList.vue",
+          "frontend/src/views/News.vue",
+          "frontend/src/views/FeadBack.vue"
+        ],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-009"
+      ],
+      "priority": 10,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "[PASS] [T-010] 前台浏览与阅读页变量化独立复验通过：AC 1-7 + TC 1-9 全部 PASS。浅色基线 8 路由逐像素：home/bookclass/book_rank/book_detail/read/chapter_list/feadback 全部 0 差异，news 仅 1px 抗锯齿；阳性对照 136005~505757 px 触发；活性探针 --nv-probe-liveness 读回 rgb(1,2,3)。深色 alpha 合成对比度全量 >=4.5（正文 11.26 / 顶部工具栏 14.06 / 上一章-目录-下一章 13.98 / 列表卡片 5.21~13.83）；深色白蒙层扫描 8 路由 0 处（浅色同页 28~126 处对照）。layout light-vs-dark diff=0（8 路由节点数与 docH 全部相同）；lint 115 errors delta=0（HEAD 副本逐条同文案同规则）；build exit=0 hash cc741ec29407a149，dist 内 :root/html.dark 各 118 个 --nv-*，--nv-reader-* 23 个各 2 次，EP dark 独有值（--el-color-primary-light-7:#213d5b 等）与 node_modules 源值吻合；read_style_* 23 个顶层规则块/94 个选择器，选择器-顺序-块体 sha256 两侧一致（7b539151）。三点裁定：A) TC4 内联蒙层口径变更合理 —— read_style_* 运行期不可达（window.BookDetail 未定义、模板/script 零引用、.ico_setup 在 HTML 注释内且运行时计数 0、.maskBox DOM 计数 0、运行时 [class*=read_style] 为 []），且原口径与「不得删除 read_style_*」互相冲突，建议 Orchestrator 改词；B) BookContent 色值实为 116（5 内联 + 97 CSS + 14 注释，含 10 个 progid token），非 Developer 的 120/118，含换行的 rgba 匹配 0，实质清零结论成立（现行 24 条非 progid 色值全部经回溯确认在 read_style 选择器内）；C) 名次徽标 2.75/2.28/1.89 经 git show HEAD 证实为历史值，theme.css 深浅同值，非本任务缺陷。范围外事项 12 项见报告。详见：.sdd/test-reports/test-T-010.md",
+      "user_gate": true
+    },
+    {
+      "id": "T-011",
+      "title": "账号中心与内容管理页变量化（登录 / 注册 / 用户中心 / 上传图书 / 我的上传 / 书籍管理）",
+      "type": "frontend",
+      "description": "把账号中心与内容管理相关的页面级硬编码颜色替换为 `--nv-*` 变量，并确认 Element Plus 组件在三页管理界面中的深色表现。\n\n1. 范围与实测体量\n- `views/Login.vue` 60 处、`views/Register.vue` 60 处、`views/UserSetup.vue` 60 处、`views/UserComment.vue` 62 处、`views/UserHistory.vue` 7 处、`components/user/Menu.vue` 60 处。\n- `views/BookUpload.vue` 4 处、`views/MyUpload.vue` 2 处、`views/BookManage.vue` 7 处。\n- 这些页面共享同一套色板（#fff 卡片底、#eaeaea 边框、#999/#666 次要文字、#ed4259 危险色、#f80 品牌色），应统一映射到 theme.css 已有变量，不要每个文件各造一套。\n\n2. Element Plus 组件处理原则\n- `el-table` / `el-dialog` / `el-form` / `el-input` / `el-select`（下拉 teleport 到 body）/ `el-pagination` / `el-upload` / `el-tag` / `el-message` / `el-empty` 的深色由官方 `dark/css-vars.css` 提供，**不要**逐组件写深色覆写。\n- 仅处理页面自定义容器与既有硬编码覆写，例如 author 页面系列里 `background-color: #f80 !important`（分页当前页高亮）这类把官方变量覆盖成固定色的写法，应改为引用 `--nv-brand` 等变量。\n- 若确有必须的局部覆写，必须在 notes 列明「选择器 + 原因 + 为什么变量解决不了」，不得批量写 `html.dark .el-xxx`。\n\n3. 重点页面\n- 登录/注册：`.userBox` 白底、表单输入框、错误提示 `#ff4040`、按钮。\n- 用户中心：`.userBox`、`.my_l`（左侧菜单，选中态 `#f80` 左边线 + `#f8f8f8` 底）、`.my_r`、评论列表与阅读历史列表的分隔线。\n- 上传图书：`el-upload` 文件选择框、表单、提交按钮、结果提示（深色下文件名文字不得消失）。\n- 我的上传：表格表头与行、状态标签、分页器、筛选下拉。\n- 书籍管理：表格（含 fixed 列的阴影）、分页、编辑信息 / 换封面 / 替换内容三个对话框的表单与按钮。\n\n4. 不改动任何接口调用、表单校验、分页逻辑与路由；不改动任何尺寸与布局。",
+      "source_feature": "PRD 7.3/7.4（登录注册/用户中心/上传/我的上传/书籍管理深色可读）+ Plan 5（页面组件变量化-前台管理部分）",
+      "acceptanceCriteria": [
+        "深色下登录页与注册页的表单卡片、输入框、占位符、按钮、错误提示文字均清晰可读，没有白色卡片压在深色页面上的割裂感",
+        "深色下用户设置、我的评论、阅读历史三个页面（含左侧用户中心菜单）的卡片底色、菜单文字、列表分隔线均为深色系，当前选中菜单项仍可一眼辨识",
+        "深色下上传图书页的文件选择框、表单、提交按钮、结果提示均可读；选中文件后文件名文字不会因底色变化而消失",
+        "深色下我的上传页的表格表头、行底色、状态标签、分页器、状态筛选下拉均为深色系，翻页与筛选操作正常，当前页页码高亮清晰",
+        "深色下书籍管理页的表格、分页、编辑信息对话框、更换封面对话框均为深色系且文字与按钮可读，对话框可正常打开与关闭",
+        "浅色下以上所有页面与改造前外观一致（颜色、边框、阴影无可感知差异）",
+        "两种主题下以上页面均无元素错位、遮挡或宽度变化，表单项位置与输入框尺寸不变"
+      ],
+      "technicalChecks": [
+        "`cd frontend && npm run lint`：本次修改文件 ESLint delta = 0（附核查证据）",
+        "`cd frontend && npm run build` 通过（允许既有体积告警）",
+        "色值清零证据：本次涉及的 .vue 文件内 `color|background|border` 声明的十六进制与 rgba 降为 0；白名单逐条列明理由",
+        "Element Plus 组件实测：在深色下打开「编辑书籍信息」对话框，读取 `.el-dialog` computed backgroundColor 为深色（非 #fff）；打开状态筛选下拉，读取 teleport 到 body 的 `.el-select-dropdown` computed backgroundColor 为深色（证明 `html.dark` 对 body 下 teleport 节点同样生效）",
+        "el-table 实测：深色下读取表头单元格与数据行的 computed backgroundColor 与 color，均来自 Element Plus 深色变量，非页面硬编码",
+        "浅色视觉基线：改造前后对 `/login`、`/register`、`/user/setup`、`/user/comment`、`/user/history`、`/book_upload`、`/my_upload`、`/book_manage` 同视口（1440x900）截图对比，差异仅抗锯齿级；截图路径附报告",
+        "深色可读性：登录页表单、用户中心列表、管理表格抽样计算文字与底色相对亮度差，正文 ≥ 4.5",
+        "未新增逐组件深色覆写块：`grep -rn 'html.dark .el-' frontend/src` 结果为空（或仅为 notes 中已说明的必要项）",
+        "未改动 `api/**`、`utils/**`、`router/**` 与表单校验逻辑；`frontend/package.json` 未变",
+        "浏览器实测在 `http://localhost:1024` 进行（不使用 127.0.0.1）"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [
+          "frontend/src/views/Login.vue",
+          "frontend/src/views/Register.vue",
+          "frontend/src/views/UserSetup.vue",
+          "frontend/src/views/UserComment.vue",
+          "frontend/src/views/UserHistory.vue",
+          "frontend/src/components/user/Menu.vue",
+          "frontend/src/views/BookUpload.vue",
+          "frontend/src/views/MyUpload.vue",
+          "frontend/src/views/BookManage.vue"
+        ],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-010"
+      ],
+      "priority": 11,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": "claude-code/developer",
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "【技术栈口径】本项目前端为 Vue 3.2 + Vue CLI 5（非 Vite）+ Element Plus 2.2.0，`dev-standards/frontend.md` 中 React / TypeScript / Vite / Ant Design 相关条款不适用，仅以其通用前端质量要求（组件边界、可读性、无死代码、无控制台报错）为参考；实现风格必须沿用仓库既有写法（Vue 2 风格 options API + setup、`<style scoped>`、Element Plus class 覆写）。\n\n【来自系统级经验 2026-05-22「固定高度容器必须预留 20% 缓冲」】本任务只允许修改色彩相关声明：color / background / background-color / border-*-color / box-shadow / outline-color / 占位符色 / 图片占位底色。禁止修改 width / height / min-height / max-height / line-height / padding / margin / font-size / font-weight / flex / grid 等尺寸与布局声明。若改色后发现文字被裁切、换行异常或容器高度不足，记录到 notes 并报告 Orchestrator，不在本任务内顺手调尺寸或调行高。\n\n【边界】纯前端样式改动：不改任何接口、路由语义、数据结构、登录鉴权、业务逻辑；不改后端；不引入新依赖（主题能力使用 Element Plus 自带 `theme-chalk/dark/css-vars.css`）；不新增「跟随系统」「多套配色方案」「过渡动画」（PRD 7.5/7.6 非目标）；`frontend/src/assets/styles/easyui.css`（第三方遗留）与 `frontend/src/assets/styles/layer.css`（未被任何文件引入）不在改造范围，禁止修改。\n\n【技术门禁】本项目无 type-check 脚本，禁止写 `npm run type-check`；质量门禁为 `npm run lint` 与 `npm run build`。仓库存在 116 个历史 ESLint 错误（T-006 已记录），因此判定口径为「本次新增/修改文件 ESLint delta = 0」，并需给出该 delta 的核查证据；不得因为全仓历史错误而跳过 lint。\n\n【真实浏览器验收】必须用真实浏览器（Playwright 或等价）在 `http://localhost:1024` 上验证（项目后端 CORS 仅放行 localhost，`127.0.0.1:1024` 会被拒绝，见 T-007 经验）；只做静态代码检查或只跑 build 不能判 PASS。\n\n【实测体量（2026-10-29 扫描）】Login 60、Register 60、UserSetup 60、UserComment 62、UserHistory 7、user/Menu 60、BookUpload 4、MyUpload 2、BookManage 7；这 6 个用户中心文件共用同一色板，变量映射必须一致。\n\n【不得碰业务】书籍管理涉及删除/替换内容等写操作，本任务只改样式；Tester 验收时只做「对话框可打开/关闭」级别的只读检查，不得执行删除或替换内容等破坏性操作。\n\n【我的上传/书籍管理的表格是 Element Plus 深色的主要验收点】它们同时覆盖 el-table + el-pagination + el-dialog + el-select + el-tag，是 T-008 引入的官方深色变量是否真正生效的关键证据。\n\n【验收自包含】本任务只验收账号中心与内容管理这几页；首页/阅读页在 T-010 已完成，作者后台在 T-012，不在本任务重复验收。\n【本门禁内的深色中间态】作者后台尚未适配（T-012 负责），此刻在深色下进入作者后台会看到浅色页面，属预期中间态，不在本门禁验收范围，不要把该现象判为缺陷。\n\n完成后把 Element Plus 深色与 teleport 组件（下拉/消息/对话框挂 body）的注意事项追加到 `.sdd/experience.md`。\n\n【T-011 Tester 验收 2026-10-29 19:30 PASS（user_gate）】独立复验，未采信 Developer 六项声明但全部复核为真：theme.css 相对 T-011 基线删 0 增 25（+14/+11）仅新增 9 变量；:root 与 html.dark 各 127 条、唯一名 127、重复 0、集合相等；9 个 .vue 的 hex/rgba、progid/gradient、具名色均为 0，317 对替换逐对验证「去色后同文」且全部落在 <style> 块内（块外 0 行）；ESLint 自测 115，与 T-010 基线按 文件+规则+级别 比对新增 0 删除 0；npm run build DONE，dist 中 html.dark 变量与 127 个 --nv-* 全量保留。浅色零变化三方互证：before/current 像素差 7 页 maxdiff=0、register 3164px 的 bbox(584,453)-(683,490) 与验证码 code_pic 几何盒重合（裁图数字 5608→6776 属随机内容）、317/317 静态回代一致、51/51 实时 computed 一致；并做正对照证明比较器敏感（颜色 #fe0102 检出 266px、1px padding 检出 11485px、三次重复截图 maxdiff=0）。EP 深色专项通过：.el-dialog 深色 rgb(20,20,20)（浅 rgb(255,255,255)）；teleport 到 body 的 .el-select__popper 深色 rgb(29,30,31)、父链 DIV→BODY→HTML.dark 证明 html.dark 命中 teleport；.el-table th rgb(20,20,20)/比7.56、数据行 rgb(29,30,31)/比11.13；el-upload 选中文件名 rgb(207,211,220)/比11.13 可见；el-tag 比7.05。以上均溯源到官方 --el-* 变量（.el-dialog 用 var(--el-bg-color)，官方 dark/css-vars 定义 #141414/#1d1e1f），全仓无 --el-bg-color 声明、无 .dark 作用域 --el-* 声明、html.dark .el- 命中 0。三个对话框深色下开关正常（取消后 overlay 不可见），筛选 108→1 行、翻页 active=2、my_upload 三个 radio 筛选均正常。浅/深几何 8 页 geometryDiffs=0（正对照 8 节点可检出）。深色可读性正文全部 ≥4.5（最低 5.21 占位符/提示）。已知既有项未恶化且未据此判 FAIL：EP 品牌色按钮 2.78/2.9/2.19（两主题同值，浅色低对比 143 处 > 深色 28 处且深色独有 0）、封面图 404、作者后台深色仍浅（T-012 范围，预期中间态）、全仓历史 ESLint 115。改动面核实：src 下仅 10 个约定文件被改，api/utils/router 零触碰，package.json 未变。详见 .sdd/test-reports/test-T-011.md，证据见 .sdd/tmp/t011-tester/。",
+      "user_gate": true
+    },
+    {
+      "id": "T-012",
+      "title": "作者后台变量化（author 五个页面 + author/Header + author/Register）",
+      "type": "frontend",
+      "description": "把作者后台的页面级硬编码颜色替换为 `--nv-*` 变量。作者后台不复用 `components/common/Header.vue`，而是 `components/author/Header.vue`，其顶栏样式与前台不同，需要单独处理。\n\n1. 范围与实测体量\n- `views/author/BookAdd.vue` 66、`ChapterUpdate.vue` 66、`ChapterList.vue` 66、`BookList.vue` 66、`ChapterAdd.vue` 66、`author/Register.vue` 35。\n- `components/author/Header.vue` 4（含模板内联 `color: #fff` 与 `.back_link:hover` 的 `#ffe8d1`）。\n- 5 个页面各有一段 `<style>`（无 scoped，内容为 `.el-pagination` 的 `background-color: #f80 !important` 与 `--el-pagination-hover-color: #f80 !important`）与一段 `<style scoped>`（自定义表格 `.updateTable`、按钮 `.redBtn`、上传框 `.avatar-uploader`、标签与文字色）。两段都要处理。\n- `author/Register.vue` 已改为 Element Plus 表单（含 `easyui-validatebox` 遗留 class 名，仅作 class 名，不影响样式），按其 scoped 样式逐条替换。\n\n2. 处理原则\n- 分页高亮 `#f80 !important` 改为引用品牌变量（如 `var(--nv-brand)`），保留 `!important` 层级以免被官方样式覆盖。\n- `.avatar-uploader .el-upload` 已经使用 `var(--el-border-color)` 等官方变量，保持；`.el-icon.avatar-uploader-icon` 的 `#8c939d` 改为次要文字变量。\n- `author/Header.vue` 模板内联 `color: #fff` 与 `.back_link` 的 `#fff`、hover `#ffe8d1`：深色下顶栏底色变深时文字仍须反白可读，统一改为反色文字变量；`height: 44px`/`line-height: 48px` 等尺寸一律不动。\n- **不**在作者后台新增主题切换入口（PRD 7.3/7.4 的入口口径是前台导航栏；author/Header 没有 `.bookShelf` 区域）。作者后台继承全局 `<html>` class 即可跟随主题。\n\n3. 不改动作者相关的接口调用、表单校验（章节字数校验等）、AI 润色逻辑与路由。",
+      "source_feature": "Plan 5（页面组件变量化-作者后台）",
+      "acceptanceCriteria": [
+        "深色下作者后台的书籍列表页、新建书籍页的表格、表单、按钮、提示文字均为深色系且可读，分页器当前页码高亮清晰",
+        "深色下章节列表页、新增章节页、修改章节页的表格、输入框、富文本编辑区外围、保存按钮可读，章节内容输入区域不出现深底深字",
+        "深色下作者注册页的表单卡片、输入框、按钮、错误提示可读",
+        "深色下作者后台顶部条（返回上一页链接 + 「小说精品屋作家管理」）底色为深色系、文字为浅色，返回链接 hover 后仍清晰可辨",
+        "浅色下作者后台各页面与改造前外观一致",
+        "两种主题下作者后台无元素错位、遮挡或尺寸变化（顶部条高度、表格列宽、表单间距均不变）"
+      ],
+      "technicalChecks": [
+        "`cd frontend && npm run lint`：本次修改文件 ESLint delta = 0（附核查证据）",
+        "`cd frontend && npm run build` 通过（允许既有体积告警）",
+        "色值清零证据：author 五个页面 + author/Register.vue + author/Header.vue 内 `color|background|border` 声明的十六进制与 rgba 降为 0；白名单逐条列明理由",
+        "分页高亮证据：`grep -n '#f80' frontend/src/views/author/*.vue` 无结果，分页当前页仍为品牌色（截图或 computed backgroundColor 证据）",
+        "浅色视觉基线：改造前后对 `/author/book_list`、`/author/book_add`、`/author/chapter_list/*`、`/author/chapter_add/*`、`/author/register` 同视口（1440x900）截图对比，差异仅抗锯齿级；截图路径附报告（需真实作者账号登录，账号信息只写在报告本地、不进仓库）",
+        "深色实测：作者后台在浏览器中切换主题后，`.mainNav`（author Header）与表格、输入框的 computed backgroundColor 为深色系，文字相对亮度差 ≥ 4.5",
+        "浏览器实测在 `http://localhost:1024` 进行（不使用 127.0.0.1）",
+        "未改动 `api/author.js`、章节字数校验、AI 润色调用与 `router` 配置；`frontend/package.json` 未变",
+        "作者后台未新增主题切换入口按钮（本任务只做跟随，不做入口）"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [
+          "frontend/src/views/author/BookAdd.vue",
+          "frontend/src/views/author/BookList.vue",
+          "frontend/src/views/author/ChapterAdd.vue",
+          "frontend/src/views/author/ChapterList.vue",
+          "frontend/src/views/author/ChapterUpdate.vue",
+          "frontend/src/views/author/Register.vue",
+          "frontend/src/components/author/Header.vue"
+        ],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-011"
+      ],
+      "priority": 12,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": "claude-code/developer",
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "[PASS] [T-012] 作者后台变量化独立复验通过：AC 1-6 + TC 1-9 全部 PASS，Developer 八项声明全部采信（均独立复现）。浅色零变化：6 页 1440x900 逐像素 max=0/changed_px=0（每页 1,296,000 px），采用「基线态活性标记（--nv-text-field 读回空串）+ 重复拍摄噪声 0 + 正对照 458240 px/35.358% bbox(210,68)-(1229,567) 与 .userBox 几何盒吻合」三层可信度构建；另 8 文件 var(--nv-*) 回代 :root 后字节级相同。深色可读性（页面自持选择器全部 >=4.5）：.mainNav 13.83、.userBox 13.83、.updateTable th 13.01、td 5.21、.link_4 14.98、.textarea 9.28（浅底深字 9.28，非深底深字）、.s_input 9.28、.inpMain 11.13、注册卡片 13.01、.notes 6.65、Header 标题 16.70、back_link hover 12.58、ElMessage 5.59；低于 4.5 者全为品牌橙底白字（两主题同值）与 EP 禁用态 AI 按钮。变量化核对：theme.css :root 与 html.dark 各 127->134，新增 7、删除 0、值变更 0（Developer 的 127 基线经 t011-baseline 118 佐证非陈旧）；7 文件 <style> 块内 hex/rgba/具名色全为 0（残余 #8249 为 &#8249; 实体），硬编码 369 -> var(--nv-*) 368+内联 1；#f80 全仓 0、!important 每页 2 处共 10；363 行改动 100% 为纯颜色替换、非颜色行改动 0；Header 仅 3 行色值、height:44px/line-height:48px 运行期未变。质量门禁：ESLint 26->26（removed 0/added 0，Header 基线侧以 --stdin 单独核为 0 problems），全仓 115 与 T-011 一致；build DONE，dist 中 134 个 --nv-* 缺失 0、T-012 七个新变量与 html.dark/#213d5b 均保留。几何：浅 vs 深逐可见元素 rect 全等（51/39/109/41/32/52），docH 相等，ndiff=0。主题跟随实测（不刷新加 dark class 即变深）且作者后台无任何主题切换入口。范围收敛：非 style 块改动为 0 行，api/author.js 与 package.json mtime 2026-09-04 未触碰，router/index.js 的 M 状态为 T-011 及更早既有改动（mtime 2026-10-21）。两个陷阱均由我独立确认为真：A) 深色 .textarea/.s_input 的 rgb(59,59,59) 来自 color-scheme:dark 驱动的原生控件（about:blank 裸控件对照即 59,59,59；全 stylesheet 对该元素零 background 规则），真正的 scoped 证据是 .userBox[data-v-00aa4ce4] var(--nv-bg-container) 与 .mainNav var(--nv-nav-bg)；B) Header.vue git diff 高报 46 行系 T-011 未提交的 .back_link/setup 增量，T-012 基线副本对比恰为 3 行。账号与数据：未 BLOCKED——我自建临时作者账号走真实 /api/author/register 完成验收，临时账号信息仅存本地报告未入仓库。清理前 author_info 1/book_info 109/book_chapter 17768/book_content 17768/user_info 1 -> 清理后 0/108/17756/17756/1，与自核基线完全一致；authorInfoCache/bookContentCache 键已清空，/author/books 恢复 A0301，库内 T012 书籍 0。超出范围（不判 FAIL）：浅色下品牌橙底白字 2.39、back_link 浅色 2.39/hover 2.02、#999 表格 2.85/2.73、注册 notes 3.80、AI 按钮禁用态 深色 2.82-3.13/浅色 1.46-1.69、封面图 404 与深色仍浅、.num1-3 徽标、utils/auth.js 无 try/catch、Register.vue 既有未使用组件与 data 未校验、tasks.json 记 116 实为 115。环境未关闭（T-013 需用）；未执行 git checkout/reset/clean，工作区 8 文件 sha256 与 Developer 最终态一致。详见 .sdd/test-reports/test-T-012.md，证据见 .sdd/tmp/t012-tester/。",
+      "user_gate": false
+    },
+    {
+      "id": "T-013",
+      "title": "深色全站走查与收口（残余硬编码清扫 + Element Plus 组件全家桶 + 首帧 + 功能回归）",
+      "type": "frontend",
+      "description": "收口任务：全站扫描残余硬编码颜色，逐条判定处理或保留，并完成深色下的跨页面走查与功能回归。\n\n1. 残余硬编码清扫\n- 扫描 `frontend/src` 下所有 `*.vue` 与 `*.css` 的色值（`#[0-9a-fA-F]{3,8}` 与 `rgba?()`），排除 `assets/styles/theme.css`、`easyui.css`、`layer.css`、`node_modules`。\n- 每条残余必须给出结论：改为 `--nv-*` 变量，或保留并说明理由（例如纯装饰性阴影、图片占位、品牌色常量、第三方组件必要的 `!important` 覆写）。\n- 形成最终白名单写入 notes 与 `.sdd/experience.md`，供后续新增页面参考。\n\n2. Element Plus 组件全家桶深色核对\n- `el-table`（含 fixed 列右侧阴影）、`el-dialog`、`el-form`/`el-form-item` 标签、`el-input`/`textarea`、`el-select` 下拉（teleport 到 body 的 popper）、`el-pagination`、`el-upload`、`el-tag`、`el-message`、`el-empty`、`el-loading` 遮罩。\n- teleport 组件挂在 `body` 下，依赖 `html.dark` 生效，必须真实打开实测，不能只看静态样式。\n\n3. 正文阅读页长时间阅读复核\n- 深色下正文底色与文字亮度差足够、无眩光（不使用纯黑底 + 纯白字的极端组合，除非 Element Plus 深色体系本身如此且实测可读）。\n- 行距、字号、行宽、内边距与改造前一致。\n\n4. 首帧与持久化\n- localStorage 预置 dark 后直接打开任一页面，`domcontentloaded` 时 `<html>` 已带 dark，无先浅后深闪动。\n- 清空 localStorage 后默认浅色，与改造前一致（不跟随系统 `prefers-color-scheme`）。\n\n5. 功能回归（仅只读或可逆操作）\n- 登录/退出、首页推荐、搜索、分页、书籍详情、正文上下章、上传图书（可选执行一次小文件上传并清理）、我的上传筛选与翻页、书籍管理列表与对话框打开。\n- 不得执行删除书籍、替换内容等破坏性操作；上传若执行须按既有经验单事务清理测试数据。\n\n6. 收口\n- 确认 `easyui.css`、`layer.css`、后端目录、`package.json`、`docs/**` 的协议/接口部分均未被改动。\n- 把主题体系使用说明（如何新增页面颜色、变量清单、禁止事项）写入 `.sdd/experience.md`。",
+      "source_feature": "PRD 7.3/7.4/7.5 + Plan 5（深色适配走查）",
+      "acceptanceCriteria": [
+        "未登录、普通用户、管理员三种状态下，任意页面顶部导航栏右上角都能看到主题切换图标；点击后当前页面立即变色，无需刷新",
+        "深色下依次访问并确认无不可读区域：首页、全部作品、排行榜、书籍详情、正文阅读、登录、注册、用户设置、我的评论、阅读历史、上传图书、我的上传、书籍管理",
+        "深色下页面内的下拉选择框、消息提示、确认/编辑对话框、分页器、空数据提示、加载遮罩均为深色系，与页面整体协调，不出现白底弹层",
+        "深色下正文阅读页可长时间阅读：正文区域底色为深色、文字为浅色，顶部工具栏与章节导航同为深色系，页面上无白色或半透明白色块残留",
+        "刷新任意处于深色的页面时直接呈现深色，不出现先浅后深的闪动；首次访问（清空浏览器存储）默认浅色",
+        "切换主题后业务功能不受影响：登录与退出、搜索、列表分页、正文上下章、我的上传的筛选与翻页、书籍管理列表与编辑对话框打开均正常",
+        "浅色主题下各页面观感与改造前一致，首次访问默认浅色的表现与改动前相同",
+        "整个页面在两种主题下布局一致，无因改色引起的错位、遮挡、换行或滚动条异常"
+      ],
+      "technicalChecks": [
+        "`cd frontend && npm run lint`：本次修改文件 ESLint delta = 0；`cd frontend && npm run build` 通过（允许既有体积告警）",
+        "残余色值扫描：对 `frontend/src` 执行 `grep -rn -E '#[0-9a-fA-F]{3,8}\\b|rgba?\\(' --include=*.vue --include=*.css`，排除 theme.css / easyui.css / layer.css 后，结果逐条列出并给出「改为变量 / 保留理由」结论；不允许存在未说明的残余",
+        "Element Plus teleport 组件实测：深色下打开状态筛选下拉与编辑对话框，读取挂载在 body 下的 `.el-select-dropdown` / `.el-dialog` computed backgroundColor 为深色",
+        "对比度抽样：正文阅读区、管理表格行、登录表单、用户中心列表各抽取 1 处，计算文字与底色相对亮度差（正文 ≥ 4.5，辅助文字 ≥ 3）并在报告中给出数值",
+        "首帧无闪烁：localStorage 预置 dark 后加载页面，`domcontentloaded` 时刻 `document.documentElement` 已含 dark class",
+        "全路由截图：13 个前台路由 + 5 个作者后台路由，light/dark 各一套（1440x900），截图路径列入报告；作者后台如无账号则标记 BLOCKED(账号) 并附前台证据",
+        "功能回归：登录/退出、搜索、分页、正文上下章、我的上传筛选与翻页、书籍管理对话框打开全部真实执行且无控制台报错、无新增失败请求",
+        "未改动项核对：`easyui.css`/`layer.css` sha256 与改造前一致；`frontend/package.json` 逐字未变；`backend/` 下无文件改动；`docs/api-contracts.md` 未改",
+        "浏览器实测在 `http://localhost:1024` 进行（不使用 127.0.0.1）"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [
+          "frontend/src/views/Home.vue",
+          "frontend/src/views/BookClass.vue",
+          "frontend/src/views/BookRank.vue",
+          "frontend/src/views/Book.vue",
+          "frontend/src/views/BookContent.vue",
+          "frontend/src/views/Login.vue",
+          "frontend/src/views/Register.vue",
+          "frontend/src/views/UserSetup.vue",
+          "frontend/src/views/UserComment.vue",
+          "frontend/src/views/UserHistory.vue",
+          "frontend/src/views/BookUpload.vue",
+          "frontend/src/views/MyUpload.vue",
+          "frontend/src/views/BookManage.vue",
+          "frontend/src/components/common/Top.vue"
+        ],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-012"
+      ],
+      "priority": 13,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "【技术栈口径】本项目前端为 Vue 3.2 + Vue CLI 5（非 Vite）+ Element Plus 2.2.0，`dev-standards/frontend.md` 中 React / TypeScript / Vite / Ant Design 相关条款不适用，仅以其通用前端质量要求（组件边界、可读性、无死代码、无控制台报错）为参考；实现风格必须沿用仓库既有写法（Vue 2 风格 options API + setup、`<style scoped>`、Element Plus class 覆写）。\n\n【来自系统级经验 2026-05-22「固定高度容器必须预留 20% 缓冲」】本任务只允许修改色彩相关声明：color / background / background-color / border-*-color / box-shadow / outline-color / 占位符色 / 图片占位底色。禁止修改 width / height / min-height / max-height / line-height / padding / margin / font-size / font-weight / flex / grid 等尺寸与布局声明。若改色后发现文字被裁切、换行异常或容器高度不足，记录到 notes 并报告 Orchestrator，不在本任务内顺手调尺寸或调行高。\n\n【边界】纯前端样式改动：不改任何接口、路由语义、数据结构、登录鉴权、业务逻辑；不改后端；不引入新依赖（主题能力使用 Element Plus 自带 `theme-chalk/dark/css-vars.css`）；不新增「跟随系统」「多套配色方案」「过渡动画」（PRD 7.5/7.6 非目标）；`frontend/src/assets/styles/easyui.css`（第三方遗留）与 `frontend/src/assets/styles/layer.css`（未被任何文件引入）不在改造范围，禁止修改。\n\n【技术门禁】本项目无 type-check 脚本，禁止写 `npm run type-check`；质量门禁为 `npm run lint` 与 `npm run build`。仓库存在 116 个历史 ESLint 错误（T-006 已记录），因此判定口径为「本次新增/修改文件 ESLint delta = 0」，并需给出该 delta 的核查证据；不得因为全仓历史错误而跳过 lint。\n\n【真实浏览器验收】必须用真实浏览器（Playwright 或等价）在 `http://localhost:1024` 上验证（项目后端 CORS 仅放行 localhost，`127.0.0.1:1024` 会被拒绝，见 T-007 经验）；只做静态代码检查或只跑 build 不能判 PASS。\n\n【这是本次增量的唯一全站门禁】前置任务各自只验收自己的页面，本任务负责跨页面一致性与收口；发现的问题若属于前序任务的范围，直接修复并在 notes 记录归属，不要新开任务。\n\n【禁止执行破坏性业务操作】书籍管理有删除书籍、替换内容等写操作，回归只做只读与可逆操作；若必须上传测试文件，按 T-007 经验先记录三表基线与 book_content → book_chapter → book_info 顺序单事务清理。\n\n【已知环境约束】访问必须用 `http://localhost:1024`（后端 CORS 只放行 localhost，127.0.0.1 会被拒，见 T-007 经验）；写库相关回归需本机 MySQL/Redis 已启动。\n\n【禁止顺手改布局】全站走查若发现文字被裁切，只记录与实际证据，不在本任务内调尺寸；确需调整容器高度时必须单独上报 Orchestrator 走 Bugfix，不在样式任务里夹带。\n\n【验收禁区】主题偏好只存 localStorage，不得验收「换浏览器/换设备后仍保持」「后端持久化」这类跨端或服务端能力（PRD 7.6 明确不做后端持久化）。\n\n完成后必须把最终变量白名单、新增页面时如何接主题、踩坑与禁止事项写入 `.sdd/experience.md`；跨项目通用教训标注 `[SYSTEM] 建议回传系统级经验`（例如「大范围样式变量化必须分页分任务、每步保留浅色基线对比」）。\n\n【T-013 Tester 验收 2026-10-29 23:26 PASS（user_gate，全站收口门禁）】独立复验，未采信 Developer 七条踩坑与八项声明，但逐条复核：八项声明全部成立（其中第 5 条 bbox 声明的 (412,59) 与实测 (411,58) 为 getbbox 排他上界差异，同指一区；第 3 条 69 处残余我独立复算复现）。变更面核定：T-013 时间窗内 src 下仅 Top.vue（logo 白字版切换）+ theme.css（仅注释）被写，backend/src 零改动。AC 1-8 与 TC 1-9 全部 PASS。关键证据：theme.css 注释剥离后与基线逐字节相同（8654/8654，sha 2b5ce61e），:root 与 html.dark 各 134 变量「名+序+值」全等（零变量值变化）；Top.vue 与基线 diff 仅 4 处 hunk 全围绕 logo 绑定，logo_white.png 属 git HEAD 既有资产（6045B，mtime 2026-09-04），浏览器实测浅色 logo.png sha 78f2723a / 深色 logo_white.png sha c5d57215，显示尺寸两主题同为 216x48；残余色值排除三文件后 62 行/69 token，注释 33、实体 2、progid 10(5 行)、alpha 5 行、半透明白 5、死亡 .read_style_* 调色板 20，全部逐条说明，运行时 [class*=\"read_style_\"] 匹配 0 且 scoped body 无 data-v 惰性反证；深色 11/13 页 bbox 精确 (261,35)-(411,58)=1876px，book/register 为 logo+动态区（验证码与同类推荐四次加载 sha 两两不同，同状态重复截图 sha 相同，浅深正对照 1.27M~7.73M px，三重对照证实动态而非回归）；浅色 11/13 页 changed_px=0 我独立重算复现；lint 自跑 115 problems、Top.vue 当前版与基线版各 2 条同规则错误 delta=0（行号 58/64→59/65 为新增行偏移），build 自跑 BUILD_EXIT=0 DONE Build complete；首帧 6 路由 class 变更 ≤ DCL ≤ firstPaint 恒成立且 bgAtDCL=rgb(20,20,20)、清空存储+OS 深色偏好下仍默认浅色；对比度正文 11.13/表格行 11.13/登录 13.83/用户中心 13.83，辅助 6.85/7.56；全站 <2.0 极低对比深色 13/13 页 0 处；几何 geometryDiffs 12/13 为 0，book 的 4 处全在 x=1074 推荐栏且同主题两次加载亦为 4 且书名不同；overflow 全 0。三态切换入口 8+4+1 路由全命中 rect=[1210,27,20,38]，点击 navMark 不变、noReload 成立。功能回归登录/退出/搜索15行/分页/上下章(第1章→第2章→第1章)/筛选空态/编辑框打开取消/第2页 全正常，无 JS 异常，仅 84 条既有封面图 404。TC8 未改动项 git status 空、easyui/layer/package.json mtime 2026-09-04、backend/src 零改动、api-contracts mtime 2026-10-21。DB 基线复核一致：author_info=0 book_info=108 book_chapter=17756 book_content=17756 user_info=1，今日新建书籍/章节均 0；仅 user_read_history id=7 的 update_time 因只读浏览推进到 23:18:38（行数仍 6，未新增，我未删除亦未伪造）。校验基线瑕疵已记录：Developer pre-edit 快照 mtime 21:32:24 晚于源码写入 21:31:26/21:32:13 且 clipped.json 仅覆盖 4/13 页，故 AC7 改以静态等价为主要证据链。超出范围备案：浅色既有低对比 2 处（暂无评论 1.61、update_time 1.76）、tasks.json notes 的「116」实测为 115、同类推荐随机、封面 404、.read_style_* 死样式。详见 .sdd/test-reports/test-T-013.md。",
+      "user_gate": true
+    }
+  ]
+}

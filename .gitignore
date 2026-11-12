@@ -1,0 +1,79 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyre/
+
+# ---- Node ----
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- Java / Maven ----
+target/
+*.class
+*.jar
+*.war
+
+# ---- 构建与分发产物 ----
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# ---- 运行时数据与日志 ----
+*.log
+logs/
+workspace/
+*.db
+*.sqlite
+*.sqlite3
+*.rdb
+*.tmp
+
+# ---- 恢复 / 审计中间产物 ----
+_artifacts/
+_recovered_raw/
+_recovered_v2/
+_analysis/
+_py38probe/
+.sdd/tmp/
+.sdd/audit/geom-*.json
+
+# ---- 环境与密钥 ----
+.env
+.env.*
+!**/.env.example
+!**/.env.development
+!**/.env.production
+*.pem
+*.key
+*.pfx
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ---- 本机工具缓存 ----
+.codegraph/
+.omo/
+.ccgui/
+.continue/
+.codex-docs-cache/
+test-results/
+.claude/settings.local.json
+.workbuddy/memory/

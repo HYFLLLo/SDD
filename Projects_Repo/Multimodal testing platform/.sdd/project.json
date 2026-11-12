@@ -1,0 +1,10 @@
+{
+  "id": "Multimodal testing platform",
+  "name": "多模态测试平台 (Multimodal testing platform)",
+  "project_type": "web",
+  "source": "import",
+  "repo_url": null,
+  "created_at": "2026-11-05 09:13:56",
+  "last_active": "2026-11-05 09:13:56",
+  "harness_version": "V7.1"
+}

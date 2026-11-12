@@ -1,0 +1,27 @@
+{
+  "eval_id": 2,
+  "eval_name": "t2-mobile-h5",
+  "prompt": "想做一个手机端的记账 H5 应用，主要是个人日常记账用，有添加账单、账单列表、分类统计、个人中心几个页面。界面要清新简单，适合手机上浏览。请走完产品设计阶段的流程。",
+  "assertions": [
+    {
+      "name": "perfume-path-correct",
+      "description": "输出中产物路径均在 active_project_path 下（docs/ 或 .sdd/），未出现 Harness 根目录下的 docs/ 或 .sdd/",
+      "type": "path_correctness"
+    },
+    {
+      "name": "four-artifacts-complete",
+      "description": "完成时四件套齐全：docs/PRD.md + docs/api-contracts.md + docs/Plan.md + docs/prototypes/",
+      "type": "artifact_presence"
+    },
+    {
+      "name": "viewport-390x844-mentioned",
+      "description": "移动端 390×844 视口说明出现在设计产物（Design Spec 或原型）中",
+      "type": "content_presence"
+    },
+    {
+      "name": "memory-artifacts-cleaned",
+      "description": "临时产物清理时机遵循映射表（ui-design-spec B2 后删，visual-research C 末删）",
+      "type": "cleanup_timing"
+    }
+  ]
+}

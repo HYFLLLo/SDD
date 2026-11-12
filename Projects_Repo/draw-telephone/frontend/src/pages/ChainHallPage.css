@@ -1,0 +1,417 @@
+/* P04 链大厅页 · 手账涂鸦本风格（对齐原型 04-room.html） */
+.chain-hall {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 32px 64px;
+}
+
+/* 房间头部 */
+.room-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.room-head .title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.room-head .meta {
+  color: var(--text2);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.room-code {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-soft);
+  border: 1.5px dashed var(--accent);
+  border-radius: var(--r-btn);
+  padding: 8px 14px;
+}
+
+.room-code .code {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+
+.room-code button {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 700;
+  background: transparent;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.room-code button:hover {
+  background: rgba(200, 100, 60, 0.1);
+}
+
+/* 通用面板 */
+.panel {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.panel h3 {
+  font-size: 14px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+
+/* ★ 签名锚点：进度节点链 */
+.progress-panel {
+  margin-bottom: 20px;
+}
+
+.chain-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 8px 0 4px;
+  /* 固定高度容器预留 20% 缓冲 */
+  min-height: 80px;
+}
+
+.node-row {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.node-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+.node-dot .circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px dashed var(--dash);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text3);
+}
+
+.node-dot.done .circle {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.node-dot.current .circle {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--paper);
+  color: var(--accent);
+  animation: pulse 1.8s infinite;
+}
+
+.node-dot .label {
+  font-size: 11px;
+  color: var(--text3);
+  max-width: 64px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.node-dot.done .label,
+.node-dot.current .label {
+  color: var(--text2);
+}
+
+.node-link {
+  width: 32px;
+  height: 0;
+  border-top: 2px dotted var(--dash);
+  margin: 0 -2px;
+  position: relative;
+  top: -14px;
+  z-index: 1;
+}
+
+.node-link.done {
+  border-top-style: solid;
+  border-color: var(--accent);
+}
+
+/* 脉冲动画（★签名锚点核心） */
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 100, 60, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(200, 100, 60, 0);
+  }
+}
+
+/* 布局 */
+.room-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 成员 */
+.members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.member .av {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.member.current .av {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.member .name {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+/* AI 补位倒计时（冷灰蓝） */
+.ai-countdown {
+  background: var(--ai-soft);
+  border: 1.5px dashed var(--ai);
+  border-radius: var(--r-card);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+}
+
+.ai-countdown .icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.ai-countdown .txt {
+  font-size: 13px;
+  color: var(--text2);
+}
+
+.ai-countdown .txt b {
+  color: var(--ai);
+}
+
+.ai-countdown .time {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ai);
+  margin-top: 2px;
+}
+
+/* 链信息 */
+.info-rows {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 2;
+}
+
+.info-rows .prompt-text {
+  color: var(--text);
+  font-size: 16px;
+}
+
+/* 实时围观 */
+.watch-area {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.watch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.watch-label .who {
+  font-size: 14px;
+  color: var(--text2);
+}
+
+.watch-label .who b {
+  color: var(--accent);
+}
+
+.live-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.live-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.watch-canvas {
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.watch-canvas-el {
+  width: 60%;
+  height: 80%;
+}
+
+.watch-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+}
+
+/* 轮到你 / 回放 */
+.your-turn {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.your-turn .btn {
+  font-size: 16px;
+  padding: 16px 40px;
+}
+
+.waiting-hint {
+  font-size: 14px;
+  color: var(--text2);
+  padding: 16px;
+}
+
+/* 通用按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--r-btn);
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.15s;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 100, 60, 0.3);
+}
+
+.btn-lg {
+  padding: 14px 32px;
+  font-size: 15px;
+}
+
+/* 手写体 */
+.handwritten {
+  font-family: 'Caveat', 'Ma Shan Zheng', cursive;
+  font-weight: 600;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty .emoji-art {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .room-layout {
+    grid-template-columns: 1fr;
+  }
+  .chain-hall {
+    padding: 24px 20px 48px;
+  }
+}

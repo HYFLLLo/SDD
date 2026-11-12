@@ -1,0 +1,445 @@
+/* P07 整链回放页 · 手账涂鸦本风格（对齐原型 07-replay.html） */
+.replay-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+/* 头部 */
+.replay-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.replay-head .title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.replay-head .meta {
+  color: var(--text2);
+  font-size: 13px;
+}
+
+.replay-head .prompt-row {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text2);
+}
+
+.replay-head .prompt-text {
+  color: var(--text);
+  font-size: 18px;
+}
+
+/* 回放控制条 */
+.replay-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.replay-controls .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--r-btn);
+  font-weight: 700;
+  font-size: 13px;
+  transition: all 0.15s;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  background: var(--paper);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.replay-controls .btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.replay-controls .btn.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.replay-controls .progress {
+  font-size: 13px;
+  color: var(--text2);
+}
+
+.replay-controls .progress b {
+  color: var(--accent);
+}
+
+/* 回放节点序列 */
+.replay-sequence {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+/* 单个回放节点（framer-motion 控制渐显） */
+.replay-node {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  /* 固定高度容器预留 20% 缓冲 */
+  min-height: 168px;
+  position: relative;
+}
+
+.replay-node.ai-node {
+  border-color: var(--ai);
+  background: var(--ai-soft);
+}
+
+/* 节点 meta */
+.replay-node-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.replay-node-meta .seq {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
+}
+
+.replay-node-meta .type {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg);
+  color: var(--text2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.replay-node-meta .author {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ai-node .replay-node-meta .author {
+  color: var(--ai);
+}
+
+/* AI 续标签（冷灰蓝） */
+.ai-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  background: var(--paper);
+  color: var(--ai);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  border: 1px solid var(--ai);
+}
+
+/* 节点内容 */
+.replay-node-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+}
+
+.replay-node-image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 回放节点真实画作图片（限制最大宽度，圆角 + 画布背景） */
+.replay-node-img {
+  max-width: 100%;
+  max-height: 360px;
+  border-radius: var(--r-canvas);
+  background: var(--canvas);
+  display: block;
+}
+
+.replay-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background: var(--canvas);
+  border: 1.5px dashed var(--dash);
+  border-radius: var(--r-canvas);
+}
+
+.replay-thumb .thumb-char {
+  font-size: 48px;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.ai-node .replay-thumb .thumb-char {
+  color: var(--ai);
+}
+
+.replay-node-text {
+  font-size: 22px;
+  color: var(--text);
+  text-align: center;
+  padding: 12px;
+}
+
+/* 连接线 */
+.replay-connector {
+  width: 2px;
+  height: 24px;
+  margin: 0 auto;
+  border-left: 2px dashed var(--dash);
+}
+
+.replay-connector.ai {
+  border-left-color: var(--ai);
+}
+
+/* 投票面板 */
+.vote-panel {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.vote-panel h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.vote-panel .hint {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 20px;
+}
+
+/* 投票维度卡 */
+.vote-dim {
+  margin-bottom: 20px;
+  /* 固定高度容器预留 20% 缓冲：标题 24 + 选项行 ~64 + padding 32 ≈ 120 → 144 */
+  min-height: 144px;
+}
+
+.vote-dim:last-child {
+  margin-bottom: 0;
+}
+
+.vote-dim-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vote-dim-title .dim-emoji {
+  font-size: 16px;
+}
+
+/* 投票选项（单选） */
+.vote-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.vote-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--r-btn);
+  border: 1.5px solid var(--border);
+  background: var(--paper);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.vote-opt:hover {
+  border-color: var(--accent);
+}
+
+.vote-opt .opt-type {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg);
+  color: var(--text2);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* 选中态：陶土橙边框 + 底色 */
+.vote-opt.selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.vote-opt.selected .opt-type {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* 提交按钮 */
+.vote-submit-row {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.vote-submit-row .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 36px;
+  border-radius: var(--r-btn);
+  font-weight: 700;
+  font-size: 15px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.vote-submit-row .btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.vote-submit-row .btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 100, 60, 0.3);
+}
+
+.vote-submit-row .btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 投票结果 */
+.vote-result {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.vote-result h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-dim {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.result-dim:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.result-dim-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.result-dim-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.result-winner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.result-winner .winner-name {
+  background: var(--accent-soft);
+  padding: 2px 10px;
+  border-radius: 4px;
+}
+
+.result-bar {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.result-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.result-votes {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+/* 手写体 */
+.handwritten {
+  font-family: 'Caveat', 'Ma Shan Zheng', cursive;
+  font-weight: 600;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty .emoji-art {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}

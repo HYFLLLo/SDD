@@ -1,0 +1,22 @@
+/* 画意接龙 · 手账涂鸦本设计基底 · 设计 token */
+:root {
+  --bg: #FAF6EF;          /* 米白纸底 */
+  --paper: #FFFFFF;       /* 卡片底 */
+  --text: #2B2622;        /* 暖灰墨色 */
+  --text2: #7A6F64;       /* 暖灰副文 */
+  --text3: #A89C8C;       /* 更弱 */
+  --border: #D9CFC0;      /* 米灰边框 */
+  --dash: #B8A890;        /* 手绘虚线 */
+  --accent: #C8643C;      /* 陶土橙 accent */
+  --accent-soft: #F2E2D6; /* accent 浅底 */
+  --ai: #6B7A8F;          /* AI 续冷灰蓝 */
+  --ai-soft: #E8EDF2;     /* AI 浅底 */
+  --canvas: #FFFBF3;      /* 画布底 */
+  --white: #FFFFFF;
+  --ok: #5B8C5A;          /* 成功绿 */
+  --shadow: 0 2px 8px rgba(43, 38, 34, 0.06);
+  --shadow-lg: 0 6px 20px rgba(43, 38, 34, 0.1);
+  --r-card: 12px;
+  --r-btn: 8px;
+  --r-canvas: 4px;
+}

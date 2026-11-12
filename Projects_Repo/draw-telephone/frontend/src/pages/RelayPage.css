@@ -1,0 +1,336 @@
+/* P05 接力作画/描述页 · 手账涂鸦本风格 */
+.relay-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+
+.relay-head {
+  margin-bottom: 20px;
+}
+
+.relay-head h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.relay-head .desc {
+  color: var(--text2);
+  font-size: 14px;
+}
+
+/* 通用卡片 */
+.card {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+}
+
+/* 上一节点展示区 */
+.prev-panel {
+  padding: 20px;
+  margin-bottom: 20px;
+  /* 固定高度容器预留 20% 缓冲 */
+  min-height: 120px;
+}
+
+.prev-panel h3 {
+  font-size: 14px;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.prev-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.prev-text {
+  font-size: 24px;
+  color: var(--text);
+  text-align: center;
+}
+
+.prev-image {
+  max-width: 100%;
+}
+
+.prev-image img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: var(--r-canvas);
+}
+
+/* 创作区 */
+.create-panel {
+  padding: 20px;
+}
+
+/* 画布工具栏（固定高度预留缓冲） */
+.canvas-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px dashed var(--border);
+  background: var(--paper);
+  flex-wrap: wrap;
+  min-height: 56px;
+}
+
+.tool-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-label {
+  font-size: 12px;
+  color: var(--text3);
+  margin-right: 2px;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+/* 色板圆点 */
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.swatch.active {
+  box-shadow: 0 0 0 2px var(--accent);
+  transform: scale(1.1);
+}
+
+/* 粗细按钮 */
+.size-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-btn);
+  border: 1.5px solid var(--border);
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.size-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.size-dot {
+  border-radius: 50%;
+  display: block;
+}
+
+/* 工具按钮 */
+.tool-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-btn);
+  border: 1.5px solid var(--border);
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text2);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tool-btn:hover,
+.tool-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* 画布 */
+.relay-canvas {
+  margin-top: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-canvas);
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+.draw-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+/* 述节点输入区 */
+.describe-area {
+  padding: 8px 0;
+}
+
+.describe-area label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.describe-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-btn);
+  background: var(--paper);
+  resize: vertical;
+  min-height: 80px;
+  transition: border 0.15s;
+}
+
+.describe-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 4px;
+}
+
+/* 提交按钮 */
+.submit-row {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.submit-row .btn-primary.ant-btn-primary {
+  min-width: 200px;
+  height: 44px;
+  border-radius: var(--r-btn);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.submit-row .btn-primary.ant-btn-primary:hover:not(:disabled) {
+  background: #b8582f;
+  border-color: #b8582f;
+}
+
+/* 手写体 */
+.handwritten {
+  font-family: 'Caveat', 'Ma Shan Zheng', cursive;
+  font-weight: 600;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty .emoji-art {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .relay-page {
+    padding: 16px 12px 48px;
+  }
+  .canvas-toolbar {
+    gap: 4px;
+  }
+}
+
+/* AI 辅助按钮（接力页，画/述节点通用）
+   用 AI 专属冷灰蓝，与陶土橙工具按钮视觉区隔，突出「AI 特殊能力」 */
+.ai-btn {
+  width: auto !important;
+  min-width: 44px;
+  height: 38px;
+  padding: 0 14px;
+  border: none !important;
+  border-radius: var(--r-btn) !important;
+  background: linear-gradient(135deg, #6B7A8F 0%, #566479 100%) !important;
+  color: #fff !important;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(107, 122, 143, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(107, 122, 143, 0.45);
+  filter: brightness(1.08);
+}
+
+.ai-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ai-btn:disabled {
+  opacity: 0.85;
+  cursor: progress;
+}
+
+/* 加载中脉冲动画 */
+.ai-btn:disabled::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  animation: ai-shimmer 1.2s infinite;
+}
+
+@keyframes ai-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 述节点底部：字数 + AI 按钮 */
+.describe-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}

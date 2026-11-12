@@ -1,0 +1,3257 @@
+{
+ "totals": {
+  "exact": 592,
+  "near": 10,
+  "diff": 21,
+  "missing": 0
+ },
+ "modules": [
+  {
+   "module": "app",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.annotate",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5522,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_clip",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_label_value",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_field_value",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_font",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_image_size",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/draw_objects",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/draw_objects/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.comparison",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.4928,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_text",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_norm_name",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_bbox",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_bbox/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/iou",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_expected_name",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_predicted_name",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_is_context",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_is_context/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_match_objects",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/compare",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/compare/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/compare/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.config",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.8162,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/ensure_workspace",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/load_config",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/save_config",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/normalize_config",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/normalize_config/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/normalize_config/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/normalize_config/integer",
+     "score": 0.9848,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/all_models",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/total_keys",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/total_keys/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/subdir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/safe_path",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.datasets",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5194,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_locked",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_locked/wrapper",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_clean_name",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_clean_name/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/dataset_ref",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/split_ref",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_project_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_is_project_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_dataset_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_project",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_projects",
+     "score": 0.9953,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/list_projects/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_projects/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_project",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_project/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_project",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_load_dataset_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save_dataset_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/dataset_exists",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_dataset_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_dataset_item",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_project_datasets",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_datasets",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_datasets/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_dataset/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/scan_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/scan_images/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/scan_images/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/image_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/import_from_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/save_upload",
+     "score": 0.9833,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/delete_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_image",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/set_image_split",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.demo",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.78,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_pack_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_pack_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_pack_images/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_dataset_ref",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.dircache",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.75,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/fingerprint",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/subfile_fingerprint",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/FingerprintCache",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/FingerprintCache/__init__",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/FingerprintCache/get",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/FingerprintCache/invalidate",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.evaluate",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5856,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_eval_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_evals",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_evals/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_eval",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_eval",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_vote",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_vote/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_set_vote",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_set_vote/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_eval",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_eval/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_eval/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_single",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_single/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_single/<dictcomp>/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_single/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_multi",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_multi/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_multi/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metrics_multi/<dictcomp>/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_prf",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/compare",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.extractor",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.7681,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_safe_segment",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_match_one",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_match_one/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_match_one/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_iter_results",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_copy_sources",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/extract",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/extract/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.judge",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5781,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_file",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_as_bool",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_normalize",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_normalize/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_judgment",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_judgments",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_judgments/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_judgments/compute/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/judge_one",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/judge_one/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_job_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_jobs",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_jobs/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_jobs/compute/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_targets",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_existing_judge_model",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_existing_judge_model/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_existing_judge_profile",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_existing_judge_profile/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_should_auto_force",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_eligible_targets",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_eligible_targets/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/coverage",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/start_judge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/stop_judge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_judge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute_job/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute_job/submit_next",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute_job/submit_next/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute_job/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.maas",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.7395,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_openai_client",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_image_mime",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_model_max_tokens_floor",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_reencode_jpeg",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_should_retry",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient",
+     "score": 0.2126,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/MaaSClient/__init__",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_resolve",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/has_keys",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/has_keys/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_client_for",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_key_state_for",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_acquire_key",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_acquire_key/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_release_key",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/recommended_concurrency",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/recommended_concurrency/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/recommended_concurrency/<listcomp>/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/key_stats",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_payload",
+     "score": 0.9875,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/MaaSClient/_b64",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_data_url",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/test_connection",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/test_connection/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/test_connection/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/chat_image",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/chat_text",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/chat_multimodal",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/chat_messages",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/image_part",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MaaSClient/_chat",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.main",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_err",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_mask_key",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_restore_masked_keys",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_config",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_config/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_config/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/ConfigIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/put_config",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_test_config",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_key_stats",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_demo_status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_demo_create",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_help",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_dashboard",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_dashboard/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_dashboard/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_dashboard/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_dashboard/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_datasets",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_projects",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/ProjectIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_create_project",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_project",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_delete_project",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/DatasetIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_create_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/ImportIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_import",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_upload",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_del_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_dataset_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_dataset_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_del_dataset_image",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/SplitIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_set_dataset_split",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompts",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_template",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_create_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptMetaIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/VersionIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_add_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/NoteIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_update_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_del_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_diff",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/RollbackIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_rollback",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/MergeIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_merge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_best",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_del_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptRenameIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_rename_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_duplicate_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_prompt_settings",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/SettingsIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_put_prompt_settings",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_runs",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/RunIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_create_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_start_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_stop_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_del_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_run_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_run_result",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_run_stability",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_run_export",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_diff_runs",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/TrialIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_trial",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptSessionIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptParseIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_parse_prompt_sections",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_parse_prompt_sections/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_sessions",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_prompt_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptSessionUpdateIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_update_prompt_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_delete_prompt_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_session_upload_attachments",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/SessionDatasetAttachmentIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_session_dataset_attachment",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptChatIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_chat",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_chat_status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptSessionSaveIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_session_save",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/ReviewIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_save_review",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_list_reviews",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/ReviewBatchIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_batch_reviews",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/ReviewReuseIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_reuse_reviews",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_review",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/JudgeIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_judge_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_judge_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_judge_jobs",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_stop_judge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_delete_judge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_list_judgments",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_judgment",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/OptimizeIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_optimize",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_optimization",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_delete_optimization",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/CandidateSaveIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_save_candidate",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_optimizations",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_prompt_profiles",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/PromptProfileIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_save_prompt_profile",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_delete_prompt_profile",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_error_pool",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/RegressionIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/RegressionIn/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_regression_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/WorkflowIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_workflows",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_create_workflow",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_workflow",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_pause_workflow",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_resume_workflow",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_delete_workflow",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_extract_fields",
+     "score": 0.9912,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/ExtractIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/ExtractIn/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_extract",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_truth",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/TruthIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_create_truth",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_truth_for_image",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_truth",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_del_truth",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_truth_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/LabelIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_set_label",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_truth_sync_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_evals",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/EvalIn",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_create_eval",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_eval_compare",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_eval_compare/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_get_eval",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_del_eval",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_file_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_file_prompt_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_file_annotated",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_file_run_image",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_file_truth",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/api_file_review_annotated",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/global_exc",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/index",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.prompt_ai",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5284,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/OptimizationError",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_session_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_files_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_sessions",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_sessions/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_session/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_add_attachment",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/save_upload_attachments",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/add_dataset_attachment",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/attachment_file",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save_session",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_derive_title",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/chat_status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/chat",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/chat/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_chat_background",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_chat_background/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_build_trajectory_table",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_build_trajectory_table/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_build_trajectory_table/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_select_optimizable_judgments",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_select_optimizable_judgments/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_select_optimizable_judgments/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_select_optimizable_judgments/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/optimize",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/optimize/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/optimize/<listcomp>/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/optimize/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/optimize/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/optimize/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/start_optimize",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/start_optimize/work",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_analyze_judge_modules",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_compose_candidate",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_compose_candidate/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_compose_candidate/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_optimization_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save_optimization",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_optimization",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/record_status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_optimization_view",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_optimization",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_optimizations",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_optimizations/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_optimizations/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/save_candidate",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.prompt_profiles",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.687,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_clean_name",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_clean_name/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_profiles",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_profiles/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_profile",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/save_profile",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_profile",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.prompts",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.526,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_locked",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_locked/wrapper",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/extract_sections",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/extract_sections/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/compose_sections",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/compose_sections/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_output_hash",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_meta_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_load_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_prompts",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_clean_name",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_clean_name/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/rename_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/duplicate_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_meta/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_version/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_version/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_default_template",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/add_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/add_version/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_version/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_versions",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/summary_diff",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/summary_diff/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_sections",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_sections/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/rollback",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/merge_versions",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/attach_metrics",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/attach_metrics/merge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/mark_version_status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_metric_value",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/best_version",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/best_version/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/safe_version_ref",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/output_format_hash",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_settings",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_settings",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/update_settings/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.reviews",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5189,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_stem",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/save_review",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_normalize_objects",
+     "score": 0.9963,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/_normalize_objects/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_normalize_objects/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_draw_review",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/review_file",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_review",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_reviews",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_reviews/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_reviews/compute/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/summary",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/summary/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/metrics",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/metrics/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/batch_save",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/derive_verdict",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/reuse_baseline",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/reuse_baseline/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_same_image",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_same_image/digest",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_same_image/digest/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.runner",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5587,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_run_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_run_json_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_load_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_result_rel",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_legacy_result_rel",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_result_candidates",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_existing_result_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_result_reusable",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_run/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_runs",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_runs/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_runs/compute/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_reconcile_run_state",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/stop_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/start_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_reconcile_counts",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_process_one",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_run_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_run_images/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_run_images/compute/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/export_csv",
+     "score": 0.988,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/export_csv/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_result",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/result_file",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/image_file",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_runs",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_runs/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_runs/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_runs/norm_label",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/diff_runs/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.schema",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5493,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/build_full_prompt",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_first_key",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_first_key/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/extract_json_block",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/parse_bbox",
+     "score": 0.9896,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/parse_bbox/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/parse_bbox/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_coord_base",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/normalize_bbox",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/normalize_bbox/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_status_labels",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_status_labels/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/normalize_status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_scene_status",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_scene_status/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_scene_status/<listcomp>/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/validate_open_protocol",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/parse_result",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/parse_result/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_field_value",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/flatten_paths",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/flatten_paths/walk",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.stats",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.8302,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_mode",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_stability",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_stability/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_stability/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_stability/<listcomp>/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.trial",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.7009,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_pick_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_pick_images/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_pick_images/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_trial_one",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_trial_one/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_trial",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_trial/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_trial/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/run_trial/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.truth",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.497,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/<setcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_slug",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_task_dir",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_task_json",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_tasks",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_task",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_task/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_create_task",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_create_task/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_task",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_source_stats",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save_task_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_task",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_labeled_map",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_labeled_map/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_task_meta",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/get_progress",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/set_labels",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/truth_label_map",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_source_images",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/image_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_dataset_short_name",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_ensure_sync_task",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_ensure_sync_task/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_add_labels",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/sync_from_review",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/sync_from_review/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/sync_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/labels_for_image",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/labels_for_image/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  },
+  {
+   "module": "app.workflow",
+   "status": "OK",
+   "functions": [
+    {
+     "fn": "<module>",
+     "score": 0.5521,
+     "status": "diff"
+    },
+    {
+     "fn": "<module>/_clamp_int",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_clamp_float",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_normalize_job_state",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/JudgeIncompleteError",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/JudgeIncompleteError/__init__",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/error_pool",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/error_pool/<dictcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_regression_dataset",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/create_regression_dataset/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_path",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_save",
+     "score": 0.9932,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/get_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/delete_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_jobs",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/list_jobs/compute",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/start_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/pause_job",
+     "score": 0.9855,
+     "status": "near"
+    },
+    {
+     "fn": "<module>/resume_job",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_launch",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_wait_run",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_wait_judge",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_quality",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_quality/<genexpr>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_judge_module_stats",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_is_model_dominant",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_is_model_dominant/<listcomp>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_is_model_dominant/<lambda>",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_check_root_cause_ceiling",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_meets_thresholds",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_compare_quality",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_finish_pending_round",
+     "score": 1.0,
+     "status": "exact"
+    },
+    {
+     "fn": "<module>/_execute",
+     "score": 1.0,
+     "status": "exact"
+    }
+   ]
+  }
+ ]
+}

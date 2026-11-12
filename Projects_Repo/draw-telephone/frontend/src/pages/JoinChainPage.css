@@ -1,0 +1,119 @@
+/* P03 加入链页 · 手账涂鸦本风格（对齐原型 03-join.html） */
+.join-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+}
+
+.form-card {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.form-card h1 {
+  font-size: 24px;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.form-card .desc {
+  color: var(--text2);
+  margin-bottom: 32px;
+  font-size: 14px;
+}
+
+/* 6 位房间码分格输入 */
+.code-input {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.code-box {
+  width: 48px;
+  height: 56px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-btn);
+  background: var(--paper);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  transition: all 0.15s;
+}
+
+.code-box.filled {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.code-box:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(200, 100, 60, 0.12);
+}
+
+/* 校验/加入按钮 */
+.check-btn,
+.join-btn {
+  width: 100%;
+}
+
+.check-btn.ant-btn-primary,
+.join-btn.ant-btn-primary {
+  height: 44px;
+  border-radius: var(--r-btn);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.check-btn.ant-btn-primary:hover:not(:disabled),
+.join-btn.ant-btn-primary:hover:not(:disabled) {
+  background: #b8582f;
+  border-color: #b8582f;
+}
+
+.check-btn.ant-btn-primary:disabled,
+.join-btn.ant-btn-primary:disabled {
+  background: var(--border);
+  border-color: var(--border);
+  color: var(--text3);
+}
+
+/* 链预览 */
+.chain-preview {
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--r-card);
+  padding: 16px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.chain-preview .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.chain-preview .row:last-of-type {
+  margin-bottom: 16px;
+}
+
+.chain-preview .row span:first-child {
+  color: var(--text2);
+}
+
+.chain-preview .row span:last-child {
+  font-weight: 700;
+  color: var(--text);
+}

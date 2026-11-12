@@ -1,0 +1,10 @@
+{
+  "id": "novel",
+  "name": "novel 小说精品屋",
+  "project_type": "web",
+  "source": "import",
+  "repo_url": "https://github.com/201206030/novel.git",
+  "created_at": "2026-09-04 15:35:15",
+  "last_active": "2026-09-04 15:35:15",
+  "harness_version": "V7.1"
+}

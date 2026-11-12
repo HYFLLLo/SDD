@@ -1,0 +1,138 @@
+{
+  "base": "http://127.0.0.1:8735/",
+  "failure_states": {
+    "#/datasets": {
+      "activeNav": "项目和图片集",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "项目与图片集\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦截了 1",
+      "textLen": 82
+    },
+    "#/evals": {
+      "activeNav": "工具 ▾",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "效果评估与提示词对比\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦",
+      "textLen": 86
+    },
+    "#/home": {
+      "activeNav": "首页",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "工作台\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦截了 127.",
+      "textLen": 79
+    },
+    "#/judge-iter": {
+      "activeNav": "裁判与优化",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "裁判与优化\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦截了 12",
+      "textLen": 81
+    },
+    "#/prompt-ai": {
+      "activeNav": "提示词生成",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "提示词生成\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦截了 12",
+      "textLen": 81
+    },
+    "#/prompts": {
+      "activeNav": "提示词库",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "提示词库\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦截了 127",
+      "textLen": 80
+    },
+    "#/runs": {
+      "activeNav": "运行测试",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "运行测试\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦截了 127",
+      "textLen": 80
+    },
+    "#/truth": {
+      "activeNav": "工具 ▾",
+      "blank": false,
+      "hasErr": true,
+      "hasRetry": true,
+      "head": "真值标注任务\n页面数据加载失败：Failed to fetch\n\n可能是后端未启动、服务正在重启，或本机防火墙拦截了 1",
+      "textLen": 82
+    }
+  },
+  "generated": "2026-11-09 09:39:37",
+  "interactive": {
+    "focusable": 7,
+    "homeStepCount": 7
+  },
+  "keyboard_nav": {
+    "reaches_submenu": true,
+    "sequence": [
+      {
+        "href": "#/home",
+        "t": "首页"
+      },
+      {
+        "href": "#/datasets",
+        "t": "项目和图片集"
+      },
+      {
+        "href": "#/prompt-ai",
+        "t": "提示词生成"
+      },
+      {
+        "href": "#/prompts",
+        "t": "提示词库"
+      },
+      {
+        "href": "#/runs",
+        "t": "运行测试"
+      },
+      {
+        "href": "#/judge-iter",
+        "t": "裁判与优化"
+      },
+      {
+        "href": "#/extract",
+        "t": "工具 ▾"
+      },
+      {
+        "href": "#/extract",
+        "t": "字段提取"
+      },
+      {
+        "href": "#/truth",
+        "t": "真值标注"
+      },
+      {
+        "href": "#/evals",
+        "t": "评估对比"
+      },
+      {
+        "href": "#/jsontool",
+        "t": "JSON工具"
+      },
+      {
+        "href": "#/config",
+        "t": "配置"
+      }
+    ]
+  },
+  "mobile_nav": {
+    "landedHash": "#/home",
+    "menuDisplay": "flex",
+    "menuOpened": true,
+    "submenuLinks": 4
+  },
+  "slow_nav": {
+    "activeNav": "运行测试",
+    "hasSkeleton": false,
+    "title": "工作台 新手引导"
+  }
+}

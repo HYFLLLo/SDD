@@ -1,0 +1,471 @@
+{
+  "project_id": "Multimodal testing platform",
+  "updated_at": "2026-11-06",
+  "tasks": [
+    {
+      "id": "P0-1",
+      "title": "源码纳入版本管理 + 可复现构建",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "源码、依赖清单、构建脚本均已入库，可从零复现构建",
+        "运行数据与分发产物未被提交，仓库无明文 API Key"
+      ],
+      "evidence": [
+        "git 首次提交 c4a35e0，137 个文件",
+        "PyInstaller 构建成功，dist/多模态测试平台.exe 启动后首页 200"
+      ]
+    },
+    {
+      "id": "P0-2",
+      "title": "补最小测试集",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "协议解析、IoU 匹配、指标计算、配置校验四类核心逻辑有回归用例",
+        "管线边界（围栏、非法 JSON、阈值边界、空列表、路径穿越）均有覆盖"
+      ],
+      "evidence": [
+        "tests/ 共 6 个文件，pytest 73 passed"
+      ]
+    },
+    {
+      "id": "P0-3",
+      "title": "安全响应头 + Host 白名单",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "正常访问带 CSP / nosniff / Referrer-Policy",
+        "非白名单 Host 被拒绝，文档页不被主 CSP 破坏"
+      ],
+      "evidence": [
+        "源码与打包 exe 均实测：正常 Host 200 且三头齐全，Host: evil.com 返回 400"
+      ]
+    },
+    {
+      "id": "P0-4",
+      "title": "修复字段提取接口缺参缺陷",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "字段提取接口在有结果文件时返回 200 与字段路径",
+        "修复写入可复现的装配片段，不随重新装配丢失"
+      ],
+      "evidence": [
+        "原始 pyc 确认 flatten_paths 默认参数 (4, 300)",
+        "接口实测 200，返回 a / custom.z / objects[].name 三个字段"
+      ]
+    },
+    {
+      "id": "P1-1",
+      "title": "前端可访问性与交互整改（P1）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "19 处 confirm()、5 处 prompt() 全部替换为站内确认/输入对话框，危险操作需二次确认",
+        "模态框具备 role=dialog、aria-modal、焦点陷阱、Esc 关闭与关闭后焦点归还",
+        "所有表单控件具备可访问名称（label for/id 或 aria-label），提供跳转链接与 :focus-visible",
+        "运行/裁判长任务展示百分比进度，弱动态偏好与窄屏表格可用"
+      ],
+      "evidence": [
+        "web/app.js: confirmDlg/promptDlg/trapDlgFocus/openDlg；enhanceA11y 渲染后统一补名称",
+        "无头浏览器实测：config 20/20、runs 9/9、judge-iter 31/31、extract 8/8、prompts 4/4 控件均有名称",
+        "CDP 实测弹窗 role=dialog、aria-modal=true、Tab 焦点回环、Esc 关闭后焦点归还",
+        "pytest tests/test_frontend_p1.py 10 passed"
+      ]
+    },
+    {
+      "id": "P1-2",
+      "title": "反编译重建缺陷修复（控制流/默认值/缩进）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "恢复源码与原始 Python 3.8 字节码逐函数对拍，真实控制流差异全部关闭",
+        "修复不依赖 pyc 之外的推测，每个修复都以对拍 1.0000 为证",
+        "对拍工具自身缺陷被修正，避免假差异掩盖真实问题"
+      ],
+      "evidence": [
+        "修复 prompts.create_prompt 默认值、prompt_profiles.save_profile 缩进、annotate.draw_objects、stats.run_stability、trial._pick_images、workflow._execute/_finish_pending_round、main._restore_masked_keys",
+        "verify_bytecode.py / check_module.py 改用 compile(..., dont_inherit=True)，消除 __future__ 注释假差异（exact 545→591）",
+        "最终对拍：623 个函数 exact 591 / near 11 / diff 21 / missing 0；剩余 diff 仅为模块级与类体注解剥离"
+      ]
+    },
+    {
+      "id": "P1-3",
+      "title": "回归测试与运行验证",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "全量 pytest 通过，P1 修复点均有回归用例",
+        "打包 exe 实测核心页面、接口、安全头与 Host 白名单",
+        "示例项目与运行创建等写路径在打包版可用"
+      ],
+      "evidence": [
+        "pytest 全量 113 passed",
+        "PyInstaller 重新构建 dist/多模态测试平台.exe 成功（66.9 MB）",
+        "打包版实测：首页/静态资源/API 200，CSP+nosniff+Referrer-Policy 齐全，Host: evil.com 与 127.0.0.1.evil.com 均 400",
+        "打包版 demo.create 返回 20 张图 + 20 条真值，POST /api/runs 返回 200"
+      ]
+    },
+    {
+      "id": "P1-4",
+      "title": "文档与工程状态收口",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "工作日志如实记录修复过程与过程中的误操作",
+        "项目状态与任务清单和实际代码一致",
+        "临时分析脚本清理，不混入交付物"
+      ],
+      "evidence": [
+        ".sdd/work-log.md 追加 2026-11-05 P1 记录（含 git checkout -- 误回滚事故说明）",
+        "tasks.json 增加 P1-1~P1-4 并更新 tasks 状态",
+        "清理 .sdd/tmp 下的临时脚本与 DOM dump"
+      ]
+    },
+    {
+      "id": "P2-1",
+      "title": "CSS 设计令牌分层与 !important 清理",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "颜色抽成语义变量（tokens 层），组件规则不再出现硬编码纯白/纯黑色值",
+        "!important 只保留在 prefers-reduced-motion 这类必须覆盖的场景",
+        "视觉与改造前一致，无回归"
+      ],
+      "evidence": [
+        "style.css 顶部新增 tokens 层：中性色/状态色/顶栏/代码语法/遮罩，硬编码色值 56 → 42（其余集中在令牌定义处）",
+        "!important 7 → 2（仅 reduced-motion）",
+        "亮色/暗色截图对比：亮色与改造前像素级一致"
+      ]
+    },
+    {
+      "id": "P2-2",
+      "title": "暗色模式（跟随系统 + 手动切换）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "支持亮色 / 暗色 / 跟随系统三态，选择持久化",
+        "暗色下文字、卡片、输入框、表格、代码块对比度正常",
+        "主题切换按钮有可访问名称"
+      ],
+      "evidence": [
+        "data-theme 属性 + prefers-color-scheme 双通道；THEME_KEY=mmtest.theme 持久化",
+        "实测暗色：body rgb(15,20,27)、文字 rgb(227,233,241)、输入框 rgb(22,29,39)",
+        "#theme-toggle 具备 aria-label 与动态 title"
+      ]
+    },
+    {
+      "id": "P2-3",
+      "title": "移动端导航折叠与窄屏可用性",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "≤760px 顶栏改为汉堡菜单，展开/收起可用，Esc 可关闭",
+        "表格窄屏可横向滚动，页面无横向溢出",
+        "触控目标尺寸合理"
+      ],
+      "evidence": [
+        "#nav-toggle + aria-expanded/aria-controls；点导航项与 Esc 自动收起",
+        "390×844 实测：菜单 closed=none → open=flex，14 个导航项均可见，document.scrollWidth - clientWidth = 0",
+        "13 处表格包进 .tbl-scroll 横向滚动容器"
+      ]
+    },
+    {
+      "id": "P2-4",
+      "title": "加载骨架屏与大列表增量渲染",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "首屏/帮助页/首页加载时展示骨架占位而非空白或纯文字",
+        "大图片集分批渲染，不因一次性插入导致长时间卡顿",
+        "骨架屏尊重 reduced-motion"
+      ],
+      "evidence": [
+        "skeleton(lines, kind) + .sk-line 微光动画；首页、帮助页、数据集等接入",
+        "数据集网格按 120 张/帧 insertAdjacentHTML，渲染完成后再统一绑定事件",
+        "实测 20 张图片集增量渲染 20/20 全部到位"
+      ]
+    },
+    {
+      "id": "P2-5",
+      "title": "渲染安全收口（innerHTML 插值审计）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "审计 257 处模板插值，确认外部数据均经 esc/enc/number 处理",
+        "发现并修复直接拼接进 HTML 的变量"
+      ],
+      "evidence": [
+        "脚本审计全部 ${} 插值：绝大多数为数字/枚举/常量",
+        "zoom(src) 原先把 src 拼进 innerHTML，改为 createElement + 属性赋值，并补 role/aria-modal/alt",
+        "pytest 120 passed"
+      ]
+    },
+    {
+      "id": "P3-1",
+      "title": "单实例互斥锁（替代端口探测）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "第二实例不再启动第二个服务，直接复用已运行实例地址",
+        "进程异常退出留下的陈旧锁可自动接管，不会永久锁死",
+        "持锁信息（pid/端口/启动时间）可读，便于排障"
+      ],
+      "evidence": [
+        "app/instance_lock.py：Windows msvcrt 字节区独占 + POSIX flock；持有者信息写独立 instance.lock.json",
+        "run.py：抢锁失败打印复用地址，成功则 lock.update(port)；finally 释放",
+        "实测：第二实例输出复用地址且日志 pid=30108（非空）；停止后 instance.lock 与 .json 均清除",
+        "tests/test_instance_lock.py 7 passed（含陈旧锁接管、释放后重建）"
+      ]
+    },
+    {
+      "id": "P3-2",
+      "title": "结构化日志与崩溃上报（本地文件）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "关键事件以 JSON Lines 写入 workspace/logs/app.log，按大小轮转",
+        "错误栈与事件均脱敏，不落提示词正文、图片内容或 API Key",
+        "请求日志只记方法/路径/状态码/耗时，且不刷爆日志"
+      ],
+      "evidence": [
+        "app/applog.py：RotatingFileHandler 2MB×3，JsonFormatter，sk-* 脱敏",
+        "RequestLog 中间件：静态资源与高频轮询降级 debug；慢请求(≥1s)与 4xx/5xx 保持 INFO",
+        "run.py 记录 start.listen / start.reuse_running_instance / start.failed",
+        "tests/test_applog.py 5 passed（脱敏、timed 成败、请求日志、幂等安装）"
+      ]
+    },
+    {
+      "id": "P3-3",
+      "title": "版本号、CHANGELOG 与构建元信息",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "版本号单一来源（app/meta.py），pyproject 与之一致",
+        "GET /api/version 返回版本、构建时间、提交号、Python 与运行形态",
+        "打包产物内含 build_info.json，帮助页可见版本"
+      ],
+      "evidence": [
+        "app/meta.py VERSION=0.2.0；pyproject.toml 同步为 0.2.0",
+        "multimodaltest.spec 构建时生成 build/build_info.json 并打入产物；hiddenimports 补 app.meta/app.applog/app.instance_lock",
+        "帮助页新增版本行（版本 / 构建时间 / 提交号）",
+        "tests/test_meta.py 4 passed"
+      ]
+    },
+    {
+      "id": "P3-4",
+      "title": "中文、空格与长路径健壮性",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "工作区位于中文或含空格路径时，配置读写与数据集增删改查正常",
+        "超过 260 字符的嵌套目录可正常写入与扫描",
+        "非法名称与路径穿越被拒绝"
+      ],
+      "evidence": [
+        "tests/test_paths.py 6 passed：中文/空格工作区、数据集上传扫描删除、旧版数据集兼容、跨盘穿越拒绝、>260 字符路径",
+        "实测最长写入路径 544 字符成功"
+      ]
+    },
+    {
+      "id": "P3-5",
+      "title": "CI：测试与字节码对拍",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "每次 push/PR 自动跑 pytest（Windows, 3.11/3.12）",
+        "Python 3.8 上跑字节码对拍，diff 数超出基线即失败",
+        "CI 不接触真实 API Key，不依赖本地 workspace"
+      ],
+      "evidence": [
+        ".github/workflows/ci.yml：test 矩阵 + bytecode job（py3.8 + _src/_pyc 对拍）",
+        "对拍结果与 tools/recover/bytecode_match.json 基线比较，diff>21 或 missing>0 即失败"
+      ]
+    },
+    {
+      "id": "P3-6",
+      "title": "新手引导流转卡顿修复（同步渲染 + 短预算定位）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "点击下一步后标题/正文在同一帧内更新，不再等待目标元素",
+        "引导 DOM 只创建一次，步骤切换不重建整棵节点",
+        "高亮与气泡在视口内稳定落位，空状态走 mock 降级",
+        "Esc / 左右方向键可用；输入框内方向键不劫持；快速连点与排队 hashchange 不叠加定时器或误关引导"
+      ],
+      "evidence": [
+        "headless Chrome + CDP 实测 1440x900 与 390x844：点击到步骤号更新 0.3-2.9ms，高亮 63-69ms，空状态 438-455ms",
+        "连点 40ms x 6 步号 2/8-7/8 且 DOM 唯一；前进后立刻后退引导存活；用户手动导航退出；输入框内方向键不切步；stopGuide 后 _tour === null",
+        "pytest 145 passed；verify_bytecode 623/592/10/21/0 与基线一致"
+      ]
+    },
+    {
+      "id": "P3-7",
+      "title": "新手引导第 2 步超高目标定位修复（气泡出界 / 页头被顶出）",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "目标高于可视区时不再整页居中滚动，页面标题保持可见",
+        "气泡始终完整落在视口内，且不遮挡高亮区域",
+        "常见笔记本窗口与移动视口下均表现一致"
+      ],
+      "evidence": [
+        "1280x600 / 1366x650 / 1366x768 / 1440x900 / 1920x1080 实测：bubbleInside 全 true、overlap 全 false",
+        "多站点（4 个）与 390x844 移动视口通过；8 步全流程逐步检查通过",
+        "pytest 146 passed；verify_bytecode 623/592/10/21/0 与基线一致"
+      ]
+    },
+    {
+      "id": "P3-8",
+      "title": "引导气泡被挤角落、不可拖动、前端缓存不失效",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "刷新页面后必定拿到最新前端资源，不再停留在旧界面",
+        "第 2 步只高亮单个站点卡片，气泡有足够摆放空间",
+        "气泡可按住拖动，拖动后滚动/缩放不抢回位置"
+      ],
+      "evidence": [
+        "静态资源与首页均返回 no-cache；app.js/style.css URL 带内容指纹 v=0.2.0-d8e9c9f3-ae4ef9c",
+        "1366x768 + 4 站点：第 2 步气泡 455-655 在视口内、与高亮零重叠、页头可见",
+        "拖动从 (37,455) 到 (8,375) 生效并夹在视口内；8 步全流程 inside/overlap 全通过",
+        "pytest 150 passed；verify_bytecode 623/592/10/21/0 与基线一致"
+      ]
+    },
+    {
+      "id": "P3-9",
+      "title": "新手引导第 3-7 步高亮框贴合目标并消除定位滞后",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "高亮框严格等于目标与可视区的交集，不因气泡位置撑高或收口",
+        "第 3 步框完整包住「新建对话」且不切断页面标题；第 6 步框完整包住「启动裁判」",
+        "切步后高亮 120ms 内到位，且不再先闪回屏幕中央",
+        "气泡不覆盖高亮目标、不出视口；放不下时限高内滚",
+        "空工作区的第 5 步仍有可用锚点，不退化成全屏压暗"
+      ],
+      "evidence": [
+        "CDP 实测 900x500 / 1024x600 / 1280x720 / 1366x768 / 1400x520 / 1600x900：coversTgt 全 true、bubbleOverlapsSpot 全 false、bubbleOut 全 false",
+        "框到位 30-80ms（修复前 530-560ms）；第 6 步框 {t:298,b:348} 覆盖 #ji-start {t:304,b:342}，修复前框在其上方 60px",
+        "第 3 步框 {t:119,b:169} 覆盖 #pai-new {t:125,b:163}，页面标题 72-96 未被切",
+        "pytest 152 passed；verify_bytecode 623/592/10/21/0 与基线一致"
+      ]
+    },
+    {
+      "id": "P3-10",
+      "title": "主题切换在深色系统下需点两下",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "夜间切日间点一下即生效，不需要点第二下",
+        "首次打开仍跟随系统主题",
+        "按钮图标与提示反映当前主题和点击后的目标主题"
+      ],
+      "evidence": [
+        "模拟系统深色：bg rgb(15,20,27) 点一下变 rgb(244,246,250)；再点交替翻转",
+        "模拟系统亮色：bg rgb(244,246,250) 点一下变 rgb(15,20,27)",
+        "pytest 153 passed"
+      ]
+    },
+    {
+      "id": "P3-11",
+      "title": "顶栏「工具」下拉按钮比其它导航项高",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "「工具」与其它导航项顶部、底部、高度完全一致",
+        "下拉菜单展开位置与行为不受影响",
+        "移动端纵向导航样式不受影响"
+      ],
+      "evidence": [
+        "桌面 1366x768：13 项均为 top 11 / bottom 41 / height 30（修复前工具为 6-36）",
+        "下拉菜单 display:flex，自 41 展开，左边缘与按钮对齐",
+        "移动端 390x844：8 项均为 height 41，间距一致",
+        "pytest 154 passed"
+      ]
+    },
+    {
+      "id": "P3-12",
+      "title": "图片集详情「批量分组」按钮出框且高度不一致",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "按钮完整显示在卡片内，文字不溢出",
+        "按钮与同排下拉框等高",
+        "窄屏换行时仍不出框、不重叠"
+      ],
+      "evidence": [
+        "1366x768：修复前按钮右边缘 1365.5 > 卡片 1343（溢出 22px）；修复后 1326 <= 1326，scrollWidth==clientWidth",
+        "高度由 29px 改为 38px，与 select 一致；五档窗口 sameH 全 true",
+        "480x800 自动换行，按钮仍在卡片内",
+        "pytest 155 passed"
+      ]
+    },
+    {
+      "id": "P3-13",
+      "title": "帮助页目录与正文耦合，滚动即消失且无法跳章节",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "目录独立于正文，位于正文左侧，正文滚动时目录保持可见",
+        "点击目录任一章节，正文滚动到对应章节且标题不被顶栏遮挡",
+        "点击目录不改变路由 hash，不触发整页重渲染",
+        "窄屏（<=860px）目录降级为常驻横条，仍可跳转且无横向溢出"
+      ],
+      "evidence": [
+        "1366x768：目录 232px、sticky top 66，正文左边缘 269；点第 1/4/8/16 章标题 top 72/101/101/101，hash 保持 #/help 并高亮跟随",
+        "手动滚到 6000px 目录仍 top 66，高亮切到当前章节；路由切走再回无重复挂载（toc 1 个、16 项）",
+        "900x700 仍为左侧栏；400x800 降级为 top 52 常驻横条，跳转后标题 top 149 未被遮挡，scrollWidth == 400",
+        "顺带修复 900px 全站 51px 横向溢出（.topbar nav 补 min-width:0、.theme-toggle 补 flex:0 0 auto）",
+        "pytest 157 passed"
+      ]
+    },
+    {
+      "id": "P3-14",
+      "title": "帮助页正文排版扁平：术语表/步骤/代码块无结构",
+      "status": "passed",
+      "blocked": false,
+      "retry_count": 0,
+      "acceptanceCriteria": [
+        "术语表渲染为真正的表格（表头 + 术语/说明两列），不再用空格对齐",
+        "步骤、嵌套列表、问答、JSON 示例各自有可辨识的结构",
+        "浅色与深色主题下卡片、表头、代码块都有正确底色",
+        "1366/900/400 三档宽度无横向溢出，窄屏术语表可读"
+      ],
+      "evidence": [
+        "16 章生成 27 组步骤、47 个列表、2 个代码块、19 个问答、2 张表（8 行枚举 + 19 条术语），旧 help-pre 为 0",
+        "1366x768 与 900x700：scrollWidth == clientWidth，术语列完整不折行；400x800：scrollWidth 536 -> 400，术语表改为上下排",
+        "卡片底色 深色 rgb(22,29,39) / 浅色 rgb(255,255,255)；--panel 与自引用令牌全部补齐",
+        "目录 16 项跳转标题 top 72/101 且 hash 保持 #/help，未回归",
+        "pytest 159 passed"
+      ]
+    }
+  ]
+}

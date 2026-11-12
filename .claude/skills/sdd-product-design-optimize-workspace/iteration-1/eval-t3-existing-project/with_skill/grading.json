@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "判断走已有项目修整分支（sdd-project-maintenance），不是新建产品设计",
+      "passed": true,
+      "evidence": "存在项目时判入已有项目修整分支，非新建"
+    },
+    {
+      "text": "不创建任何新产物文件（不写 PRD.md / prototypes/ 等）",
+      "passed": true,
+      "evidence": "第一步只做状态检查与对话内 Delta Plan，不新建 PRD 或原型"
+    },
+    {
+      "text": "明确告知用户不该新建项目，而应走已有项目修改",
+      "passed": true,
+      "evidence": "明确告知不需要新建项目，应走维护分支"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

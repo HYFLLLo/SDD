@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multimodal-testing-platform"
+version = "0.2.0"
+description = "多模态大模型能力测试平台（源码恢复版）"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.104,<1.0",
+    "uvicorn[standard]>=0.24,<1.0",
+    "pydantic>=2.4,<3.0",
+    "httpx>=0.25,<1.0",
+    "openai>=1.0,<3.0",
+    "pillow>=10.0,<14.0",
+    "python-multipart>=0.0.6,<1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4,<10.0",
+    "pyinstaller>=6.0,<7.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-ra"

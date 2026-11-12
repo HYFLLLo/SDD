@@ -1,0 +1,12 @@
+*** Begin Patch
+*** Update File: Projects_Repo/creator-topic-library/frontend/.tmp-t004.spec.mjs
+@@
+-  await expect(page.getByText('待验证')).toBeVisible()
+-  await expect(page.getByText('中')).toBeVisible()
++  await expect(page.locator('.quick-create-modal').getByText('待验证')).toBeVisible()
++  await expect(page.locator('.quick-create-modal').getByText('中')).toBeVisible()
+@@
+-  await expect(page.getByText('AI工具')).toBeVisible()
++  await expect(page.getByText('AI工具').first()).toBeVisible()
+ })
+*** End Patch

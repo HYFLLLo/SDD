@@ -1,0 +1,9 @@
+{
+  "stage": "development-complete",
+  "mode": "import",
+  "design_ready": true,
+  "development_ready": true,
+  "current_task": "T-013",
+  "blocked": false,
+  "notes": "2026-10-30 全局主题切换（浅色/深色）开发完成。T-008~T-013 全部 Tester PASS；T-010 与 sprint 收口审查（review-sprint-20261030.md）均 0 Blocker 放行，可进入用户验收。实现要点：theme.css 134 个 --nv-* 变量（:root / html.dark 严格同名同数，4 个零引用待清理）、utils/theme.js 单一真相源、Element Plus 官方 dark/css-vars.css 经 require 引入绕过 sideEffects tree-shaking（Webpack globstar=false 不匹配 theme-chalk/dark/ 子目录）。浅色基线以静态等价为主证据（theme.css 剥注释后逐字节相同），深色各页对比度均达标。残留 Minor：4 个零引用变量、4 个账号中心页 scoped 样式高度重复（历史债）。未提交：整轮主题功能仍在 frontend 工作区未 commit。"
+}

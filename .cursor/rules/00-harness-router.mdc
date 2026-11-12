@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+description: SDD V7.1 Cursor 入口适配器。打开规范包后自动加载唯一入口 harness-core/router.md，其余规范由 router 按需路由。
+---
+
+# SDD V7.1 Cursor Adapter
+
+你现在处在 SDD V7.1 Harness 工作区。Cursor 打开的目录是 Harness 根目录，但 **业务项目文件不得直接写在 Harness 根目录**。
+
+必须先读取并遵守：
+
+1. `harness-core/router.md`
+
+当用户有项目开发意图时，必须按 `harness-core/` 下的对应 command / skill / agent 规范执行项目开发动作，当不清楚如何行动时，优先提问，禁止**基于猜测的执行行为**。

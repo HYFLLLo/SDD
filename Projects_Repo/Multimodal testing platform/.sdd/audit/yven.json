@@ -1,0 +1,1899 @@
+{
+  "base": "http://127.0.0.1:8735/",
+  "breakpoints": {
+    "1024": {
+      "#/help": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 0
+      }
+    },
+    "1200": {
+      "#/help": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 0
+      }
+    },
+    "1366": {
+      "#/help": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 0
+      }
+    },
+    "390": {
+      "#/help": {
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1983,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1880,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 0
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 0
+      }
+    },
+    "760": {
+      "#/help": {
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1613,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1510,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 0
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 0
+      }
+    },
+    "761": {
+      "#/help": {
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1620,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1517,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 131
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 131
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 131
+      }
+    },
+    "780": {
+      "#/help": {
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1601,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1498,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 112
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 112
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 112
+      }
+    },
+    "800": {
+      "#/help": {
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1581,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1478,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 92
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 92
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 92
+      }
+    },
+    "860": {
+      "#/help": {
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1521,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1418,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 32
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 32
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 32
+      }
+    },
+    "900": {
+      "#/help": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/home": {
+        "offenders": [],
+        "pageOverflow": 0
+      },
+      "#/runs": {
+        "offenders": [],
+        "pageOverflow": 0
+      }
+    }
+  },
+  "console": {
+    "exceptions": []
+  },
+  "contrast": {
+    "dark": {
+      "body": {
+        "bg": "#0f141b",
+        "fg": "#e3e9f1",
+        "ratio": 15.13
+      },
+      "muted": {
+        "bg": "#161d27",
+        "fg": "#9aa8b8",
+        "ratio": 6.99
+      },
+      "primaryBtn": {
+        "bg": "#5b8ef0",
+        "fg": "#ffffff",
+        "ratio": 3.2
+      }
+    },
+    "light": {
+      "body": {
+        "bg": "#f4f6fa",
+        "fg": "#1f2d3d",
+        "ratio": 12.93
+      },
+      "muted": {
+        "bg": "#ffffff",
+        "fg": "#6b7a8d",
+        "ratio": 4.38
+      },
+      "primaryBtn": {
+        "bg": "#2e6de6",
+        "fg": "#ffffff",
+        "ratio": 4.72
+      }
+    }
+  },
+  "generated": "2026-11-06 14:37:02",
+  "label": "yven",
+  "routes": {
+    "#/config": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 19,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38,
+          76
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 415,
+        "title": "系统配置"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 19,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38,
+          76
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 415,
+        "title": "系统配置"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [
+          {
+            "cls": "INPUT",
+            "overflow": 64
+          }
+        ],
+        "dropdownDisplay": "none",
+        "fieldCount": 19,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38,
+          76
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 415,
+        "title": "系统配置"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 19,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38,
+          76
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 415,
+        "title": "系统配置"
+      }
+    },
+    "#/datasets": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 125,
+        "title": "项目与图片集"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 125,
+        "title": "项目与图片集"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 119,
+        "title": "项目与图片集"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 125,
+        "title": "项目与图片集"
+      }
+    },
+    "#/evals": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 248,
+        "title": "效果评估与提示词对比"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 248,
+        "title": "效果评估与提示词对比"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 248,
+        "title": "效果评估与提示词对比"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 248,
+        "title": "效果评估与提示词对比"
+      }
+    },
+    "#/extract": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 5,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 124,
+        "title": "字段提取归档"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 5,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 124,
+        "title": "字段提取归档"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 5,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 124,
+        "title": "字段提取归档"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 5,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 124,
+        "title": "字段提取归档"
+      }
+    },
+    "#/help": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 16932,
+        "title": "帮助与操作指南"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 16932,
+        "title": "帮助与操作指南"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [
+          {
+            "cls": "card help-toc",
+            "overflow": 1996
+          },
+          {
+            "cls": "help-code",
+            "overflow": 237
+          }
+        ],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1983,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1880,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1727,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1587,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1471,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1318,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 16865,
+        "title": "帮助与操作指南"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [
+          {
+            "cls": "card help-toc",
+            "overflow": 1602
+          }
+        ],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [
+          {
+            "cls": "help-toc-link",
+            "over": 1581,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1478,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1325,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1185,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 1069,
+            "tag": "a"
+          },
+          {
+            "cls": "help-toc-link",
+            "over": 916,
+            "tag": "a"
+          }
+        ],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 16865,
+        "title": "帮助与操作指南"
+      }
+    },
+    "#/home": {
+      "1024": {
+        "clickableDivKeyboardDead": 11,
+        "clickableDivTotal": 11,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          26,
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 476,
+        "title": "工作台 新手引导"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 11,
+        "clickableDivTotal": 11,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          26,
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 476,
+        "title": "工作台 新手引导"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 11,
+        "clickableDivTotal": 11,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          26,
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 476,
+        "title": "工作台 新手引导"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 11,
+        "clickableDivTotal": 11,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 0,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px"
+        ],
+        "heights": [
+          26,
+          29
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 476,
+        "title": "工作台 新手引导"
+      }
+    },
+    "#/jsontool": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 1,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          38,
+          444
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 53,
+        "title": "JSON 工具"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 1,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          38,
+          444
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 53,
+        "title": "JSON 工具"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 1,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          38,
+          444
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 53,
+        "title": "JSON 工具"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 1,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          38,
+          444
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 53,
+        "title": "JSON 工具"
+      }
+    },
+    "#/judge-iter": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 30,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 348,
+        "title": "裁判与优化"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 30,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 348,
+        "title": "裁判与优化"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 30,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 348,
+        "title": "裁判与优化"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 30,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 2,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 348,
+        "title": "裁判与优化"
+      }
+    },
+    "#/prompt-ai": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 7,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px",
+          "13px"
+        ],
+        "heights": [
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px",
+          "7px",
+          "8px"
+        ],
+        "requiredCount": 0,
+        "textLen": 35,
+        "title": "提示词生成"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 7,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px",
+          "13px"
+        ],
+        "heights": [
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px",
+          "7px",
+          "8px"
+        ],
+        "requiredCount": 0,
+        "textLen": 35,
+        "title": "提示词生成"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 7,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px",
+          "13px"
+        ],
+        "heights": [
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px",
+          "7px",
+          "8px"
+        ],
+        "requiredCount": 0,
+        "textLen": 35,
+        "title": "提示词生成"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 7,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.3333px",
+          "13.5px",
+          "13px"
+        ],
+        "heights": [
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px",
+          "7px",
+          "8px"
+        ],
+        "requiredCount": 0,
+        "textLen": 35,
+        "title": "提示词生成"
+      }
+    },
+    "#/prompts": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [
+          {
+            "cls": "DIV",
+            "overflow": 19
+          }
+        ],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 85,
+        "title": "提示词库"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [
+          {
+            "cls": "DIV",
+            "overflow": 19
+          }
+        ],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 85,
+        "title": "提示词库"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [
+          {
+            "cls": "DIV",
+            "overflow": 19
+          }
+        ],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 85,
+        "title": "提示词库"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [
+          {
+            "cls": "DIV",
+            "overflow": 19
+          }
+        ],
+        "dropdownDisplay": "none",
+        "fieldCount": 3,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.3333px",
+          "13.5px"
+        ],
+        "heights": [
+          13,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "0px",
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 85,
+        "title": "提示词库"
+      }
+    },
+    "#/runs": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 9,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 244,
+        "title": "运行测试"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 9,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 244,
+        "title": "运行测试"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 9,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 244,
+        "title": "运行测试"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 9,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "13.5px"
+        ],
+        "heights": [
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 1,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 244,
+        "title": "运行测试"
+      }
+    },
+    "#/truth": {
+      "1024": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          26,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 284,
+        "title": "真值标注任务"
+      },
+      "1366": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          26,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 284,
+        "title": "真值标注任务"
+      },
+      "390": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          26,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [],
+        "offenders": [],
+        "pageOverflow": 0,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 284,
+        "title": "真值标注任务"
+      },
+      "800": {
+        "clickableDivKeyboardDead": 0,
+        "clickableDivTotal": 0,
+        "clippedContainers": [],
+        "dropdownDisplay": "none",
+        "fieldCount": 4,
+        "focusVisibleRules": 3,
+        "fontSizes": [
+          "12.5px",
+          "13.5px"
+        ],
+        "heights": [
+          26,
+          29,
+          36,
+          38
+        ],
+        "imgNoAlt": 0,
+        "imgTotal": 0,
+        "invalidCount": 0,
+        "navHeights": [
+          30
+        ],
+        "offenders": [],
+        "pageOverflow": 92,
+        "primaryBtns": 2,
+        "radii": [
+          "6px"
+        ],
+        "requiredCount": 0,
+        "textLen": 284,
+        "title": "真值标注任务"
+      }
+    }
+  }
+}

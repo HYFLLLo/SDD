@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>画意接龙 · 原型 Junior Pass</title>
+<style>
+  :root{
+    --bg:#FAF6EF; --paper:#FFFFFF; --text:#2B2622; --text2:#7A6F64;
+    --border:#D9CFC0; --dash:#B8A890; --accent:#C8643C; --ai:#6B7A8F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Nunito","Noto Sans SC",system-ui,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;padding:32px;
+  }
+  .wrap{max-width:1480px;margin:0 auto}
+  h1{font-size:30px;margin-bottom:4px;letter-spacing:.5px}
+  .sub{color:var(--text2);margin-bottom:24px;font-size:15px}
+  .banner{
+    background:var(--paper);border:2px dashed var(--dash);border-radius:12px;
+    padding:20px 24px;margin-bottom:28px;
+  }
+  .banner h2{font-size:16px;color:var(--accent);margin-bottom:10px}
+  .banner ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:6px 28px;font-size:14px}
+  .banner li::before{content:"▸ ";color:var(--accent)}
+  .banner .assumption{color:var(--text2)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{
+    background:var(--paper);border:1.5px solid var(--border);border-radius:12px;
+    padding:0;overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 2px 8px rgba(43,38,34,.06);
+  }
+  .card-head{padding:14px 18px;border-bottom:1px dashed var(--dash);display:flex;justify-content:space-between;align-items:center}
+  .card-head .pid{font-size:13px;color:var(--text2);font-weight:700}
+  .card-head .ptype{font-size:11px;background:var(--bg);padding:2px 8px;border-radius:6px;color:var(--text2)}
+  .card-title{padding:12px 18px 4px;font-size:16px;font-weight:700}
+  .card-body{padding:8px 18px 18px;flex:1}
+  .regions{list-style:none;font-size:13px;margin-bottom:10px}
+  .regions li{padding:3px 0;border-bottom:1px dotted var(--border)}
+  .regions li:last-child{border-bottom:none}
+  .regions b{color:var(--accent)}
+  .placeholder{
+    background:repeating-linear-gradient(45deg,#F0E9DC,#F0E9DC 8px,#EDE4D4 8px,#EDE4D4 16px);
+    border:1px dashed var(--dash);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--text2);margin-top:8px;
+  }
+  .path{font-size:12px;color:var(--text2);background:var(--bg);padding:8px 10px;border-radius:6px;border-left:3px solid var(--accent)}
+  .path b{color:var(--text)}
+  .ai-tag{display:inline-block;font-size:11px;background:#E8EDF2;color:var(--ai);padding:1px 6px;border-radius:4px;margin-left:6px}
+  .legend{display:flex;gap:18px;margin:8px 0 20px;font-size:13px;color:var(--text2);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .footer{margin-top:32px;padding:20px;background:var(--paper);border-radius:12px;border:1px solid var(--border);font-size:14px;color:var(--text2)}
+  .footer b{color:var(--text)}
+  .q{color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>画意接龙 · Junior Pass</h1>
+  <p class="sub">手账涂鸦本方向 · 桌面 Web 1440×900 · 9 个 MVP 界面平铺 · 方向确认用</p>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--accent)"></i>陶土橙 accent（CTA/进度/强调）</span>
+    <span><i class="dot" style="background:var(--ai)"></i>冷灰蓝（AI 续标注，区隔人画）</span>
+    <span><i class="dot" style="background:var(--bg);border:1px solid var(--border)"></i>米白纸底</span>
+    <span><i class="dot" style="background:repeating-linear-gradient(45deg,#F0E9DC,#F0E9DC 4px,#EDE4D4 4px,#EDE4D4 8px)"></i>占位灰块</span>
+  </div>
+
+  <div class="banner">
+    <h2>设计假设 Assumptions（理解错了早改比晚改便宜 100 倍）</h2>
+    <ul>
+      <li class="assumption">A1：起手题词用手写体呈现，强化"题词"感；人画署名暖色，AI 续署名冷灰蓝</li>
+      <li class="assumption">A2：P04 进度条是签名锚点——手绘虚线节点链，当前节点陶土橙脉冲</li>
+      <li class="assumption">A3：画布偏直角(4px)，卡片圆角(12px)，区分"纸"与"卡"</li>
+      <li class="assumption">A4：实时围观只展示当前作画者的画布，不展示历史笔迹回放</li>
+      <li class="assumption">A5：投票三维度（最跑偏/最佳画/最佳描述）合并进 P07 回放页底部</li>
+      <li class="assumption">A6：游客可浏览广场和作品，创建/加入/投票需登录</li>
+    </ul>
+  </div>
+
+  <div class="banner" style="border-color:var(--accent)">
+    <h2>关键用户路径 Key Flow</h2>
+    <ul>
+      <li><b>主路径（创建接力）</b>：P09 登录 → P01 广场 → P02 创建链 → P04 大厅 → P05 接力作画 → 提交回 P04 → 链完成 → P07 回放+投票 → P06 作品分享</li>
+      <li><b>加入路径</b>：P01 广场 → P03 加入(房间码) → P04 大厅 → P05 接力 → …</li>
+      <li><b>围观路径</b>：P04 大厅实时围观画布（WebSocket 笔迹）</li>
+      <li><b>AI 补位路径</b>：P04 节点 24h 超时 → AI 自动续链（标注 AI 续）→ 推进下一节点</li>
+    </ul>
+  </div>
+
+  <div class="grid">
+
+    <!-- P01 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P01</span><span class="ptype">列表页</span></div>
+      <div class="card-title">首页 / 广场</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>顶部导航</b>：Logo / 广场·我的 / 通知·头像</li>
+          <li><b>Hero</b>：手写题词 + 主 CTA「开始一条链」</li>
+          <li><b>作品瀑布流</b>：已完成公开链卡片（2-3列）</li>
+          <li><b>加入入口</b>：房间码输入</li>
+        </ul>
+        <div class="placeholder">占位：3-4 张作品缩略图 + 标题 + 作者数</div>
+        <div class="path"><b>去</b>：P02 创建 / P03 加入 / P06 作品详情 / P09 登录</div>
+      </div>
+    </div>
+
+    <!-- P02 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P02</span><span class="ptype">表单页</span></div>
+      <div class="card-title">创建链</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>链长滑块</b>：4-10，默认 6</li>
+          <li><b>标题输入</b>：可选</li>
+          <li><b>公开性</b>：邀请制 / 公开广场</li>
+          <li><b>起手题来源</b>：手动写 / AI 生成<span class="ai-tag">AI</span></li>
+          <li><b>主按钮</b>：创建并生成房间码</li>
+        </ul>
+        <div class="placeholder">占位：AI 生成题词预览区（手写体）</div>
+        <div class="path"><b>去</b>：P04 链大厅</div>
+      </div>
+    </div>
+
+    <!-- P03 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P03</span><span class="ptype">表单页</span></div>
+      <div class="card-title">加入链</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>房间码大输入框</b>：6 位</li>
+          <li><b>邀请链接解析</b>：带码自动填充</li>
+          <li><b>主按钮</b>：加入</li>
+        </ul>
+        <div class="placeholder">占位：校验状态（未满/未过期）</div>
+        <div class="path"><b>去</b>：P04 链大厅</div>
+      </div>
+    </div>
+
+    <!-- P04 -->
+    <div class="card" style="border-color:var(--accent);border-width:2px">
+      <div class="card-head"><span class="pid">P04 ★签名锚点</span><span class="ptype">仪表盘</span></div>
+      <div class="card-title">链大厅（房间页）</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>进度条</b>：手绘虚线节点链（签名锚点）</li>
+          <li><b>链信息</b>：标题/链长/成员头像</li>
+          <li><b>实时围观画布</b>：当前作画者笔迹</li>
+          <li><b>AI 补位倒计时</b>：24h<span class="ai-tag">AI</span></li>
+          <li><b>CTA</b>：轮到你了 → P05</li>
+        </ul>
+        <div class="placeholder">占位：进度节点 6 个 + 当前画布缩略</div>
+        <div class="path"><b>去</b>：P05 接力 / P07 回放</div>
+      </div>
+    </div>
+
+    <!-- P05 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P05</span><span class="ptype">创作页</span></div>
+      <div class="card-title">接力作画 / 描述</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>上一节点展示</b>：只看上一节点（防剧透）</li>
+          <li><b>画布涂鸦</b>：笔/色/粗/擦/撤销（绘画节点）</li>
+          <li><b>文字描述输入</b>：≤30字（描述节点）</li>
+          <li><b>提交按钮</b>：提交接力</li>
+        </ul>
+        <div class="placeholder">占位：画布工具栏 + 上一节点缩略</div>
+        <div class="path"><b>去</b>：P04 大厅（提交后）</div>
+      </div>
+    </div>
+
+    <!-- P06 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P06</span><span class="ptype">详情页</span></div>
+      <div class="card-title">作品详情（只读）</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>全链纵向展示</b>：A画→B述→C画→…</li>
+          <li><b>署名</b>：每节点作者，AI 续标注<span class="ai-tag">AI</span></li>
+          <li><b>分享链接</b>：复制只读链接</li>
+          <li><b>回放入口</b>：→ P07</li>
+        </ul>
+        <div class="placeholder">占位：6 节点纵向卡片流</div>
+        <div class="path"><b>去</b>：P07 回放 / P01 广场</div>
+      </div>
+    </div>
+
+    <!-- P07 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P07</span><span class="ptype">详情页</span></div>
+      <div class="card-title">整链回放（含投票）</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>逐节点渐显</b>：动画 2s 间隔</li>
+          <li><b>投票面板</b>：最跑偏/最佳画/最佳描述</li>
+          <li><b>结果展示</b>：三维度统计</li>
+        </ul>
+        <div class="placeholder">占位：渐显动画 + 投票三维度</div>
+        <div class="path"><b>去</b>：P06 分享 / P04 大厅</div>
+      </div>
+    </div>
+
+    <!-- P08 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P08</span><span class="ptype">列表页</span></div>
+      <div class="card-title">个人主页</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>我的作品</b>：参与/创建的链卡片</li>
+          <li><b>头像/昵称</b>：顶部</li>
+        </ul>
+        <div class="placeholder">占位：作品卡片网格（MVP 不做分类筛选）</div>
+        <div class="path"><b>去</b>：P06 作品详情</div>
+      </div>
+    </div>
+
+    <!-- P09 -->
+    <div class="card">
+      <div class="card-head"><span class="pid">P09</span><span class="ptype">表单页</span></div>
+      <div class="card-title">登录 / 注册</div>
+      <div class="card-body">
+        <ul class="regions">
+          <li><b>用户名+密码</b>：注册/登录切换</li>
+          <li><b>游客入口</b>：先逛逛 → P01</li>
+        </ul>
+        <div class="placeholder">占位：表单 + 切换 Tab</div>
+        <div class="path"><b>去</b>：P01 广场 / 来源页</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p><b>未确认问题：</b></p>
+    <p>1. <span class="q">P05 描述节点</span>的"上一节点展示"是展示完整画作还是缩略图？默认完整画作居中展示。</p>
+    <p>2. <span class="q">P07 投票</span>是否允许投给自己的节点？默认允许（不限制）。</p>
+    <p>3. <span class="q">P04 实时围观</span>画布尺寸与 P05 画布是否一致？默认一致（固定画布尺寸）。</p>
+    <p style="margin-top:12px"><b>下一步：</b>确认方向后进入 Full Pass，按手账涂鸦本方向绘制 9 个高保真 HTML 页面，填充示例数据与交互状态。</p>
+  </div>
+
+</div>
+</body>
+</html>

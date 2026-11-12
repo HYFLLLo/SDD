@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "产物路径均在 active_project_path 下",
+      "passed": true,
+      "evidence": "产物均在 project-accounting-h5 下"
+    },
+    {
+      "text": "完成时四件套齐全",
+      "passed": true,
+      "evidence": "四件套齐备"
+    },
+    {
+      "text": "移动端 390x844 视口说明出现在设计产物中",
+      "passed": true,
+      "evidence": "B1 spec 界面清单 390x844，原型 README 视口验证 390x844"
+    },
+    {
+      "text": "临时产物清理时机遵循映射表",
+      "passed": true,
+      "evidence": "ui-design-spec B2 删；visual-research 选择保留至 C 完成"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

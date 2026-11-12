@@ -1,0 +1,369 @@
+{
+  "project": "创作者选题灵感库（creator-topic-library）",
+  "project_type": "web",
+  "created": "2026-10-16",
+  "source_files": {
+    "prd": "docs/PRD.md",
+    "plan": "docs/Plan.md",
+    "api_contracts": "docs/api-contracts.md"
+  },
+  "external_services": [],
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "前端工程脚手架（Vite+React+TS+AntD+Zustand+路由+持久化适配层+演示数据）",
+      "type": "frontend",
+      "description": "初始化 frontend/ 纯前端单页应用工程：Vite + React + TypeScript + Ant Design（暖纸色板定制 token）+ Zustand + react-router。落地分层骨架 UI Components -> Pages -> Store -> Service Layer -> Persistence Adapter -> localStorage；服务层统一返回 code/message/data 契约（对齐 api-contracts.md，为 V2 接 FastAPI 预留），服务方法不直接操作 localStorage；预置演示 Mock 数据（不少于 6 条选题、4 个标签，字段与 api-contracts.md 完全一致）。本任务不含任何业务页面实现，仅提供应用外壳、主题、路由骨架与数据层。注意：本项目 V1 无后端，不生成任何 pycore/fastapi/数据库内容。",
+      "source_feature": "Plan.md 前端技术选型 / 前端开发清单基础",
+      "acceptanceCriteria": [
+        "前端工程可启动：在 frontend/ 下执行开发命令后，应用在 5199 端口正常打开（严格端口模式，被占用时报错而非换端口）",
+        "package.json 提供 lint、type-check、build 三个脚本，全部可执行通过",
+        "应用外壳落地：顶部栏含应用名称占位、主体区域与路由骨架（主页路径与标签管理路径两条路由）",
+        "首次打开应用即可看到演示数据：至少 6 条选题和 4 个标签已通过本地数据层提供，刷新页面后数据仍在",
+        "界面整体呈暖纸色调（AntD 主题 token 已定制，非默认蓝）"
+      ],
+      "technicalChecks": [
+        "npm run type-check 通过",
+        "npm run lint 通过",
+        "npm run build 通过",
+        "frontend/.env 配置 VITE_API_BASE_URL 为相对路径 /api，服务层代码中不得出现写死的完整 URL（如 http://localhost:xxxx）",
+        "dev server 使用 --strictPort 启动；端口被占时先用命令排查陈旧进程再处理，不得静默换端口",
+        "服务层响应结构为 {code, message, data}，与 api-contracts.md 统一响应格式一致；演示数据字段与 Topic/Tag 契约完全一致",
+        "持久化适配层独立于业务代码：Zustand store 通过 service 层读写，组件不得直接调用 localStorage API"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [],
+      "priority": 1,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": false
+    },
+    {
+      "id": "T-002",
+      "title": "P01 选题库主页：卡片列表 + 关键词搜索 + 组合筛选 + 排序 + 列表/看板视图切换 + 删除选题",
+      "type": "frontend",
+      "description": "实现 P01 选题库主页列表视图核心功能（F-01-02、F-01-03、F-01-04、F-01-05、F-01-06、F-01-09）：选题卡片列表（标题、标签 chip、状态徽标、优先级标记、更新时间）、空状态引导、关键词实时搜索（标题/内容/标签名，包含匹配即可，不做分词）、组合筛选（标签、状态、优先级、更新时间）、排序（优先级/创建时间/更新时间）、视图切换（卡片列表 <-> 按状态分列的看板展示，本任务看板仅展示分组，拖动改状态在 T-007 实现）、单条删除（确认弹窗）。顶部栏含应用名、搜索框、快速记录按钮、随机选题按钮、标签管理入口（按钮仅展示入口，交互在后续任务实现）。数据经 Zustand + 服务层读写，删除后落 localStorage。组件参考 docs/prototypes/README.md：TopicCard、TopicFilterBar、TopicKanban（本任务只做布局分组）。",
+      "source_feature": "P01 / F-01-02、F-01-03、F-01-04、F-01-05、F-01-06、F-01-09",
+      "acceptanceCriteria": [
+        "进入主页可见选题卡片列表，每张卡片展示标题、标签、状态、优先级和更新时间；没有任何选题时显示空状态引导",
+        "在顶部搜索框输入关键词后，列表实时只显示标题、内容或标签名包含该关键词的选题",
+        "使用筛选栏组合选择标签、状态、优先级、更新时间条件后，列表同步刷新为符合全部条件的选题；清除筛选后恢复完整列表",
+        "切换排序方式（优先级、创建时间、更新时间）后，列表顺序相应变化",
+        "点击视图切换按钮，页面在卡片列表和按状态分列的看板两种形式之间切换，展示内容立即变化",
+        "点击某条选题的删除按钮并在确认弹窗中确认后，该选题从列表消失；刷新页面后该选题仍未出现",
+        "顶部栏展示应用名称、搜索框、快速记录按钮、随机选题按钮、标签管理入口和视图切换"
+      ],
+      "technicalChecks": [
+        "npm run type-check 通过",
+        "npm run lint 通过",
+        "npm run build 通过",
+        "固定高度容器 20% 缓冲（系统级经验 2026-05-22）：TopicCard 等含多行文本的固定高度容器，容器高度 ≥ 理论内容高度 × 1.2，三行内容最小高度 h-24（96px），布局优先 justify-between；Developer 输出前必查",
+        "Tester 用浏览器工具抽查卡片：实际内容高度 < 容器高度 × 0.85，长标题/长内容不溢出不截断重叠",
+        "响应式布局在 1280px / 1440px / 1920px 宽度下无错位",
+        "搜索/筛选/排序均在纯前端完成，页面展示数据格式与 api-contracts.md 一致",
+        "在 5199 端口启动 dev server 完成自动验证（run_in_background），不占用用户门禁端口 5175"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-001"
+      ],
+      "priority": 2,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": "codex-tester",
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "[PASS] T-002 独立验证通过（AC1-AC7 + TC1-TC8 全 PASS）。报告：.sdd/test-reports/test-T-002.md。范围外发现：①P01 文案与 Pencil 原型存在少量差异（品牌名/清除/全部/优先级标签/示例数据），逐字文案未列入 AC，交用户门禁决策；②默认排序 updated_desc 与 api-contracts.md 默认 created_desc 不一致，且排序下拉含「默认排序」「更新时间」两个同值项，建议统一口径。",
+      "user_gate": true
+    },
+    {
+      "id": "T-003",
+      "title": "P02 选题详情抽屉：查看详情 + 编辑选题 + 删除选题",
+      "type": "frontend",
+      "description": "实现 P02 选题详情抽屉（F-02-01、F-02-02、F-02-03）：在 P01 点击选题卡片打开右侧抽屉，展示全部字段（标题、内容、备注、来源、标签、状态、优先级、创建时间、更新时间）；抽屉内编辑模式可修改全部可编辑字段并保存，保存后主页列表与抽屉同步更新；标题必填校验；抽屉内删除（确认弹窗）后关闭抽屉并刷新列表。数据经服务层读写 localStorage。组件：TopicDetailDrawer。",
+      "source_feature": "P02 / F-02-01、F-02-02、F-02-03",
+      "acceptanceCriteria": [
+        "在主页点击任意选题卡片，右侧弹出详情抽屉，展示该选题的标题、内容、备注、来源、标签、状态、优先级和创建/更新时间等全部字段",
+        "在抽屉中进入编辑，修改标题、内容、备注、来源、标签、状态、优先级任意字段并保存后，抽屉和主页列表立即显示更新后的内容；刷新页面后修改仍然生效",
+        "编辑时清空标题后点击保存，页面给出明确的标题必填提示，且不保存本次修改",
+        "在抽屉中点击删除并在确认弹窗中确认后，抽屉关闭，该选题从主页列表消失"
+      ],
+      "technicalChecks": [
+        "npm run type-check 通过",
+        "npm run lint 通过",
+        "npm run build 通过",
+        "抽屉内多行文本区域（内容/备注）为自适应高度或带缓冲的固定高度，长文本不溢出抽屉",
+        "在 5199 端口启动 dev server 完成自动验证"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-002"
+      ],
+      "priority": 3,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": "codex-tester",
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "[PASS] T-003 独立验证通过（AC1-AC4 + TC1-TC5 全 PASS）。报告：.sdd/test-reports/test-T-003.md。范围外发现：①AntD Card `bordered` 弃用告警（T-002 引入，来自 TopicCard）+ favicon.ico 404（T-001 引入），均不影响本任务；建议后续统一改 variant 并补 favicon。",
+      "user_gate": true
+    },
+    {
+      "id": "T-004",
+      "title": "P03 快速录入弹窗：新建选题 + 标题必填校验 + 内联新建标签",
+      "type": "frontend",
+      "description": "实现 P03 快速录入弹窗（F-03-01、F-03-02、F-03-03，含 F-01-01 快速记录入口交互）：在 P01 点击顶部'快速记录'按钮弹出录入弹窗；表单含标题（必填）、内容、来源、标签（多选）、状态（默认待验证）、优先级（默认中）；标题为空保存时明确提示；标签选择器支持内联新建标签（输入名称、选择颜色，名称唯一校验），新标签保存后立即出现在可选列表并同步到标签库（经服务层落 localStorage）；保存成功后弹窗关闭，新选题出现在主页列表顶部。组件：QuickCreateModal。",
+      "source_feature": "P03 / F-03-01、F-03-02、F-03-03、P01 / F-01-01",
+      "acceptanceCriteria": [
+        "在主页点击快速记录按钮，弹出快速录入弹窗",
+        "填写标题、内容、来源、标签、状态、优先级并保存后，弹窗关闭，新选题出现在主页列表顶部；刷新页面后新选题仍然存在",
+        "不填标题直接点保存时，页面给出明确的标题必填提示，选题未被创建",
+        "新建选题时状态默认显示为'待验证'，优先级默认显示为'中'",
+        "在弹窗的标签选择中内联新建标签（输入名称并选择颜色）后，新标签立即出现在可选标签列表中；保存选题后该选题带上新标签，主页筛选标签条件中也能看到该新标签"
+      ],
+      "technicalChecks": [
+        "npm run type-check 通过",
+        "npm run lint 通过",
+        "npm run build 通过",
+        "内联新建标签调用标签服务方法并持久化，标签名唯一规则在服务层校验（重名返回错误响应，data 为 null）",
+        "新建选题的默认值：status=pending、priority=medium，字段结构与 api-contracts.md Topic 契约一致",
+        "在 5199 端口启动 dev server 完成自动验证"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-002"
+      ],
+      "priority": 4,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": "codex-tester",
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": true
+    },
+    {
+      "id": "T-005",
+      "title": "P04 标签管理页：标签列表 + 新建 + 编辑 + 删除（联动选题）",
+      "type": "frontend",
+      "description": "实现 P04 标签管理页（F-04-01、F-04-02、F-04-03、F-04-04）：从顶部导航'标签管理'进入独立路由页面；标签网格/列表展示名称、颜色、使用次数（usage_count 由关联选题数计算）；新建标签（名称必填唯一 + 颜色选择）；编辑标签名称/颜色后相关选题同步显示新名称/颜色；删除标签二次确认，删除后从所有相关选题的 tag_ids 中移除。所有操作经服务层落 localStorage。组件：TagManager。",
+      "source_feature": "P04 / F-04-01、F-04-02、F-04-03、F-04-04",
+      "acceptanceCriteria": [
+        "从顶部导航点击标签管理，进入标签管理页，可以看到全部标签的名称、颜色和使用次数",
+        "新建标签（输入名称并选择颜色）保存后，标签出现在列表中；输入已存在的标签名时，页面给出名称已存在的提示且不创建",
+        "编辑某个标签的名称或颜色并保存后，标签列表显示更新后的信息，回到主页后相关选题卡片上的该标签也同步显示新名称/颜色",
+        "删除某个标签并在二次确认弹窗中确认后，标签从列表消失，主页相关选题上不再显示该标签；刷新页面后删除仍然生效",
+        "点击返回或主页入口可回到选题库主页"
+      ],
+      "technicalChecks": [
+        "npm run type-check 通过",
+        "npm run lint 通过",
+        "npm run build 通过",
+        "usage_count 为计算字段，随选题增删/改标签实时更新，不持久化冗余值",
+        "删除标签时通过服务层一次性移除所有关联选题的 tag_ids 引用，不留悬空 id",
+        "路由切换即重置：P01 与 P04 互切时用 key 化包装组件实现状态重置，不在 effect 里同步 setState（lint 禁）",
+        "在 5199 端口启动 dev server 完成自动验证"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-002"
+      ],
+      "priority": 5,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 1,
+      "blocked": false,
+      "notes": "",
+      "user_gate": true
+    },
+    {
+      "id": "T-006",
+      "title": "随机选题：基于当前筛选结果的随机抽取 + 换一个 + 空状态",
+      "type": "frontend",
+      "description": "实现 F-01-07 随机选题（含 RandomPicker 组件与顶部'随机选题'按钮交互）：点击按钮弹出随机选题弹窗；候选池 = 当前搜索 + 筛选后的结果，默认排除'已发布'和'已放弃'状态；等概率随机抽取一条并在弹窗展示（标题、标签、状态等摘要）；'换一个'重新随机（可与当前不同）；候选池为空时显示空状态提示。抽到的选题支持跳转查看详情（复用 P02 抽屉）。纯前端内存筛选，无后端。",
+      "source_feature": "P01 / F-01-07",
+      "acceptanceCriteria": [
+        "在主页点击随机选题按钮，弹窗展示从当前列表结果中随机抽取的一条选题（含标题、标签、状态等信息）",
+        "在弹窗中点击'换一个'，展示另一条随机抽出的选题",
+        "先用筛选条件（例如选择某个标签或状态）缩小范围，再点击随机选题，抽出的选题一定符合当前筛选条件",
+        "当前筛选结果中没有可用选题（例如全部为'已发布'或'已放弃'）时，点击随机选题显示空状态提示，而不是报错或空白",
+        "在随机选题弹窗中点击该选题可打开详情抽屉查看完整信息"
+      ],
+      "technicalChecks": [
+        "npm run type-check 通过",
+        "npm run lint 通过",
+        "npm run build 通过",
+        "随机抽取逻辑：候选池 = 当前筛选结果 ∩ 排除 published/abandoned，等概率抽取，多次调用结果分布合理（无确定性固定值）",
+        "随机抽取逻辑与列表筛选共用同一套筛选管道，不重复实现导致口径不一致",
+        "在 5199 端口启动 dev server 完成自动验证"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-002",
+        "T-003"
+      ],
+      "priority": 6,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "",
+      "user_gate": true
+    },
+    {
+      "id": "T-007",
+      "title": "看板状态拖动 + 列表快捷菜单改状态",
+      "type": "frontend",
+      "description": "实现 F-01-08 状态快速修改：看板视图下（T-002 已有分组布局）支持把选题卡片拖动到另一状态列（待验证/创作中/已发布/已放弃），松手后状态立即更新并持久化；列表视图下卡片提供快捷菜单（下拉）直接修改状态，修改后卡片状态标识立即更新。状态流转不做限制（四个状态任意切换）。数据经服务层落 localStorage。",
+      "source_feature": "P01 / F-01-08",
+      "acceptanceCriteria": [
+        "切换到看板视图后，选题按'待验证、创作中、已发布、已放弃'四列分组展示",
+        "把一张选题卡片拖动到另一状态列并松手后，卡片停留在新列，卡片上的状态标识立即更新；刷新页面后状态保持不变",
+        "在列表视图的卡片上打开快捷菜单，选择新状态后，卡片状态标识立即更新；切换到看板视图后该卡片位于对应状态列",
+        "拖动或菜单修改状态后，在主页使用状态筛选条件能正确筛出修改后的选题"
+      ],
+      "technicalChecks": [
+        "npm run type-check 通过",
+        "npm run lint 通过",
+        "npm run build 通过",
+        "固定高度容器 20% 缓冲（系统级经验 2026-05-22）：看板卡片高度 ≥ 理论内容高度 × 1.2，三行内容最小 h-24；Tester 用浏览器工具抽查内容高度 < 容器高度 × 0.85",
+        "看板列内滚动与整页滚动互不干扰，1280px / 1440px / 1920px 宽度下四列布局无错位",
+        "在 5199 端口启动 dev server 完成自动验证"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-002"
+      ],
+      "priority": 7,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 0,
+      "blocked": false,
+      "notes": "T-007 验收通过：看板拖拽、列表快捷菜单、持久化、筛选、布局与门禁均验证通过。",
+      "user_gate": true
+    },
+    {
+      "id": "T-008",
+      "title": "E2E 回归：lint/type-check/build + Playwright 关键路径 + 启动文档交付",
+      "type": "frontend",
+      "description": "最终回归任务：1) ESLint、Prettier、type-check、build 全部通过；2) 用 Playwright 覆盖关键路径自动回归：快速记录（含标题必填校验）、搜索筛选排序、编辑选题、看板拖动改状态、随机选题（含空池）、标签管理增删改、删除选题、刷新后 localStorage 数据保持；3) 编写 docs/startup.md（本地启动说明：npm 安装、dev/build 命令、端口约定、浏览器兼容）；4) 全流程人工走查清单输出，供最终用户门禁验收。",
+      "source_feature": "Plan.md 阶段2 前端自动验收 + 阶段3 最终用户验收",
+      "acceptanceCriteria": [
+        "完整流程可走通：快速记录一条新选题，通过搜索或筛选找到它，打开详情编辑保存，在看板中拖动改变它的状态，随机选题可以抽到它，在标签管理页新建/编辑/删除标签，最后删除该选题",
+        "完成上述操作后刷新浏览器页面，此前的全部数据变化（新建、编辑、状态、标签）仍然保持",
+        "提供 docs/startup.md，非技术用户按文档说明可以在自己电脑上启动并打开本应用",
+        "界面无阻塞性问题：无报错弹窗、无打不开的页面、无显示不全的文本"
+      ],
+      "technicalChecks": [
+        "npm run lint、npm run type-check、npm run build 全部通过",
+        "Playwright 关键路径自动回归通过：快速记录（含空标题校验分支）、编辑、随机选题（含空池分支）、标签管理、删除、刷新后数据保持",
+        "Playwright 在 5199 端口（dev server run_in_background）执行；用户门禁验收使用 5175 端口",
+        "docs/startup.md 存在且包含安装依赖、启动、构建三步说明",
+        "检查页面不残留 [Mock] 标记、调试文案或占位提示"
+      ],
+      "frontendIntegration": {
+        "required": false,
+        "pages": [],
+        "services": [],
+        "realApiEndpoints": [],
+        "mockExitCriteria": []
+      },
+      "externalServices": [],
+      "dependencies": [
+        "T-003",
+        "T-004",
+        "T-005",
+        "T-006",
+        "T-007"
+      ],
+      "priority": 8,
+      "rules_files": [
+        "dev-standards/frontend.md"
+      ],
+      "status": "passed",
+      "developer_id": null,
+      "tester_id": null,
+      "retry_count": 1,
+      "blocked": false,
+      "notes": "[PASS] [T-008] - 独立复验通过：lint/type-check/build 退出码均为 0；Playwright 关键路径 1 passed (21.7s)，覆盖快速记录空标题、搜索/筛选/排序、编辑、看板拖动、随机空池、标签增删改、删除与刷新持久化；5199 无监听残留；启动文档与走查清单交付。`n详见：.sdd/test-reports/test-T-008.md",
+      "user_gate": true
+    }
+  ]
+}

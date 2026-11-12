@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "skill_name": "sdd-product-design（产出物映射表优化）",
+    "skill_path": "S:",
+    "executor_model": "<model>",
+    "analyzer_model": "<model>",
+    "timestamp": "2026-08-27T02:27:51Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "t1-web-control",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8333333333333334,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "time_seconds": 317.2,
+        "tokens": null,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "产物路径均在 active_project_path 下（docs/ 或 .sdd/），未出现 Harness 根目录下的 docs/ 或 .sdd/",
+          "passed": true,
+          "evidence": "产物清单均位于 P 盘 projects 下的 project-ops-desk 目录"
+        },
+        {
+          "text": "完成时四件套齐全：docs/PRD.md + docs/api-contracts.md + docs/Plan.md + docs/prototypes/",
+          "passed": true,
+          "evidence": "判定完成行明确四件套齐全并含临时产物已清理"
+        },
+        {
+          "text": "ui-design-spec.md（.sdd/tmp/）在 B2 原型完成后删除",
+          "passed": true,
+          "evidence": "B2 收尾明确立即删除 .sdd/tmp/ui-design-spec.md（原型完成后随即清理）"
+        },
+        {
+          "text": "visual-research.md（.sdd/tmp/）保留到阶段 C 完成后删除",
+          "passed": true,
+          "evidence": "收尾保留 visual-research 供 C 参考，并明确保留到阶段 C 完成后删除"
+        },
+        {
+          "text": "输出未强制创建 data-system.json",
+          "passed": false,
+          "evidence": "创建了 docs/data-system.json（因含统计仪表盘判为报表类项目），偏离映射表不列入的本意"
+        },
+        {
+          "text": "阶段判断依据产物存在性（无 PRD 到 R，有 spec 到 B2 等）",
+          "passed": true,
+          "evidence": "阶段判定链全程基于产物存在性，支持断点恢复"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "t1-web-control",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 217.1,
+        "tokens": null,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "产物路径均在 active_project_path 下",
+          "passed": true,
+          "evidence": "产物清单均位于 project-ops-desk 下"
+        },
+        {
+          "text": "完成时四件套齐全",
+          "passed": true,
+          "evidence": "最终保留清单含四件套"
+        },
+        {
+          "text": "ui-design-spec.md（.sdd/tmp/）在 B2 原型完成后删除",
+          "passed": true,
+          "evidence": "B2 收尾删除临时文件 ui-design-spec.md（原型完成后删除）"
+        },
+        {
+          "text": "visual-research.md（.sdd/tmp/）保留到阶段 C 完成后删除",
+          "passed": true,
+          "evidence": "visual-research 明确保留到阶段 C 完成后再删"
+        },
+        {
+          "text": "输出未强制创建 data-system.json",
+          "passed": true,
+          "evidence": "说明本项目按精简产出判断为不需要 data-system.json"
+        },
+        {
+          "text": "阶段判断依据产物存在性",
+          "passed": true,
+          "evidence": "PRD+数据契约但无 spec 时判定进入 B1，产物判定驱动"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "t2-mobile-h5",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 182.6,
+        "tokens": null,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "产物路径均在 active_project_path 下",
+          "passed": true,
+          "evidence": "产物均在 project-accounting-h5 下"
+        },
+        {
+          "text": "完成时四件套齐全",
+          "passed": true,
+          "evidence": "明确四件套齐备达到产品设计完成门禁"
+        },
+        {
+          "text": "移动端 390x844 视口说明出现在设计产物（Design Spec 或原型）中",
+          "passed": true,
+          "evidence": "B1 spec 界面清单目标视口 390x844，原型验证也基于 390x844"
+        },
+        {
+          "text": "临时产物清理时机遵循映射表（ui-design-spec B2 后删，visual-research C 末删）",
+          "passed": true,
+          "evidence": "ui-design-spec B2 后立即删；visual-research 保留到阶段 C 完成后删"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "t2-mobile-h5",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 379.2,
+        "tokens": null,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "产物路径均在 active_project_path 下",
+          "passed": true,
+          "evidence": "产物均在 project-accounting-h5 下"
+        },
+        {
+          "text": "完成时四件套齐全",
+          "passed": true,
+          "evidence": "四件套齐备"
+        },
+        {
+          "text": "移动端 390x844 视口说明出现在设计产物中",
+          "passed": true,
+          "evidence": "B1 spec 界面清单 390x844，原型 README 视口验证 390x844"
+        },
+        {
+          "text": "临时产物清理时机遵循映射表",
+          "passed": true,
+          "evidence": "ui-design-spec B2 删；visual-research 选择保留至 C 完成"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "t3-existing-project",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 152.7,
+        "tokens": null,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "判断走已有项目修整分支（sdd-project-maintenance），不是新建产品设计",
+          "passed": true,
+          "evidence": "存在项目时判入已有项目修整分支，非新建"
+        },
+        {
+          "text": "不创建任何新产物文件（不写 PRD.md / prototypes/ 等）",
+          "passed": true,
+          "evidence": "第一步只做状态检查与对话内 Delta Plan，不新建 PRD 或原型"
+        },
+        {
+          "text": "明确告知用户不该新建项目，而应走已有项目修改",
+          "passed": true,
+          "evidence": "明确告知不需要新建项目，应走维护分支"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "t3-existing-project",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 111.0,
+        "tokens": null,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "判断走已有项目修整分支（sdd-project-maintenance），不是新建产品设计",
+          "passed": true,
+          "evidence": "判入已有项目修整分支，非新建产品设计"
+        },
+        {
+          "text": "不创建任何新产物文件",
+          "passed": true,
+          "evidence": "第一步动作不允许创建 PRD/原型等文件"
+        },
+        {
+          "text": "明确告知用户不该新建项目，而应走已有项目修改",
+          "passed": true,
+          "evidence": "明确告知不需要新建项目"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9444,
+        "stddev": 0.0962,
+        "min": 0.8333,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 217.5,
+        "stddev": 87.6275,
+        "min": 152.7,
+        "max": 317.2
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 235.7667,
+        "stddev": 135.0709,
+        "min": 111.0,
+        "max": 379.2
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.06",
+      "time_seconds": "-18.3",
+      "tokens": "+0"
+    }
+  },
+  "notes": [
+    "映射表一致性收敛成功：四件套齐全、ui-design-spec B2 后删、visual-research C 末删，在 with-skill 与 baseline 两条配置上全部通过（路径、清理、阶段判定断言两版一致）。",
+    "唯一差异是 T1 no-data-system-json：新版 with-skill 因 T1 项目含统计仪表盘、判为报表类项目而创建了 docs/data-system.json；baseline 未建。映射表刻意不列 data-system.json，但范围说明中『数据系统/报表类项目如需要』的措辞诱导了 agent 创建它。",
+    "注意：with-skill 的 T1 创建 data-system.json 并非错误——T1 确实含报表类需求，映射表意图是『不作为默认产物』而非禁止。但『如需要』给了 agent 主动创建的理由，与当初『不列它』的决定在效果上相反，值得在下一轮收紧措辞。",
+    "时间线上 with-skill 平均 217.5s vs baseline 235.8s（-18s），主要是 T2 baseline 比新版慢一倍，属运行噪声；无系统性差异。",
+    "T3 两版都正确路由到已有项目修整分支，证明产品设计 skill 不会被误触发到已存在项目上。"
+  ]
+}

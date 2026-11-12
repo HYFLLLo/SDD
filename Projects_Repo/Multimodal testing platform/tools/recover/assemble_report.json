@@ -1,0 +1,21 @@
+{
+ "failures": [],
+ "manual": [],
+ "missing": [
+  "_execute_job",
+  "test_connection",
+  "_chat",
+  "api_help",
+  "api_file_dataset",
+  "api_file_prompt_session",
+  "api_file_annotated",
+  "api_file_run_image",
+  "api_file_truth",
+  "api_file_review_annotated",
+  "_same_image",
+  "_execute",
+  "get_result",
+  "extract_json_block",
+  "_execute"
+ ]
+}

@@ -1,0 +1,150 @@
+/* 画意接龙 · 手账涂鸦本设计基底 · Full Pass */
+:root{
+  --bg:#FAF6EF;          /* 米白纸底 */
+  --paper:#FFFFFF;       /* 卡片底 */
+  --text:#2B2622;        /* 暖灰墨色 */
+  --text2:#7A6F64;       /* 暖灰副文 */
+  --text3:#A89C8C;       /* 更弱 */
+  --border:#D9CFC0;      /* 米灰边框 */
+  --dash:#B8A890;        /* 手绘虚线 */
+  --accent:#C8643C;      /* 陶土橙 accent */
+  --accent-soft:#F2E2D6; /* accent 浅底 */
+  --ai:#6B7A8F;          /* AI 续冷灰蓝 */
+  --ai-soft:#E8EDF2;     /* AI 浅底 */
+  --canvas:#FFFBF3;      /* 画布底 */
+  --ok:#5B8C5A;          /* 成功绿 */
+  --shadow:0 2px 8px rgba(43,38,34,.06);
+  --shadow-lg:0 6px 20px rgba(43,38,34,.10);
+  --r-card:12px;
+  --r-btn:8px;
+  --r-canvas:4px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Nunito","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;font-size:14px;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,textarea,select{font-family:inherit;font-size:14px;color:var(--text)}
+
+/* 顶部导航 */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:56px;background:var(--bg);
+  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;
+}
+.logo{font-size:20px;font-weight:800;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+.logo .mark{width:26px;height:26px;border:2px dashed var(--accent);border-radius:50%;display:inline-block;position:relative}
+.logo .mark::after{content:"";position:absolute;inset:5px;background:var(--accent);border-radius:50%}
+.nav-center{display:flex;gap:28px}
+.nav-center a{font-size:14px;color:var(--text2);font-weight:600;padding:6px 4px;border-bottom:2px solid transparent}
+.nav-center a.active{color:var(--text);border-bottom-color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.bell{position:relative;width:36px;height:36px;border-radius:50%;background:var(--paper);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px}
+.bell .dot{position:absolute;top:6px;right:7px;width:8px;height:8px;background:var(--accent);border-radius:50%;border:1.5px solid var(--bg)}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+
+/* 通用容器 */
+.container{max-width:1200px;margin:0 auto;padding:32px 32px 64px}
+.container.wide{max-width:1440px}
+.container.narrow{max-width:560px}
+
+/* 按钮 */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 22px;border-radius:var(--r-btn);font-weight:700;font-size:14px;
+  transition:all .15s;border:1.5px solid transparent;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(200,100,60,.3)}
+.btn-ghost{background:var(--paper);color:var(--text);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-lg{padding:14px 32px;font-size:15px}
+.btn-sm{padding:6px 14px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* 卡片 */
+.card{background:var(--paper);border:1.5px solid var(--border);border-radius:var(--r-card);box-shadow:var(--shadow)}
+.card-dash{border-style:dashed;border-color:var(--dash)}
+
+/* 手写体 */
+.handwritten{font-family:"Caveat","Ma Shan Zheng",cursive;font-weight:600}
+
+/* AI 续标签 */
+.ai-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:var(--ai-soft);color:var(--ai);padding:2px 8px;border-radius:4px;font-weight:700}
+
+/* 页面标题区 */
+.page-head{margin-bottom:24px}
+.page-head h1{font-size:26px;font-weight:800;letter-spacing:.5px}
+.page-head .desc{color:var(--text2);font-size:14px;margin-top:4px}
+
+/* 工具栏图标占位（SVG 手绘风，非 emoji） */
+.tool-btn{width:38px;height:38px;border-radius:8px;border:1.5px solid var(--border);background:var(--paper);display:flex;align-items:center;justify-content:center;color:var(--text2)}
+.tool-btn:hover,.tool-btn.active{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.tool-btn svg{width:18px;height:18px}
+
+/* 色板圆点 */
+.swatch{width:24px;height:24px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1px var(--border);cursor:pointer}
+.swatch.active{box-shadow:0 0 0 2px var(--accent)}
+
+/* 进度节点链（签名锚点） */
+.chain-progress{display:flex;align-items:center;gap:0;padding:16px 0}
+.node-dot{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:2}
+.node-dot .circle{width:28px;height:28px;border-radius:50%;border:2px dashed var(--dash);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text3)}
+.node-dot.done .circle{border-style:solid;border-color:var(--accent);background:var(--accent);color:#fff}
+.node-dot.current .circle{border-style:solid;border-color:var(--accent);background:var(--paper);color:var(--accent);animation:pulse 1.8s infinite}
+.node-dot .label{font-size:11px;color:var(--text3);max-width:60px;text-align:center}
+.node-dot.done .label,.node-dot.current .label{color:var(--text2)}
+.node-link{flex:1;height:0;border-top:2px dotted var(--dash);margin:0 -4px;position:relative;top:-14px;z-index:1}
+.node-link.done{border-top-style:solid;border-color:var(--accent)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,100,60,.4)}50%{box-shadow:0 0 0 6px rgba(200,100,60,0)}}
+
+/* 作品卡片 */
+.work-card{background:var(--paper);border:1.5px dashed var(--dash);border-radius:var(--r-card);overflow:hidden;cursor:pointer;transition:all .15s}
+.work-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.work-thumb{height:160px;background:var(--canvas);display:flex;align-items:center;justify-content:center;position:relative}
+.work-info{padding:14px 16px}
+.work-info .title{font-weight:700;font-size:15px;margin-bottom:4px}
+.work-info .meta{font-size:12px;color:var(--text2);display:flex;justify-content:space-between}
+
+/* 画布 */
+.canvas-area{background:var(--canvas);border:1.5px solid var(--border);border-radius:var(--r-canvas);position:relative;overflow:hidden}
+.canvas-toolbar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px dashed var(--border);background:var(--paper);flex-wrap:wrap}
+.canvas-toolbar .divider{width:1px;height:24px;background:var(--border);margin:0 4px}
+
+/* 表单 */
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.field .hint{font-size:12px;color:var(--text2);margin-top:6px}
+.input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--r-btn);background:var(--paper);transition:border .15s}
+.input:focus{outline:none;border-color:var(--accent)}
+textarea.input{resize:vertical;min-height:80px}
+
+/* 通知项 */
+.notif-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.notif-item:last-child{border-bottom:none}
+.notif-item.unread{background:var(--accent-soft)}
+.notif-icon{width:32px;height:32px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* 空状态 */
+.empty{text-align:center;padding:48px 20px;color:var(--text2)}
+.empty .emoji-art{font-size:48px;margin-bottom:12px;opacity:.5}
+
+/* 投票维度卡 */
+.vote-dim{background:var(--paper);border:1.5px solid var(--border);border-radius:var(--r-card);padding:16px;margin-bottom:12px}
+.vote-dim h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.vote-options{display:flex;flex-direction:column;gap:8px}
+.vote-opt{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--r-btn);cursor:pointer;transition:all .15s}
+.vote-opt:hover{border-color:var(--accent)}
+.vote-opt.selected{border-color:var(--accent);background:var(--accent-soft)}
+.vote-opt .radio{width:16px;height:16px;border-radius:50%;border:2px solid var(--border);flex-shrink:0}
+.vote-opt.selected .radio{border-color:var(--accent);background:radial-gradient(var(--accent) 4px,transparent 5px)}
+
+/* 回放节点 */
+.replay-node{opacity:0;transform:translateY(12px);transition:all .6s ease}
+.replay-node.show{opacity:1;transform:translateY(0)}
+
+/* 页脚提示 */
+.proto-note{margin-top:32px;padding:16px;background:var(--ai-soft);border-radius:8px;font-size:12px;color:var(--ai);border:1px dashed var(--ai)}

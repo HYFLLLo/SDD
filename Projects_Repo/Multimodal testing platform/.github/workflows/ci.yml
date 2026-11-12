@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: pytest (py${{ matrix.python }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
+    env:
+      MMTEST_NO_BROWSER: "1"
+      PYTHONIOENCODING: "utf-8"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Run tests
+        run: python -m pytest -q
+
+  bytecode:
+    name: bytecode parity (py3.8)
+    runs-on: windows-latest
+    env:
+      PYTHONIOENCODING: "utf-8"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.8"
+      - name: Snapshot baseline
+        run: copy tools\recover\bytecode_match.json %RUNNER_TEMP%\baseline.json
+        shell: cmd
+      - name: Verify recovered bytecode
+        run: python tools/recover/verify_bytecode.py
+      - name: Compare with baseline
+        shell: cmd
+        run: |
+          python -c "import json,os,sys; a=json.load(open(os.path.join(os.environ['RUNNER_TEMP'],'baseline.json'),encoding='utf-8'))['totals']; b=json.load(open('tools/recover/bytecode_match.json',encoding='utf-8'))['totals']; print('baseline',a); print('current ',b); sys.exit(0 if (b['missing']==0 and b['diff']<=a['diff']) else 1)"

@@ -1,0 +1,97 @@
+{
+  "skill_name": "sdd-product-design",
+  "evals": [
+    {
+      "id": 1,
+      "name": "t1-web-control",
+      "prompt": "帮我新建一个项目，做一个面向企业内部的运维工单管理后台。目标用户是运维和客服人员，他们每天要录入、分派、跟踪工单，还要能看到工单状态统计报表。需要一个登录页、工单列表、工单详情、创建工单表单、统计仪表盘这几个主要页面。希望界面干净专业，可以参考主流的 SaaS 运维工具的风格。请按你们的流程走完产品设计阶段。",
+      "expected_output": "完整走完 R→A→B1→B2→C 产品设计流程的产物清单：PRD.md（docs/）、api-contracts.md（docs/）、Plan.md（docs/）、prototypes/（docs/）、visual-research.md（.sdd/tmp/，若产出则保留到 C 末再清理）、ui-design-spec.md（.sdd/tmp/，B2 后删除）。所有流程文件写到 active_project_path 下，不写 Harness 根目录。完成后四件套齐全。",
+      "assertions": [
+        {
+          "name": "perfume-path-correct",
+          "description": "输出中产物路径均在 active_project_path 下（docs/ 或 .sdd/），未出现 Harness 根目录下的 docs/ 或 .sdd/",
+          "type": "path_correctness"
+        },
+        {
+          "name": "four-artifacts-complete",
+          "description": "完成时四件套齐全：docs/PRD.md + docs/api-contracts.md + docs/Plan.md + docs/prototypes/",
+          "type": "artifact_presence"
+        },
+        {
+          "name": "ui-design-spec-cleaned-after-b2",
+          "description": "ui-design-spec.md（.sdd/tmp/）在 B2 原型完成后删除",
+          "type": "cleanup_timing"
+        },
+        {
+          "name": "visual-research-cleaned-after-c",
+          "description": "visual-research.md（.sdd/tmp/）保留到阶段 C 完成后删除",
+          "type": "cleanup_timing"
+        },
+        {
+          "name": "no-data-system-json",
+          "description": "输出未强制创建 data-system.json（或仅在说明为可选时出现）",
+          "type": "negative_check"
+        },
+        {
+          "name": "stage-judged-by-artifacts",
+          "description": "阶段判断依据产物存在性（如无 PRD→R，有 PRD+数据契约→A/B1，有 spec→B2）",
+          "type": "stage_logic"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "t2-mobile-h5",
+      "prompt": "想做一个手机端的记账 H5 应用，主要是个人日常记账用，有添加账单、账单列表、分类统计、个人中心几个页面。界面要清新简单，适合手机上浏览。请走完产品设计阶段的流程。",
+      "expected_output": "移动端 H5 分支的产品设计流程产物，产物路径遵循映射表（docs/PRD.md、docs/api-contracts.md、docs/Plan.md、docs/prototypes/，.sdd/tmp 临时产物按清理时机处理）。移动端应有 390×844 视口相关说明，流向 C 完成时四件套齐全。",
+      "assertions": [
+        {
+          "name": "perfume-path-correct",
+          "description": "输出中产物路径均在 active_project_path 下（docs/ 或 .sdd/），未出现 Harness 根目录下的 docs/ 或 .sdd/",
+          "type": "path_correctness"
+        },
+        {
+          "name": "four-artifacts-complete",
+          "description": "完成时四件套齐全：docs/PRD.md + docs/api-contracts.md + docs/Plan.md + docs/prototypes/",
+          "type": "artifact_presence"
+        },
+        {
+          "name": "viewport-390x844-mentioned",
+          "description": "移动端 390×844 视口说明出现在设计产物（Design Spec 或原型）中",
+          "type": "content_presence"
+        },
+        {
+          "name": "memory-artifacts-cleaned",
+          "description": "临时产物清理时机遵循映射表（ui-design-spec B2 后删，visual-research C 末删）",
+          "type": "cleanup_timing"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "t3-existing-project",
+      "prompt": "我之前已经用你们的流程做了一个售楼管理系统，项目还在 Projects_Repo 里，现在想在这个老项目上加一个预约看房的功能，我要新建项目吗？",
+      "expected_output": "应识别为已有项目修整（sdd-project-maintenance），不进入 sdd-product-design 新建流程，不新建项目目录、不创建任何新产物文件。明确告知用户这是已有项目修改，走维护分支。",
+      "assertions": [
+        {
+          "name": "routes-to-maintenance",
+          "description": "判断走已有项目修整分支（sdd-project-maintenance），不是新建产品设计",
+          "type": "branch_selection"
+        },
+        {
+          "name": "no-new-artifacts",
+          "description": "不创建任何新产物文件（不写 PRD.md / prototypes/ 等）",
+          "type": "negative_check"
+        },
+        {
+          "name": "tells-user-not-new-project",
+          "description": "明确告知用户不该新建项目，而应走已有项目修改",
+          "type": "user_communication"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

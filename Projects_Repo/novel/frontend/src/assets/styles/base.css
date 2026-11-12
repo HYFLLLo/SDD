@@ -1,0 +1,235 @@
+@charset "utf-8";
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, a, blockquote, th { margin: 0; padding: 0 }
+h1, h2, h3, h4, h5, h6 { font-size: 14px }
+ol, ul, li { list-style: none outside none }
+table { border-collapse: collapsse; border-spacing: 0 }
+fieldset, img { border: 0 none }
+/*html { background: ##f5f5f5 }*/
+body { background: var(--nv-bg-page); color: var(--nv-text-primary); font: 12px/1.5 PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif,"宋体"; text-align: left }
+input::-moz-focus-inner {
+border:none;
+padding:0
+}
+a img { border: none }
+a { outline: none; color: var(--nv-text-primary); text-decoration: none }
+a:hover, .topBar a:hover, .red, .record_list li:hover .read_link a { color: var(--nv-brand-hover) }
+.red1 { color: var(--nv-danger-strong) }
+.unlink { text-decoration: underline }
+.blue { color: var(--nv-accent-cyan) }
+.green { color: var(--nv-accent-green) }
+.black { color: var(--nv-text-strong) }
+.black3 { color: var(--nv-text-primary) }
+.black6 { color: var(--nv-text-secondary) }
+.black9 { color: var(--nv-text-weak) }
+.ccc { color: var(--nv-text-disabled) }
+.orange { color: var(--nv-orange) }
+.font12 { font-size: 12px!important }
+.font14 { font-size: 14px!important }
+.font16 { font-size: 16px!important }
+.font18 { font-size: 18px!important }
+.font20 { font-size: 20px!important }
+.font26 { font-size: 26px!important }
+.ellipsis {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-break: keep-all }
+textarea { resize: none; outline: none; border: 1px solid var(--nv-border-muted); font: 12px/1.8 "microsoft yahei", Arial; padding-left: 5px }
+input { outline: none; border: none; /* padding-left: 5px; font-size: 13px;*/ font-family: "microsoft yahei", Arial; *background:none
+}
+i, em, cite { font-style: normal }
+.layui-inline, input, label { vertical-align: middle }
+button, input, optgroup, select, textarea { color: inherit; font: inherit; margin: 0; outline: 0 }
+button, select { text-transform: none }
+/*select { -webkit-appearance: none; border: none }*/
+input { line-height: normal }
+input[type=checkbox], input[type=radio] { box-sizing: border-box; padding: 0 }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { height:auto }
+input[type=search] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box }
+input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration { -webkit-appearance:none }
+input[type="submit"], input[type="reset"], input[type="button"], button { -webkit-appearance: none }
+:-moz-placeholder { color: var(--nv-input-placeholder) }
+::-moz-placeholder { color: var(--nv-input-placeholder) }
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { color: var(--nv-input-placeholder) }
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: var(--nv-input-placeholder) }
+.cf { zoom: 1 }
+.cf:before, .cf:after { content: ""; display: table; display: block; font-size: 0; height: 0; line-height: 0; clear: both; visibility: hidden }
+.cf:after { clear: both }
+.clear { clear: both }
+.tl { text-align: left }
+.tc { text-align: center }
+.tr { text-align: right }
+.fl { float: left }
+.fr { float: right }
+.block { display: block }
+.none, .hidden { display: none }
+/*base end*/
+.channelWrap { background: var(--nv-bg-container); border-radius: 6px; padding: 20px; margin-bottom: 20px }
+.channelWrap.channelBanner { padding-bottom: 14px }
+.wrap_left { width: 750px }
+.wrap_right { width: 250px }
+.wrap_inner { padding: 20px; border-radius: 6px; background: var(--nv-bg-container); }
+.wrap_bg { border-radius: 6px; background: var(--nv-bg-container); }
+.pad20 { padding: 20px }
+.pad20_nobt { padding: 20px 20px 0 }
+.topBar { width: 100%; background: var(--nv-bg-warm); border-bottom: 1px solid var(--nv-border-warm); height: 35px; line-height: 35px }
+.box_center { width: 1020px; margin: 0 auto }
+.top_l { float: left }
+.top_r { float: right }
+.topBar .line { display: inline-block; padding: 0 12px; color: var(--nv-text-separator) }
+.topBar a { display: inline-block; color: var(--nv-text-tertiary) }
+.topBar a.on { color: var(--nv-text-primary) }
+.topMain { height: 92px; background: var(--nv-bg-container); overflow: hidden }
+.logo { width: 198px; float: left; padding: 23px 130px 0 0; display: block }
+.logo img { width: auto; height: 48px }
+.searchBar { width: 342px; margin-top: 27px; overflow: hidden }
+.searchBar .search/*, .searchBar .hotword*/ { width: 342px; overflow: hidden }
+.searchBar .s_int { width: 250px; padding: 0 14px 0 18px; height: 36px; line-height: 36px\9; vertical-align: middle; border: 1px solid var(--nv-brand); border-right: none; color: var(--nv-text-primary); float: left; border-radius: 20px 0 0 20px; font-size: 14px; /*background: #fff;*/ background: 0 0 }
+/*.searchBar .s_btn { width: 78px; height: 38px; line-height: 38px; background: #f65167; color: #fff; font-size: 16px; text-align: center; float: left; cursor: pointer; padding: 0 }
+.searchBar .s_btn:hover { background:#E23249 }*/
+.searchBar .search_btn { float: left;
+    width: 58px;
+    height: 38px;
+    text-align: center;
+    border-radius: 0 20px 20px 0;
+    background-color: var(--nv-brand); cursor: pointer; }
+.searchBar .search_btn .icon { width: 18px; height: 18px; display: block; margin: 9px auto 0; background: url(../images/search.png) no-repeat; background-size:cover; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/search.png', sizingMethod='scale'); }
+
+/*.hotword { padding-top: 3px }
+.hotword a, .hotword span { color: #999; margin: 0 6px 0 5px }
+.hotword a:hover { color: #666 }*/
+.bookShelf { margin-top: 27px; padding-left: 20px; overflow: hidden }
+.bookShelf .sj_link { height: 38px; line-height: 38px; padding-left: 30px; font-size: 15px; color: var(--nv-text-regular); background: url(../images/icon_sj.png) no-repeat 6px 50%; float: left }
+.bookShelf .user_link { height: 38px; line-height: 38px; padding-left: 20px; font-size: 15px; color: var(--nv-text-regular); float: right }
+.bookShelf .user_head { width: 26px; height: 26px; border-radius: 50%; float: left; margin: 6px 5px 0 0 }
+.bookShelf .user_name { max-width: 100px; display: inline-block }
+.bookShelf .line { float: left; color: var(--nv-text-disabled) }
+/*.bookShelf img { position: absolute; top: 17px; left: 17px; z-index: 10 }*/
+.mainNav { width: 100%; height: 48px; background: var(--nv-nav-bg); margin-bottom: 20px }
+.mainNav .nav li { float: left }
+.mainNav .nav li a { float: left; height: 44px; line-height: 48px; color: var(--nv-text-inverse); font-size: 16px; margin: 0 34px; border-bottom: 2px solid var(--nv-nav-link-line); transition: color .3s,background-color .3s,border .3s }
+.mainNav .nav li.on a, .mainNav .nav li a:hover { border-bottom: 2px solid var(--nv-nav-line) }
+.footer { padding: 0 0 20px; /*margin-top: 20px; background: #fbfaf8; border-top: 1px solid #e0e0e0; */text-align: center; font-size: 12px }
+.copyright ul li { color: var(--nv-text-weak); line-height: 26px }
+.copyright .menu { padding: 2px 0 6px; font-size: 12px }
+.copyright .line { display: inline-block; padding: 0 12px; color: var(--nv-text-separator) }
+.copyright p { margin-top: 10px; color: var(--nv-text-weak) }
+.code_bar img { margin-left: 66px }
+.rBar { float: right; width: 268px }
+.btn_gray, .btn_red, .btn_ora, .btn_ora_white, .btn_red1 {  border-radius: 20px; font-size: 15px; display: inline-block; text-align: center; cursor: pointer; /*padding: 0 34px; height: 34px; line-height: 34px;*/ padding: 11px 36px; line-height: 1; }
+.btn_gray { border: 1px solid var(--nv-border-medium); background: var(--nv-bg-subtle); }
+.btn_red, .btn_ora { border: 1px solid var(--nv-brand); background: var(--nv-brand); color: var(--nv-text-inverse) }
+.btn_red1 { border: 1px solid var(--nv-danger-strong); background: var(--nv-danger-strong); color: var(--nv-text-inverse) }
+.btn_ora_white { border: 1px solid var(--nv-brand); color: var(--nv-brand) }
+.btn_ora_white:hover { background: var(--nv-brand-tint) }
+.btn_link { padding: 2px 6px; background: var(--nv-brand); color: var(--nv-text-inverse); border-radius: 2px }
+.btn_gray:hover { background: var(--nv-bg-hover); color: var(--nv-text-primary) }
+.btn_ora:hover, .btn_red:hover, .btn_link:hover { background: var(--nv-brand-hover); color: var(--nv-text-inverse) }
+.btn_red1:hover { background: var(--nv-danger-hover); color: var(--nv-text-inverse) }
+.pay_Checkout .btn_red, .btn_big {
+    font-size: 16px;
+    padding: 15px 0;
+    border-radius: 4px;
+    width: 196px; }
+i.vip { width: 26px; height: 14px; text-align: center; line-height: 14px; font-size: 11px; color: var(--nv-text-inverse); background: var(--nv-vip); border-radius: 2px; margin: 13px 0 0 3px; display: inline-block; transform: scale(0.88); }
+i.vip_b { width: 36px; height: 22px; text-align: center; line-height: 22px; font-size: 15px; color: var(--nv-text-inverse); background: var(--nv-brand-hover); border-radius: 4px; margin-left: 5px; display: inline-block; vertical-align: 3px }
+.pageBox { text-align: center; padding: 20px 0 }
+.pageBox a, .pageBox span { display: inline-block; color: var(--nv-text-weak); padding: 6px 10px; margin: 0 5px; border-radius: 4px; font-size: 14px; line-height: 1 }
+.pageBox .current, .pageBox a:hover { background: var(--nv-brand); color: var(--nv-text-inverse) }
+.top_nearread { display: inline-block; position: relative; margin-right: 10px; float:left }
+.top_nearread .nearread { padding: 0 9px }
+.top_nearread .nearread.on { border-left: 1px solid var(--nv-border-strong); border-right: 1px solid var(--nv-border-strong); background: var(--nv-bg-container); padding: 0 8px; height: 36px; position: relative; z-index: 8 }
+.icon_down { display: inline-block; vertical-align: middle; margin: 2px 0 0 5px; width: 0px; height: 0px; overflow: hidden; border-width: 4px; border-style: solid dashed dashed; border-color: var(--nv-border-arrow) transparent transparent; }
+.book_record { width: 382px; position: absolute; top: 0; right: 0; z-index: 9 }
+.record_box { width: 380px; background: var(--nv-bg-container); margin-top:35px; border: 1px solid var(--nv-border-strong) }
+.book_record .sp { width:77px; height:6px; background:var(--nv-bg-container); position:absolute; top:32px; right:1px }
+.record_title { padding: 14px 10px }
+.record_title a { border: 1px solid var(--nv-border-medium); background: var(--nv-bg-subtle); border-radius: 2px; font-size: 12px; padding: 6px 12px; line-height: 1; margin-right: 14px }
+.record_title a.on { border: 1px solid var(--nv-danger-soft); background: var(--nv-danger-soft); color: var(--nv-text-inverse) }
+.record_box .all { display: block; height: 28px; line-height: 28px; text-align: center; background: var(--nv-bg-muted) }
+.record_list ul { margin-bottom: 10px }
+.record_list li { clear: both; padding: 10px; line-height: 1; overflow: hidden }
+.record_list li:hover { background: var(--nv-bg-muted) }
+.record_list li .cover { width: 50px; height: 63px; background: var(--nv-image-placeholder) }
+.record_list li .cover img { width: 100%; height: 100%; }
+.record_list a { display: inline; color: var(--nv-text-primary) }
+.record_list .book_intro { width: 300px; height: 65px; padding-left: 10px; position: relative; }
+.record_list .book_intro p { height: 20px; line-height: 20px; overflow: hidden; color: var(--nv-text-weak); }
+.record_list .book_intro .p1 { font-size: 14px; }
+.record_list .book_intro .p2 { margin: 2px 0; white-space: nowrap; text-overflow: ellipsis }
+.record_list .book_intro .p3 { }
+.record_list .book_intro i.vip { margin:0 0 0 3px }
+.record_list .read_link a { color: var(--nv-text-inverse) }
+.manBody {}
+.manBody .mainNav { background:var(--nv-bg-nav-strong) }
+.manBody .searchBar .s_int { border: 1px solid var(--nv-border-gray); border-right:none; background-position:8px -22px }
+.manBody .mainNav .nav li.on a, .manBody .mainNav .nav li a:hover { background:var(--nv-bg-nav-strong-hover) }
+.nav_sub { margin-bottom: 16px }
+.nav_sub a { padding: 0 6px }
+
+.copyright .menu a { color: var(--nv-text-secondary); font-size: 12px }
+.copyright .menu a:hover, .bookShelf .sj_link:hover { color: var(--nv-brand-hover) }
+
+.rightList .more, .more_bar { margin: 1px 0; height: 34px; line-height: 34px; border-radius: 1px; background-color: var(--nv-bg-muted-1); text-align: center }
+.rightList .more a, .more_bar a { display: block; color: var(--nv-text-secondary) }
+.header, .footer { min-width: 1020px }
+
+/*base*/
+.noborder { border: 0!important }
+.nomargin { margin: 0!important }
+.ml { margin-left: 12px }
+.mr { margin-right: 12px }
+.ml5 { margin-left: 5px }
+.ml10 { margin-left: 10px }
+.ml15 { margin-left: 15px }
+.ml20 { margin-left: 20px }
+.mr5 { margin-right: 5px }
+.mr10 { margin-right: 10px }
+.mr15 { margin-right: 15px }
+.mr20 { margin-right: 20px }
+.mt5 { margin-top: 5px }
+.mt10 { margin-top: 10px }
+.mt15 { margin-top: 15px }
+.mt20 { margin-top: 20px }
+.mb5 { margin-bottom: 5px }
+.mb10 { margin-bottom: 10px }
+.mb15 { margin-bottom: 15px }
+.mb20 { margin-bottom: 20px }
+.mb50 { margin-bottom: 50px }
+.pointer { cursor: pointer }
+.notindent { text-indent: inherit!important }
+.vm { vertical-align: middle!important }
+.border_t { border-top: 1px solid var(--nv-border-lighter) }
+.border_b { border-bottom: 1px solid var(--nv-border-lighter) }
+.border_l { border-left: 1px solid var(--nv-border-lighter) }
+.border_r { border-right: 1px solid var(--nv-border-lighter) }
+.layui-laypage-curr{
+    background: var(--nv-brand);
+}
+.layui-laypage-curr em {
+   color: var(--nv-text-inverse);
+}
+.layui-disabled, .layui-disabled:hover {
+    color: var(--nv-text-ghost) !important;
+    cursor: not-allowed !important
+}
+
+#noFeedbackNote {
+    line-height: 400px;
+    text-align: center;
+    border-top: 1px solid var(--nv-border-lighter);
+}
+
+#txtDescription {
+    /*width: 900px;*/
+    height: 288px;
+    margin: 20px auto 20px;
+    padding: 10px;
+
+
+    /*新增样式*/
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--nv-border-lighter);
+    font-size: 14px;
+}
+
+.userBox {
+    margin: 0 auto
+}

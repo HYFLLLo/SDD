@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>画意接龙 · 链大厅</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .room-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px}
+  .room-head .title{font-size:24px;font-weight:800}
+  .room-head .meta{color:var(--text2);font-size:13px;margin-top:4px}
+  .room-code{display:flex;align-items:center;gap:8px;background:var(--accent-soft);border:1.5px dashed var(--accent);border-radius:var(--r-btn);padding:8px 14px}
+  .room-code .code{font-size:18px;font-weight:800;letter-spacing:2px;color:var(--accent)}
+  .room-code button{font-size:12px;color:var(--accent);font-weight:700}
+  .room-layout{display:grid;grid-template-columns:340px 1fr;gap:24px}
+  .side-panel{display:flex;flex-direction:column;gap:20px}
+  .panel{padding:20px}
+  .panel h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .members{display:flex;flex-wrap:wrap;gap:8px}
+  .member{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .member .av{width:40px;height:40px;border-radius:50%;background:var(--accent-soft);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .member.current .av{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .member .name{font-size:11px;color:var(--text2)}
+  .ai-countdown{background:var(--ai-soft);border:1.5px dashed var(--ai);border-radius:var(--r-card);padding:14px 16px;display:flex;align-items:center;gap:12px}
+  .ai-countdown .icon{width:36px;height:36px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .ai-countdown .txt{font-size:13px}
+  .ai-countdown .txt b{color:var(--ai)}
+  .ai-countdown .time{font-size:20px;font-weight:800;color:var(--ai)}
+  .watch-area{display:flex;flex-direction:column}
+  .watch-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .watch-label .who{font-size:14px;color:var(--text2)}
+  .watch-label .who b{color:var(--accent)}
+  .live-dot{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--accent);font-weight:700}
+  .live-dot::before{content:"";width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 1.5s infinite}
+  .watch-canvas{height:440px;display:flex;align-items:center;justify-content:center;position:relative}
+  .watch-canvas svg{width:60%;height:80%}
+  .watch-hint{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:12px;color:var(--text3)}
+  .your-turn{margin-top:16px;text-align:center}
+  .your-turn .btn{font-size:16px;padding:16px 40px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><span class="mark"></span>画意接龙</div>
+  <nav class="nav-center"><a href="01-plaza.html">广场</a><a href="08-profile.html">我的</a></nav>
+  <div class="nav-right">
+    <button class="bell"><span>🔔</span><span class="dot"></span></button>
+    <a href="08-profile.html" class="avatar">小</a>
+  </div>
+</div>
+
+<div class="container wide">
+  <div class="room-head">
+    <div>
+      <div class="title">戴帽子的猫</div>
+      <div class="meta">链长 6 节点 · 邀请制 · 创建者 小A</div>
+    </div>
+    <div class="room-code">
+      <span class="code">DRAW4</span>
+      <button>复制链接</button>
+    </div>
+  </div>
+
+  <!-- ★ 签名锚点：进度条 -->
+  <div class="card panel" style="margin-bottom:20px">
+    <h3>接力进度</h3>
+    <div class="chain-progress">
+      <div class="node-dot done"><div class="circle">1</div><div class="label">小A·画</div></div>
+      <div class="node-link done"></div>
+      <div class="node-dot done"><div class="circle">2</div><div class="label">小B·述</div></div>
+      <div class="node-link done"></div>
+      <div class="node-dot current"><div class="circle">3</div><div class="label">小C·画</div></div>
+      <div class="node-link"></div>
+      <div class="node-dot"><div class="circle">4</div><div class="label">待接·述</div></div>
+      <div class="node-link"></div>
+      <div class="node-dot"><div class="circle">5</div><div class="label">待接·画</div></div>
+      <div class="node-link"></div>
+      <div class="node-dot"><div class="circle">6</div><div class="label">待接·述</div></div>
+    </div>
+  </div>
+
+  <div class="room-layout">
+    <!-- 左侧面板 -->
+    <div class="side-panel">
+      <div class="card panel">
+        <h3>成员（5）</h3>
+        <div class="members">
+          <div class="member"><div class="av">A</div><div class="name">小A</div></div>
+          <div class="member"><div class="av">B</div><div class="name">小B</div></div>
+          <div class="member current"><div class="av">C</div><div class="name">小C</div></div>
+          <div class="member"><div class="av">D</div><div class="name">小D</div></div>
+          <div class="member"><div class="av">E</div><div class="name">小E</div></div>
+        </div>
+      </div>
+
+      <div class="ai-countdown">
+        <div class="icon">🤖</div>
+        <div class="txt">
+          <div>当前节点 AI 补位倒计时</div>
+          <div class="time">23 时 14 分</div>
+        </div>
+      </div>
+
+      <div class="card panel">
+        <h3>链信息</h3>
+        <div style="font-size:13px;color:var(--text2);line-height:2">
+          起手题：<span class="handwritten" style="color:var(--text);font-size:16px">「戴帽子的猫」</span><br>
+          起手来源：AI 生成<br>
+          过期时间：7 天后<br>
+          状态：进行中
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧实时围观 -->
+    <div class="card watch-area" style="padding:20px">
+      <div class="watch-label">
+        <div class="who"><b>小C</b> 正在画第 3 节点</div>
+        <div class="live-dot">实时围观</div>
+      </div>
+      <div class="canvas-area watch-canvas">
+        <svg viewBox="0 0 200 200">
+          <!-- 实时笔迹（部分完成） -->
+          <circle cx="100" cy="80" r="30" fill="none" stroke="#2B2622" stroke-width="2"/>
+          <path d="M65 75 Q100 50 135 75" fill="none" stroke="#C8643C" stroke-width="2"/>
+          <circle cx="88" cy="80" r="2.5" fill="#2B2622"/>
+          <circle cx="112" cy="80" r="2.5" fill="#2B2622"/>
+          <path d="M90 95 Q100 100 110 95" fill="none" stroke="#2B2622" stroke-width="2"/>
+          <!-- 笔尖光标（正在画） -->
+          <circle cx="130" cy="120" r="3" fill="#C8643C" opacity="0.6"/>
+          <circle cx="130" cy="120" r="6" fill="none" stroke="#C8643C" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <div class="watch-hint">笔迹实时推送中 · WebSocket</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="proto-note">原型展示用 · 真实交互：WebSocket /ws/room/{id} 接收 stroke 事件广播；AI 补位定时任务每小时扫描 24h 超时节点</div>
+</body>
+</html>

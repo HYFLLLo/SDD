@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "产物路径均在 active_project_path 下",
+      "passed": true,
+      "evidence": "产物清单均位于 project-ops-desk 下"
+    },
+    {
+      "text": "完成时四件套齐全",
+      "passed": true,
+      "evidence": "最终保留清单含四件套"
+    },
+    {
+      "text": "ui-design-spec.md（.sdd/tmp/）在 B2 原型完成后删除",
+      "passed": true,
+      "evidence": "B2 收尾删除临时文件 ui-design-spec.md（原型完成后删除）"
+    },
+    {
+      "text": "visual-research.md（.sdd/tmp/）保留到阶段 C 完成后删除",
+      "passed": true,
+      "evidence": "visual-research 明确保留到阶段 C 完成后再删"
+    },
+    {
+      "text": "输出未强制创建 data-system.json",
+      "passed": true,
+      "evidence": "说明本项目按精简产出判断为不需要 data-system.json"
+    },
+    {
+      "text": "阶段判断依据产物存在性",
+      "passed": true,
+      "evidence": "PRD+数据契约但无 spec 时判定进入 B1，产物判定驱动"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多模态大模型能力测试平台</title>
+<link rel="stylesheet" href="/static/style.css?v=__ASSET_VERSION__">
+</head>
+<body>
+<a class="skip-link" href="#app">跳到主要内容</a>
+<div class="topbar">
+  <div class="logo">多模态大模型能力测试平台</div>
+  <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="展开导航菜单">☰</button>
+  <nav id="nav" aria-label="主导航">
+   <a href="#/home" data-route="home">首页</a>
+   <a href="#/datasets" data-route="datasets">项目和图片集</a>
+   <a href="#/prompt-ai" data-route="prompt-ai">提示词生成</a>
+   <a href="#/prompts" data-route="prompts">提示词库</a>
+   <a href="#/runs" data-route="runs">运行测试</a>
+   <a href="#/judge-iter" data-route="judge-iter">裁判与优化</a>
+   <div class="nav-dropdown" id="nav-tools" role="group" aria-label="工具">
+     <a href="#/extract" data-route="tools" class="nav-dropbtn" aria-expanded="false" aria-haspopup="true">工具 ▾</a>
+     <div class="nav-dropdown-menu" role="menu" aria-label="工具子菜单">
+       <a href="#/extract" data-route="extract">字段提取</a>
+       <a href="#/truth" data-route="truth">真值标注</a>
+       <a href="#/evals" data-route="evals">评估对比</a>
+       <a href="#/jsontool" data-route="jsontool">JSON工具</a>
+     </div>
+   </div>
+   <a href="#/config" data-route="config">配置</a>
+   <a href="#/help" data-route="help">帮助</a>
+  </nav>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题">☾</button>
+  <button class="quit-toggle" id="quit-toggle" type="button" aria-label="退出程序" title="退出程序（关闭本地服务）" hidden>⏻</button>
+</div>
+<div class="ctxbar" id="ctxbar" hidden>
+  <a class="ctx-home" id="ctx-home" href="#/home" hidden
+     title="返回工作台（退出当前项目，回到全部项目）" aria-label="返回工作台">
+    <span class="ctx-home-arrow" aria-hidden="true">←</span><span class="ctx-home-text" aria-hidden="true">返回工作台</span>
+  </a>
+  <nav class="ctx-crumbs" id="ctx-crumbs" aria-label="当前位置"></nav>
+  <div class="ctx-right">
+    <span class="ctx-label" id="ctx-project-label">当前项目</span>
+    <div class="ctx-picker" id="ctx-picker">
+      <button type="button" class="ctx-select" id="ctx-project"
+              aria-haspopup="listbox" aria-expanded="false"
+              aria-labelledby="ctx-project-label ctx-project">
+        <span class="ctx-select-label"></span><span class="ctx-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="ctx-pop" id="ctx-pop" hidden>
+        <input type="search" class="ctx-search" id="ctx-search" placeholder="搜索项目…"
+               aria-label="搜索项目" autocomplete="off" spellcheck="false">
+        <div class="ctx-list" id="ctx-list" role="listbox" aria-label="项目列表"></div>
+        <a class="ctx-pop-foot" href="#/datasets">管理项目与图片集 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="container" id="app" tabindex="-1"></main>
+<script src="/static/app.js?v=__ASSET_VERSION__"></script>
+</body>
+</html>

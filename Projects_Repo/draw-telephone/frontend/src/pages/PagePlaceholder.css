@@ -1,0 +1,63 @@
+/* 占位页样式（复用原型通用类） */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 32px 64px;
+}
+
+.page-head {
+  margin-bottom: 24px;
+}
+
+.page-head h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.page-head .desc {
+  color: var(--text2);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty .emoji-art {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--r-btn);
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.15s;
+  border: 1.5px solid transparent;
+}
+
+.btn-ghost {
+  background: var(--paper);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 13px;
+}

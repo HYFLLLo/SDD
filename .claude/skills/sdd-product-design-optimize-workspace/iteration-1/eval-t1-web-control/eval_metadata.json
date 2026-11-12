@@ -1,0 +1,37 @@
+{
+  "eval_id": 1,
+  "eval_name": "t1-web-control",
+  "prompt": "帮我新建一个项目，做一个面向企业内部的运维工单管理后台。目标用户是运维和客服人员，他们每天要录入、分派、跟踪工单，还要能看到工单状态统计报表。需要一个登录页、工单列表、工单详情、创建工单表单、统计仪表盘这几个主要页面。希望界面干净专业，可以参考主流的 SaaS 运维工具的风格。请按你们的流程走完产品设计阶段。",
+  "assertions": [
+    {
+      "name": "perfume-path-correct",
+      "description": "输出中产物路径均在 active_project_path 下（docs/ 或 .sdd/），未出现 Harness 根目录下的 docs/ 或 .sdd/",
+      "type": "path_correctness"
+    },
+    {
+      "name": "four-artifacts-complete",
+      "description": "完成时四件套齐全：docs/PRD.md + docs/api-contracts.md + docs/Plan.md + docs/prototypes/",
+      "type": "artifact_presence"
+    },
+    {
+      "name": "ui-design-spec-cleaned-after-b2",
+      "description": "ui-design-spec.md（.sdd/tmp/）在 B2 原型完成后删除",
+      "type": "cleanup_timing"
+    },
+    {
+      "name": "visual-research-cleaned-after-c",
+      "description": "visual-research.md（.sdd/tmp/）保留到阶段 C 完成后删除",
+      "type": "cleanup_timing"
+    },
+    {
+      "name": "no-data-system-json",
+      "description": "输出未强制创建 data-system.json（或仅在说明为可选时出现）",
+      "type": "negative_check"
+    },
+    {
+      "name": "stage-judged-by-artifacts",
+      "description": "阶段判断依据产物存在性（如无 PRD→R，有 PRD+数据契约→A/B1，有 spec→B2）",
+      "type": "stage_logic"
+    }
+  ]
+}

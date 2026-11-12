@@ -1,0 +1,138 @@
+{
+  "base": "http://127.0.0.1:8735/",
+  "failure_states": {
+    "#/datasets": {
+      "activeNav": "图片集",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    },
+    "#/evals": {
+      "activeNav": "工具 ▾",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    },
+    "#/home": {
+      "activeNav": "首页",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    },
+    "#/judge-iter": {
+      "activeNav": "裁判与优化",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    },
+    "#/prompt-ai": {
+      "activeNav": "提示词生成",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    },
+    "#/prompts": {
+      "activeNav": "提示词库",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    },
+    "#/runs": {
+      "activeNav": "运行测试",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    },
+    "#/truth": {
+      "activeNav": "工具 ▾",
+      "blank": false,
+      "hasErr": false,
+      "hasRetry": false,
+      "head": "工作台",
+      "textLen": 3
+    }
+  },
+  "generated": "2026-11-06 14:26:56",
+  "interactive": {
+    "focusable": 0,
+    "homeStepCount": 11
+  },
+  "keyboard_nav": {
+    "reaches_submenu": false,
+    "sequence": [
+      {
+        "href": "#/home",
+        "t": "首页"
+      },
+      {
+        "href": "#/datasets",
+        "t": "图片集"
+      },
+      {
+        "href": "#/prompt-ai",
+        "t": "提示词生成"
+      },
+      {
+        "href": "#/prompts",
+        "t": "提示词库"
+      },
+      {
+        "href": "#/runs",
+        "t": "运行测试"
+      },
+      {
+        "href": "#/judge-iter",
+        "t": "裁判与优化"
+      },
+      {
+        "href": "#/extract",
+        "t": "工具 ▾"
+      },
+      {
+        "href": "#/config",
+        "t": "配置"
+      },
+      {
+        "href": "#/help",
+        "t": "帮助"
+      },
+      {
+        "href": null,
+        "t": "☀"
+      },
+      {
+        "href": null,
+        "t": "新手引导"
+      },
+      {
+        "href": "#/config",
+        "t": "配置模型 →"
+      }
+    ]
+  },
+  "mobile_nav": {
+    "landedHash": "#/extract",
+    "menuDisplay": "none",
+    "menuOpened": false,
+    "submenuLinks": 4
+  },
+  "slow_nav": {
+    "activeNav": "运行测试",
+    "hasSkeleton": false,
+    "title": "工作台 新手引导"
+  }
+}

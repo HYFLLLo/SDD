@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>画意接龙 · 广场</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .hero{text-align:center;padding:56px 20px 40px;position:relative}
+  .hero .prompt{font-size:34px;color:var(--text);margin-bottom:8px;line-height:1.3}
+  .hero .tagline{color:var(--text2);font-size:15px;margin-bottom:28px}
+  .hero-cta{display:flex;gap:14px;justify-content:center}
+  .hero-deco{position:absolute;font-size:40px;color:var(--dash);opacity:.5}
+  .hero-deco.l{top:20px;left:8%}.hero-deco.r{top:30px;right:10%;transform:rotate(15deg)}
+  .join-bar{display:flex;gap:10px;align-items:center;justify-content:center;margin:0 auto 36px;max-width:420px}
+  .join-bar .input{flex:1;text-align:center}
+  .filters{display:flex;gap:8px;margin-bottom:20px}
+  .filter-chip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);font-size:13px;color:var(--text2);cursor:pointer}
+  .filter-chip.active{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:700}
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .work-thumb svg{width:80%;height:80%}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><span class="mark"></span>画意接龙</div>
+  <nav class="nav-center"><a class="active" href="01-plaza.html">广场</a><a href="08-profile.html">我的</a></nav>
+  <div class="nav-right">
+    <button class="bell" title="通知"><span>🔔</span><span class="dot"></span></button>
+    <a href="08-profile.html" class="avatar">小</a>
+  </div>
+</div>
+
+<div class="container wide">
+  <!-- Hero -->
+  <div class="hero">
+    <span class="hero-deco l handwritten">~</span>
+    <span class="hero-deco r handwritten">✦</span>
+    <div class="prompt handwritten">「戴帽子的猫」</div>
+    <div class="tagline">一条画 · 一条述 · 看一幅画如何跑偏</div>
+    <div class="hero-cta">
+      <a href="02-create.html" class="btn btn-primary btn-lg">开始一条链</a>
+    </div>
+  </div>
+
+  <!-- 加入入口 -->
+  <div class="join-bar">
+    <input class="input" placeholder="输入 6 位房间码加入接力" maxlength="6">
+    <a href="03-join.html" class="btn btn-ghost">加入</a>
+  </div>
+
+  <!-- 筛选（V1.1，MVP 单排序） -->
+  <div class="filters">
+    <span class="filter-chip active">最新</span>
+    <span class="filter-chip">最跑偏</span>
+    <span class="filter-chip">最多点赞</span>
+  </div>
+
+  <!-- 作品瀑布流 -->
+  <div class="work-grid">
+    <!-- 作品1 -->
+    <a href="06-work.html" class="work-card">
+      <div class="work-thumb">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="22" fill="none" stroke="#C8643C" stroke-width="2"/><path d="M28 38 Q50 18 72 38" fill="none" stroke="#2B2622" stroke-width="2"/><circle cx="42" cy="40" r="2" fill="#2B2622"/><circle cx="58" cy="40" r="2" fill="#2B2622"/><path d="M44 52 Q50 56 56 52" fill="none" stroke="#2B2622" stroke-width="2"/><path d="M40 75 L40 95 M60 75 L60 95" stroke="#2B2622" stroke-width="2"/></svg>
+      </div>
+      <div class="work-info">
+        <div class="title">戴帽子的猫</div>
+        <div class="meta"><span>6 节点 · 5 人</span><span>❤ 128</span></div>
+      </div>
+    </a>
+    <!-- 作品2 -->
+    <a href="06-work.html" class="work-card">
+      <div class="work-thumb">
+        <svg viewBox="0 0 100 100"><path d="M30 70 Q50 30 70 70" fill="none" stroke="#6B7A8F" stroke-width="2"/><circle cx="50" cy="45" r="12" fill="none" stroke="#2B2622" stroke-width="2"/><path d="M44 42 L48 42 M52 42 L56 42" stroke="#2B2622" stroke-width="2"/></svg>
+      </div>
+      <div class="work-info">
+        <div class="title">会飞的鱼</div>
+        <div class="meta"><span>8 节点 · 6 人</span><span>❤ 96</span></div>
+      </div>
+    </a>
+    <!-- 作品3 -->
+    <a href="06-work.html" class="work-card">
+      <div class="work-thumb">
+        <svg viewBox="0 0 100 100"><rect x="35" y="35" width="30" height="40" fill="none" stroke="#2B2622" stroke-width="2"/><path d="M35 50 L65 50" stroke="#2B2622" stroke-width="2"/><circle cx="45" cy="42" r="2" fill="#C8643C"/><circle cx="55" cy="42" r="2" fill="#C8643C"/></svg>
+      </div>
+      <div class="work-info">
+        <div class="title">机器人</div>
+        <div class="meta"><span>6 节点 · 4 人</span><span>❤ 73</span></div>
+      </div>
+    </a>
+    <!-- 作品4 -->
+    <a href="06-work.html" class="work-card">
+      <div class="work-thumb">
+        <svg viewBox="0 0 100 100"><path d="M20 80 Q50 20 80 80" fill="none" stroke="#C8643C" stroke-width="2"/><path d="M35 70 L65 70" stroke="#2B2622" stroke-width="2"/><circle cx="50" cy="40" r="3" fill="#2B2622"/></svg>
+      </div>
+      <div class="work-info">
+        <div class="title">山与日</div>
+        <div class="meta"><span>4 节点 · 4 人</span><span>❤ 54</span></div>
+      </div>
+    </a>
+    <!-- 作品5 -->
+    <a href="06-work.html" class="work-card">
+      <div class="work-thumb">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="none" stroke="#2B2622" stroke-width="2"/><path d="M30 50 Q50 30 70 50 Q50 70 30 50" fill="none" stroke="#6B7A8F" stroke-width="2"/></svg>
+      </div>
+      <div class="work-info">
+        <div class="title">眼睛里的海</div>
+        <div class="meta"><span>10 节点 · 8 人</span><span>❤ 211</span></div>
+      </div>
+    </a>
+    <!-- 作品6 -->
+    <a href="06-work.html" class="work-card">
+      <div class="work-thumb">
+        <svg viewBox="0 0 100 100"><path d="M40 30 L40 70 M50 25 L50 75 M60 30 L60 70" stroke="#2B2622" stroke-width="2" fill="none"/><path d="M35 75 Q50 85 65 75" fill="none" stroke="#C8643C" stroke-width="2"/></svg>
+      </div>
+      <div class="work-info">
+        <div class="title">三棵树</div>
+        <div class="meta"><span>6 节点 · 5 人</span><span>❤ 67</span></div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="proto-note">原型展示用 · 非生产代码 · 真实数据需对接 GET /api/works（广场作品流）</div>
+</body>
+</html>

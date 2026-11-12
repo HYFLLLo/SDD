@@ -1,0 +1,257 @@
+/* P06 作品详情页 · 手账涂鸦本风格 */
+.work-detail {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+/* 头部 */
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.detail-head .title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.detail-head .meta {
+  color: var(--text2);
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.prompt-row {
+  font-size: 14px;
+  color: var(--text2);
+}
+
+.prompt-text {
+  color: var(--text);
+  font-size: 18px;
+}
+
+.head-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.share-btn {
+  border-radius: var(--r-btn);
+  border: 1.5px solid var(--border);
+  background: var(--paper);
+  color: var(--text);
+  font-weight: 700;
+  height: 40px;
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.replay-btn {
+  height: 40px;
+  padding: 0 24px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--r-btn);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.replay-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 100, 60, 0.3);
+}
+
+/* 全链纵向展示 */
+.chain-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 节点卡 */
+.node-card {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  /* 固定高度容器预留 20% 缓冲 */
+  min-height: 140px;
+  position: relative;
+}
+
+.node-card.ai-node {
+  border-color: var(--ai);
+  background: var(--ai-soft);
+}
+
+/* 节点 meta */
+.node-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.node-seq {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
+}
+
+.node-type {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg);
+  color: var(--text2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.node-author {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ai-node .node-author {
+  color: var(--ai);
+}
+
+/* AI 续标签（冷灰蓝） */
+.ai-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  background: var(--paper);
+  color: var(--ai);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  border: 1px solid var(--ai);
+}
+
+/* 节点内容 */
+.node-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.node-image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 节点真实画作图片（限制最大宽度，圆角 + 画布背景） */
+.node-img {
+  max-width: 100%;
+  max-height: 420px;
+  border-radius: var(--r-canvas);
+  background: var(--canvas);
+  display: block;
+}
+
+.thumb-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background: var(--canvas);
+  border: 1.5px dashed var(--dash);
+  border-radius: var(--r-canvas);
+}
+
+.thumb-placeholder .thumb-char {
+  font-size: 48px;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.ai-node .thumb-placeholder .thumb-char {
+  color: var(--ai);
+}
+
+.node-text {
+  font-size: 22px;
+  color: var(--text);
+  text-align: center;
+  padding: 12px;
+}
+
+/* 连接线 */
+.node-connector {
+  width: 2px;
+  height: 24px;
+  background: var(--dash);
+  margin: 0 auto;
+  border-left: 2px dashed var(--dash);
+  background: transparent;
+}
+
+.node-connector.ai {
+  border-left-color: var(--ai);
+}
+
+/* 通用按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--r-btn);
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.15s;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: var(--paper);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* 手写体 */
+.handwritten {
+  font-family: 'Caveat', 'Ma Shan Zheng', cursive;
+  font-weight: 600;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty .emoji-art {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>画意接龙 · 加入链</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .form-card{max-width:480px;margin:0 auto;padding:40px 32px;text-align:center}
+  .form-card h1{font-size:24px;margin-bottom:6px}
+  .form-card .desc{color:var(--text2);margin-bottom:32px}
+  .code-input{display:flex;gap:8px;justify-content:center;margin-bottom:24px}
+  .code-box{width:48px;height:56px;border:1.5px solid var(--border);border-radius:var(--r-btn);background:var(--paper);text-align:center;font-size:24px;font-weight:800;color:var(--text)}
+  .code-box.filled{border-color:var(--accent);color:var(--accent)}
+  .code-box:focus{outline:none;border-color:var(--accent)}
+  .chain-preview{background:var(--bg);border:1px dashed var(--border);border-radius:var(--r-card);padding:16px;margin-top:20px;text-align:left}
+  .chain-preview .row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+  .chain-preview .row span:first-child{color:var(--text2)}
+  .chain-preview .row span:last-child{font-weight:700}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><span class="mark"></span>画意接龙</div>
+  <nav class="nav-center"><a href="01-plaza.html">广场</a><a href="08-profile.html">我的</a></nav>
+  <div class="nav-right">
+    <button class="bell"><span>🔔</span></button>
+    <a href="08-profile.html" class="avatar">小</a>
+  </div>
+</div>
+
+<div class="container narrow">
+  <div class="card form-card">
+    <h1>加入接力</h1>
+    <div class="desc">输入朋友发来的 6 位房间码</div>
+
+    <div class="code-input">
+      <input class="code-box filled" maxlength="1" value="D">
+      <input class="code-box filled" maxlength="1" value="R">
+      <input class="code-box filled" maxlength="1" value="A">
+      <input class="code-box filled" maxlength="1" value="W">
+      <input class="code-box" maxlength="1" value="">
+      <input class="code-box" maxlength="1" value="">
+    </div>
+
+    <div class="chain-preview">
+      <div class="row"><span>链标题</span><span>戴帽子的猫</span></div>
+      <div class="row"><span>链长</span><span>6 节点</span></div>
+      <div class="row"><span>当前进度</span><span>第 3 / 6 节点</span></div>
+      <div class="row"><span>剩余名额</span><span>2 人可加入</span></div>
+    </div>
+
+    <button class="btn btn-primary btn-lg" style="width:100%;margin-top:24px" onclick="location.href='04-room.html'">加入链</button>
+  </div>
+</div>
+
+<div class="proto-note">原型展示用 · 真实交互：GET /api/chains/{code} 校验房间码；POST /api/chains/{id}/join 加入</div>
+</body>
+</html>
